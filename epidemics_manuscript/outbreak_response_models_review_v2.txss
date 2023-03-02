@@ -1,0 +1,32 @@
+{
+    "InternalPDFViewer": {
+        "Embedded": false,
+        "File": ""
+    },
+    "Session": {
+        "Bookmarks": [
+        ],
+        "CurrentFile": "outbreak_response_models_review_v2.tex",
+        "FileVersion": 1,
+        "Files": [
+            {
+                "Col": 0,
+                "EditorGroup": 0,
+                "FileName": "outbreak_response_models_review_v2.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 0
+            },
+            {
+                "Col": 0,
+                "EditorGroup": 0,
+                "FileName": "submission_files/supplementary/S1 File.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 0
+            }
+        ],
+        "MasterFile": "",
+        "VerticalSplit": false
+    }
+}
