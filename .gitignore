@@ -86,3 +86,4 @@ latex.out/
 
 ## Specific files
 ./analyses/scripts/*.tex 
+./epidemics_manuscript/*.pdf
