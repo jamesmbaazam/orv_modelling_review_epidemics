@@ -84,3 +84,5 @@ latex.out/
 ## R Environment Variables
 .Renviron
 
+## Specific files
+./analyses/scripts/*.tex 
