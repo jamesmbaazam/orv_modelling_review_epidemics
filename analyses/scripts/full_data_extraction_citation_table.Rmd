@@ -33,36 +33,30 @@ conflict_prefer('select', 'dplyr')
 conflict_prefer('kable', 'knitr')
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(dev = 'jpeg')
-knitr::opts_chunk$set(fig.width = 8, fig.height = 6)
-knitr::opts_chunk$set(message = FALSE)
-
-
+```{r}
 #create a folder for storing the manuscript figures
 
-if(!dir.exists('../figs_manuscript'))
-    {
-    dir.create('../figs_manuscript', 
-               showWarnings = FALSE)
-    }
+if (!dir.exists("../figs_manuscript")) {
+  dir.create("../figs_manuscript",
+    showWarnings = FALSE
+  )
+}
 
 #save figures in this folder
 save_fig_here <- '../figs_manuscript'
-
-save_thesis_fig_here <- "C:/Users/JAMESAZAM/Dropbox/My Academic Repository/_SACEMA/Academic/_PhD/__PhD_Thesis/_Thesis_LaTeX/figs/chapter_3"
 ```
 
 
 ```{r}
 # Load the cleaned data 
-long_data <- read_rds('../data/final_data/cleaned_data/review_data_long_cleaned.rds')
+long_data <- read_rds('../data/review_data_long_cleaned.rds')
 
 #The cleaned data without citations
-compact_data_init <- read_rds('../data/final_data/cleaned_data/review_data_compact_cleaned.rds')
+compact_data_init <- read_rds('../data/review_data_compact_cleaned.rds')
+```
 
-
+```{r}
+# Data "cleaning"
 #a vector of shorter replacements for the original parametrization descriptions
 parametrization_str_replacements <- c('values_from_literature' = 'literature', 
                   'values_from_guess_and_expert_opion' = 'expert_opinion', 
@@ -78,7 +72,7 @@ validation_str_replacements <- c('compared_with_data' = 'data',
                                  )
 
 # The data with citations 
-compact_data_with_citation_keys_init <- read_rds(normalizePath('../data/final_data/cleaned_data/compact_data_with_citation_keys_cleaned.rds')) 
+compact_data_with_citation_keys_init <- read_rds('../data/compact_data_with_citation_keys_cleaned.rds')
 
 compact_data_with_citation_keys <- compact_data_with_citation_keys_init %>% 
     mutate(vax_modelled = ifelse(str_detect(intervention_modelled, 'vaccination'), 
