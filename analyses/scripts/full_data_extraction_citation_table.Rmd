@@ -2,13 +2,25 @@
 output:
   pdf_document:
     keep_tex: yes
+  html_document:
+    df_print: paged
 ---
+```{r setup, include=FALSE}
+options(kableExtra.auto_format = FALSE)
 
-```{r echo=FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      include = FALSE,
+                      dev = 'jpeg', 
+                      fig.width = 8, 
+                      fig.height = 6, 
+                      message = FALSE
+                      )
+```
+
+```{r}
 #' load packages
 library('tidyverse')
-library('readr')
-library('xlsx')
+# library('xlsx')
 library('scales')
 library('stringr')
 library('conflicted')
