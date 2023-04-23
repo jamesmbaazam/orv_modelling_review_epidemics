@@ -111,11 +111,11 @@ compact_data_with_citation_keys <- compact_data_with_citation_keys_init %>%
 #replace the original descriptions of parametrization and validation with shorter strings
 compact_data_with_citation_keys <- compact_data_with_citation_keys %>% 
   mutate(parametrization = str_replace_all(parametrization, 
-                                           parametrization_str_replacements
+                                           parametrization_dict
                                            )
          ) %>% 
   mutate(validation = str_replace_all(validation, 
-                                      validation_str_replacements
+                                      validation_dict
                                       )
          ) %>% 
   mutate(model_structure = str_replace(model_structure, 'deterministic stochastic', 'both'))
