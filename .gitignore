@@ -87,3 +87,19 @@ latex.out/
 ## Specific files
 ./analyses/scripts/*.tex 
 ./epidemics_manuscript/*.pdf
+
+*.bak
+
+*.jpeg
+
+*.png
+
+*.docx
+
+*.md
+
+*.Rproj
+
+analyses/scripts/full_data_extraction_citation_table.tex
+
+analyses/scripts/orv_sys_rev_data_analysis.tex
