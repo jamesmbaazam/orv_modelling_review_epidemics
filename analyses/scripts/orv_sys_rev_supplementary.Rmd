@@ -522,7 +522,7 @@ continents_studied <- continents_studied_by_count %>%
 #Print table of results
 knitr::kable(continents_studied_by_count %>% arrange(desc(percentage)),
              col.names = c('Continent',
-                           'Number of papers',
+                           'Number of studies',
                            'Percentage'
                            ),
              caption = 'Number/percent of studies by continent'
