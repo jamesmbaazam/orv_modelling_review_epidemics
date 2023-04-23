@@ -19,7 +19,6 @@ library('janitor')
 library('countrycode')
 library('bib2df')
 library('conflicted')
-library('Hmisc')
 library('ggwordcloud')
 
 #resolve package function conflicts
@@ -409,7 +408,7 @@ countries_studied_by_count_aggregated <- countries_studied_by_count %>%
   summarise(num_of_studies = sum(num_of_studies),
             .groups = 'drop'
             ) %>% 
-  filter(country_studied %nin% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region')) %>% 
+  filter(!country_studied %in% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region')) %>% 
   arrange(desc(num_of_studies)) %>% 
   adorn_totals(where = c('row')) %>% 
   adorn_percentages(denominator = 'col') %>% 
@@ -429,7 +428,7 @@ knitr::kable(countries_studied_by_count_aggregated,
 
 ```{r}
 continents_studied_by_count <- countries_studied_by_count %>% 
-  filter(country_studied %nin% c('none', 'northern_hemisphere', 'global')) %>% 
+  filter(!country_studied %in% c('none', 'northern_hemisphere', 'global')) %>% 
   mutate(continent_studied = countrycode(country_studied, 
                                           destination = 'continent',
                                           origin = 'iso2c',
@@ -467,7 +466,7 @@ knitr::kable(continents_studied_by_count,
 ```{r}
 author_connectedness_top_5_countries <- compact_data_with_citation_keys_no_fmd %>% 
   filter(author_in_country_studied != 'not_applicable') %>% 
-  filter(country_studied %nin% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region')) %>% 
+  filter(!country_studied %in% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region')) %>% 
 separate_rows(country_studied,  sep = ' ') %>% 
   group_by(collab_type) %>% 
   count(country_studied, author_in_country_studied, sort = TRUE) %>% 
@@ -490,7 +489,7 @@ knitr::kable(author_connectedness_top_5_countries, caption = 'Studies with at le
 ```{r}
 author_connectedness_to_location_aggreg <- compact_data_with_citation_keys_no_fmd %>% 
   filter(author_in_country_studied != 'not_applicable') %>% 
-  filter(country_studied %nin% c('other', 'none', 'northern_hemisphere', 'west_africa', 'global')) %>% 
+  filter(!country_studied %in% c('other', 'none', 'northern_hemisphere', 'west_africa', 'global')) %>% 
   count(collab_type, author_in_country_studied, sort = TRUE) %>% 
   pivot_wider(names_from = author_in_country_studied, values_from = n) %>% 
   replace_na(list(yes = 0, no = 0)) %>% 
@@ -808,7 +807,7 @@ mutate(outcome_measured = str_trim(outcome_measured)) %>%
   separate_rows(outcome_measured, sep = ',') %>% 
   group_by(collab_type, outcome_measured) %>% 
   distinct(title, .keep_all = TRUE) %>% 
-  filter(outcome_measured %nin% c('outcome_other', '', 's')) %>% 
+  filter(!outcome_measured %in% c('outcome_other', '', 's')) %>% 
   count(collab_type, outcome_measured, name = 'num_of_studies') %>% 
   ungroup(outcome_measured) %>% 
   arrange(desc(num_of_studies), .by_group = TRUE) %>% 
@@ -832,7 +831,7 @@ outcomes_tally_by_collab_type <- compact_data_with_citation_keys_no_fmd %>%
   group_by(outcome_measured) %>% 
   distinct(title, .keep_all = TRUE) %>% 
   ungroup(outcome_measured) %>% 
-  filter(outcome_measured %nin% c('outcome_other', '')) %>% 
+  filter(!outcome_measured %in% c('outcome_other', '')) %>% 
   group_by(collab_type) %>% 
   count(outcome_measured) %>% 
   arrange(desc(n), .by_group = TRUE) %>% 
@@ -1168,7 +1167,7 @@ plot(collabs_per_year_plot)
 ```{r}
 author_connectedness_to_location_fmd <- fmd_data %>% 
   filter(author_in_country_studied != 'not_applicable') %>% 
-  filter(country_studied %nin% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region')) %>% 
+  filter(!country_studied %in% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region')) %>% 
   group_by(collab_type) %>% 
   count(country_studied, author_in_country_studied, sort = TRUE) %>% 
   pivot_wider(names_from = author_in_country_studied, values_from = n) %>% 
@@ -1190,7 +1189,9 @@ knitr::kable(author_connectedness_to_location_fmd, caption = 'Studies with at le
 ```{r}
 author_connectedness_to_location_aggreg <- fmd_data %>% 
   filter(author_in_country_studied != 'not_applicable') %>% 
-  filter(country_studied %nin% c('other', 'none', 'northern_hemisphere', 'west_africa', 'global')) %>% 
+  filter(!country_studied %in% c('other', 'none', 'northern_hemisphere', 
+                                 'west_africa', 'global')
+         ) %>% 
   count(collab_type, author_in_country_studied, sort = TRUE) %>% 
   pivot_wider(names_from = author_in_country_studied, values_from = n) %>% 
   replace_na(list(yes = 0, no = 0)) %>% 
@@ -1367,7 +1368,7 @@ outcomes_tally_by_collab_type <- fmd_data %>%
   separate_rows(outcome_measured, sep = ',') %>% 
   group_by(collab_type, outcome_measured) %>% 
   distinct(title, .keep_all = TRUE) %>% 
-  filter(outcome_measured %nin% c('outcome_other', '')) %>% 
+  filter(!outcome_measured %in% c('outcome_other', '')) %>% 
   count(collab_type, outcome_measured, name = 'num_of_studies') %>% 
   ungroup(outcome_measured) %>% 
   arrange(desc(num_of_studies), .by_group = TRUE) %>% 
