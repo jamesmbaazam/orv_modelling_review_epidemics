@@ -12,13 +12,10 @@ output:
 ```{r echo=FALSE, include=FALSE}
 #' load packages
 library('tidyverse')
-library('readr')
 library('ggthemes')
 library('mdthemes')
 library('scales')
 library('janitor')
-library('forcats')
-library('stringr')
 library('countrycode')
 library('bib2df')
 library('conflicted')
@@ -32,13 +29,16 @@ conflict_prefer('kable', 'knitr')
 ```
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(dev = 'jpeg')
-knitr::opts_chunk$set(out.height = "\\textheight",  out.width = "\\textwidth")
-knitr::opts_chunk$set(message = FALSE)
-knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(echo = FALSE, 
+                      dev = 'png', 
+                      out.height = "\\textheight",  
+                      out.width = "\\textwidth", 
+                      message = FALSE, 
+                      warning = FALSE
+                      )
+```
 
-
+```{r}
 #create a folder for storing the manuscript figures
 
 if(!dir.exists('../figs_manuscript'))
