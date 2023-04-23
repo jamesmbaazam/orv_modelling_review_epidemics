@@ -12,12 +12,9 @@ output:
 ```{r echo=FALSE, message=FALSE, include=FALSE}
 #' load packages
 library('tidyverse')
-library('readr')
 library('ggthemes')
 library('scales')
 library('janitor')
-library('forcats')
-library('stringr')
 library('countrycode')
 library('bib2df')
 library('conflicted')
