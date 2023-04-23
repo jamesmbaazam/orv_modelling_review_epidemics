@@ -159,7 +159,8 @@ studies_per_collab_type <- compact_data_with_citation_keys_no_fmd %>%
     adorn_pct_formatting() %>% 
     adorn_ns()
 
-knitr::kable(studies_per_collab_type, caption = 'Number of studies per collaboration type (Human VPDs)',
+knitr::kable(studies_per_collab_type, 
+             caption = 'Number of studies per collaboration type (Human VPDs)',
              format = "latex", booktabs = TRUE) %>% 
         kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'))
 ```
@@ -895,10 +896,7 @@ knitr::kable(studies_per_collab_type, caption = 'Number of studies per collabora
 ```{r echo=FALSE, fig.width=8}
 #' Count the number of each author affiliation type per year (including FMD)
 fmd_collab_types_per_year <- fmd_data %>% 
-  count(year_aggreg, 
-        collab_type, 
-        name = 'total_publications'
-        )
+  count(year_aggreg, collab_type, name = 'total_publications')
 
 
 #The plot
