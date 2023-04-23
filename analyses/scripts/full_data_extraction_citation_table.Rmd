@@ -35,7 +35,7 @@ conflict_prefer('kable', 'knitr')
 
 if (!dir.exists("../figs_manuscript")) {
   dir.create("../figs_manuscript",
-    showWarnings = FALSE
+    showWarnings = TRUE
   )
 }
 
