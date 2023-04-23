@@ -1,9 +1,9 @@
 ---
-output:
+output: 
   pdf_document:
-    keep_tex: yes
-  html_document:
-    df_print: paged
+    df_print: kable
+    latex_engine: xelatex
+    keep_tex: true
 ---
 ```{r setup, include=FALSE}
 # options(kableExtra.auto_format = FALSE,
