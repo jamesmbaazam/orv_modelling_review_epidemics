@@ -430,7 +430,7 @@ countries_studied_by_count_aggregated <- countries_studied_by_count %>%
   summarise(num_of_studies = sum(num_of_studies),
             .groups = 'drop'
             ) %>% 
-  filter(country_studied %nin% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region')) %>% 
+  filter(!(country_studied %in% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region'))) %>% 
   arrange(desc(num_of_studies)) %>% 
   adorn_totals(where = c('row')) %>% 
   adorn_percentages(denominator = 'col') %>% 
