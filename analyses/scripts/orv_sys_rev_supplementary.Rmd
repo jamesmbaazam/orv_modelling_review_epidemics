@@ -468,10 +468,12 @@ continents_studied_by_count <- countries_studied_by_count %>%
             ) %>% 
 mutate(percentage = round(num_of_studies/sum(num_of_studies), 2)*100) %>% 
   arrange(desc(num_of_studies)) 
+
+#Print the results
+knitr::kable(continents_studied_by_count, 
+             caption = 'Number of studies per country'
+             )
 ``` 
-
-
-
 
 ### Country most studied
 ```{r echo=FALSE}
