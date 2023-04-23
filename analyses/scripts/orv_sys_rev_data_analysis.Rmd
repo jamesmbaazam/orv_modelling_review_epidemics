@@ -438,8 +438,8 @@ continents_studied_by_count <- countries_studied_by_count %>%
          ) %>% 
   mutate(continent_studied = str_to_lower(continent_studied)
          ) %>% 
-  mutate(continent_studied = case_when(str_detect(continent_studied, 'asia') == T ~ 'asia', 
-                                         str_detect(continent_studied, 'africa') == T ~ 'africa', 
+  mutate(continent_studied = case_when(str_detect(continent_studied, 'asia') == TRUE ~ 'asia', 
+                                         str_detect(continent_studied, 'africa') == TRUE ~ 'africa', 
                                          TRUE ~ continent_studied
                                        )
            ) %>% 
