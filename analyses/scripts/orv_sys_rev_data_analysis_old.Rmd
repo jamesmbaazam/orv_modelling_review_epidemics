@@ -9,12 +9,12 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-
-# Sets the working directory for subsequent chunks, but not this chunk
-#knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
-
-knitr::opts_chunk$set(fig.width = 8, fig.height = 6)
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE, 
+                      message = FALSE, 
+                      fig.width = 8, 
+                      fig.height = 6
+                      )
 ```
 
 ```{r echo=FALSE, message=FALSE}
