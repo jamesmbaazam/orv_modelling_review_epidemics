@@ -24,12 +24,9 @@ knitr::opts_chunk$set(fig.width = 8, fig.height = 6)
 ```{r echo=FALSE, message=FALSE}
 #' load packages
 library('tidyverse')
-library('readr')
 library('ggthemes')
 library('scales')
 library('janitor')
-library('forcats')
-library('stringr')
 library('countrycode')
 library('bib2df')
 library('conflicted')
