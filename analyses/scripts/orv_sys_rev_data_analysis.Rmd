@@ -13,7 +13,6 @@ output:
 #' load packages
 library('tidyverse')
 library('ggthemes')
-library('mdthemes')
 library('scales')
 library('janitor')
 library('countrycode')
