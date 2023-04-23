@@ -6,14 +6,18 @@ output:
     df_print: paged
 ---
 ```{r setup, include=FALSE}
-options(kableExtra.auto_format = FALSE)
+# options(kableExtra.auto_format = FALSE,
+#         knitr.table.format = "latex"
+#         )
 
 knitr::opts_chunk$set(echo = FALSE, 
                       include = FALSE,
-                      dev = 'jpeg', 
+                      # dev = 'jpeg', 
                       fig.width = 8, 
                       fig.height = 6, 
-                      message = FALSE
+                      message = FALSE,
+                      warning = FALSE,
+                      cache = FALSE
                       )
 ```
 
