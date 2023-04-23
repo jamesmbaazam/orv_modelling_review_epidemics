@@ -31,6 +31,8 @@ library('conflicted')
 conflict_prefer('filter', 'dplyr')
 conflict_prefer('select', 'dplyr')
 conflict_prefer('kable', 'knitr')
+
+data_dir <- "../data"
 ```
 
 
@@ -46,10 +48,11 @@ conflict_prefer('kable', 'knitr')
 
 ```{r echo=FALSE, include=FALSE}
 # Load the cleaned data 
-long_data <- read_rds('../data/final_data/cleaned_data/review_data_long_cleaned.rds')
+long_data <- read_rds(file.path(data_dir, 'review_data_long_cleaned.rds'))
 
 #The cleaned data without citations
-compact_data_init <- read_rds('../data/final_data/cleaned_data/review_data_compact_cleaned.rds')
+compact_data_init <- read_rds(file.path(data_dir, 'review_data_compact_cleaned.rds')
+                              )
 
 compact_data <- compact_data_init %>% 
     mutate(vax_modelled = ifelse(str_detect(intervention_modelled, 'vaccination'), 
@@ -64,7 +67,7 @@ compact_data <- compact_data_init %>%
   relocate(vax_modelled, intervention_type, .after = 'intervention_modelled')
 
 # The data with citations 
-compact_data_with_citation_keys_init <- read_rds(normalizePath('../data/final_data/cleaned_data/compact_data_with_citation_keys_cleaned.rds')) 
+compact_data_with_citation_keys_init <- read_rds(file.path(data_dir, "compact_data_with_citation_keys_cleaned.rds"))
 
 compact_data_with_citation_keys <- compact_data_with_citation_keys_init %>% 
   mutate(vax_modelled = ifelse(str_detect(intervention_modelled, 'vaccination'), 
