@@ -1,7 +1,7 @@
 ---
-title: "Systematic review of outbreak response models"
-author: "James Azam"
-date: "01/06/2021"
+title: "Systematic review of outbreak response models: data analysis"
+author: "James M. Azam, Xiaoxi Pang, Elisha B. Are, Juliet R.C. Pulliam, Matthew J. Ferrari"
+date: today()
 output:
   word_document:
     keep_md: yes
