@@ -49,35 +49,34 @@ if(!dir.exists('../figs_manuscript'))
 
 #save figures in this folder
 save_fig_here <- '../figs_manuscript'
-
-save_thesis_fig_here <- "C:/Users/JAMESAZAM/Dropbox/My Academic Repository/_SACEMA/Academic/_PhD/__PhD_Thesis/_Thesis_LaTeX/figs/chapter_3"
 ```
 
 
 ```{r}
 # Load the cleaned data 
-long_data <- read_rds('../data/final_data/cleaned_data/review_data_long_cleaned.rds')
+long_data <- read_rds('../data/review_data_long_cleaned.rds')
 
 #The cleaned data without citations
-compact_data_init <- read_rds('../data/final_data/cleaned_data/review_data_compact_cleaned.rds')
+compact_data_init <- read_rds('../data/review_data_compact_cleaned.rds')
+```
 
-
-#a vector of shorter replacements for the original parametrization descriptions
-parametrization_str_replacements <- c('values_from_literature' = 'literature', 
+```{r}
+# Dictionary of parametrization methods descriptions
+parametrization_dict <- c('values_from_literature' = 'literature', 
                   'values_from_guess_and_expert_opion' = 'expert_opinion', 
                   'values_fitted_to_ts' = 'fitted',
                   ' ' = ' and ' #replace space with 'and' to make it more readable
                   )
 
-#a vector of shorter replacements for the original validation descriptions
-validation_str_replacements <- c('compared_with_data' = 'data',
+# Dictionary of validation methods descriptions
+validation_dict <- c('compared_with_data' = 'data',
                                  'compared_with_other_model_output' = 'another_model',
                                  'model_not_validated' = 'none',
                                  ' ' = '_and_'
                                  )
 
 # The data with citations 
-compact_data_with_citation_keys_init <- read_rds(normalizePath('../data/final_data/cleaned_data/compact_data_with_citation_keys_cleaned.rds')) 
+compact_data_with_citation_keys_init <- read_rds('../data/compact_data_with_citation_keys_cleaned.rds')
 
 compact_data_with_citation_keys <- compact_data_with_citation_keys_init %>% 
     mutate(vax_modelled = ifelse(str_detect(intervention_modelled, 'vaccination'), 
@@ -143,24 +142,24 @@ fmd_data <- compact_data_with_citation_keys %>%
 
 # Human vaccine-preventable diseases
 
-```{r eval=FALSE}
-library(PRISMAstatement)
-
-prisma_chart <- prisma(found = 12986,
-       found_other = 0,
-       no_dupes = 5012, 
-       extra_dupes_box = TRUE,
-       screened = 5012, 
-       screen_exclusions = 4211, 
-       full_text = 801,
-       full_text_exclusions = 548, 
-       qualitative = 253, 
-       quantitative = 0,
-       width = 800, height = 800,
-       font_size = 12)
-
-prisma_chart
-```
+<!-- # ```{r eval=FALSE} -->
+<!-- # library(PRISMAstatement) -->
+<!-- #  -->
+<!-- # prisma_chart <- prisma(found = 12986, -->
+<!-- #        found_other = 0, -->
+<!-- #        no_dupes = 5012,  -->
+<!-- #        extra_dupes_box = TRUE, -->
+<!-- #        screened = 5012,  -->
+<!-- #        screen_exclusions = 4211,  -->
+<!-- #        full_text = 801, -->
+<!-- #        full_text_exclusions = 548,  -->
+<!-- #        qualitative = 253,  -->
+<!-- #        quantitative = 0, -->
+<!-- #        width = 800, height = 800, -->
+<!-- #        font_size = 12) -->
+<!-- #  -->
+<!-- # prisma_chart -->
+<!-- # ``` -->
 
 
 <!-- ## Publications per year -->
