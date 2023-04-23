@@ -19,15 +19,12 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ```{r}
 #' load packages
-library('tidyverse')
-# library('xlsx')
-library('scales')
-library('stringr')
-library('conflicted')
-library('Hmisc')
-library('kableExtra')
+library("tidyverse")
+library("scales")
+library("conflicted")
+library("knitr")
 
-#resolve package function conflicts
+# Resolve package function conflicts
 conflict_prefer('filter', 'dplyr')
 conflict_prefer('select', 'dplyr')
 conflict_prefer('kable', 'knitr')
