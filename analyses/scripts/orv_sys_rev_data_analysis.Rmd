@@ -921,15 +921,11 @@ fmd_collab_proportions_plot <- ggplot(data = fmd_collab_types_per_year) +
                      labels = x_axis_labels,
                      expand = c(0, 0)
                      ) +
-  #coord_flip() +
-  labs(#title = 'Publications per collaboration type over time',
-       x = '**Year**',
-       y = '**Proportion of total publications**',
+  labs(x = 'Year',
+       y = 'Proportion of total publications',
        fill = '**Collaboration type**' 
          ) +
-  theme(legend.position = 'none') +
- # md_theme_minimal(base_size = 16) #For Powerpoint
-  md_theme_minimal(base_size = 12)
+  theme(legend.position = 'none') 
 
 
 plot(fmd_collab_proportions_plot)
@@ -961,12 +957,10 @@ collabs_per_year_plot <- ggplot(data = fmd_collabs_per_year,
                      labels = x_axis_labels,
                      expand = c(0, 0)
                      ) +
-  labs(x = '**Year**', 
-       y = '**Total publications**', 
+  labs(x = 'Year', 
+       y = 'Total publications', 
        fill = 'Collaboration type'
        ) +
-  md_theme_minimal(base_size = 12) +
-  #md_theme_minimal(base_size = 16) +
   theme(legend.position = 'bottom') 
 
 plot(collabs_per_year_plot)
