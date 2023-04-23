@@ -38,25 +38,32 @@ knitr::opts_chunk$set(echo = FALSE,
 ```
 
 ```{r}
-#create a folder for storing the manuscript figures
 
-if(!dir.exists('../figs_manuscript'))
+
+#directories
+# Figures
+figs_dir <- "../figs_manuscript"
+
+# Create a folder for storing the manuscript figures if it doesn't exist
+if (!dir.exists('../figs_manuscript'))
     {
     dir.create('../figs_manuscript', 
                showWarnings = FALSE)
     }
 
-#save figures in this folder
-save_fig_here <- '../figs_manuscript'
+
+data_dir <- "../data"
 ```
 
 
 ```{r}
 # Load the cleaned data 
-long_data <- read_rds('../data/review_data_long_cleaned.rds')
+long_data <- read_rds(file.path(data_dir, "review_data_long_cleaned.rds"))
 
 #The cleaned data without citations
-compact_data_init <- read_rds('../data/review_data_compact_cleaned.rds')
+compact_data_init <- read_rds(file.path(data_dir, 
+                                        "review_data_compact_cleaned.rds")
+                              )
 ```
 
 ```{r}
@@ -682,7 +689,7 @@ print(outcomes_tally_plot)
 ggsave(filename = 'outcomes_tally_plot.tiff',
        plot = outcomes_tally_plot, 
        device = 'tiff',
-       path = save_fig_here
+       path = figs_dir
        )
 
 ggsave(filename = 'outcomes_tally_plot.tiff',
@@ -1217,7 +1224,7 @@ outcomes_tally_plot <- ggplot(data = outcomes_tally_by_collab_type,
 ggsave(filename = 'outcomes_tally_fmd_plot.tiff',
        plot = outcomes_tally_plot, 
        device = 'tiff',
-       path = save_fig_here
+       path = figs_dir
        )
 ```
 
