@@ -9,7 +9,17 @@ output:
     fig_crop: no
 ---
 
-```{r echo=FALSE, include=FALSE}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      dev = 'png', 
+                      out.height = "\\textheight",  
+                      out.width = "\\textwidth", 
+                      message = FALSE, 
+                      warning = FALSE
+                      )
+```
+
+```{r}
 #' load packages
 library('tidyverse')
 library('ggthemes')
@@ -26,19 +36,7 @@ conflict_prefer('select', 'dplyr')
 conflict_prefer('kable', 'knitr')
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, 
-                      dev = 'png', 
-                      out.height = "\\textheight",  
-                      out.width = "\\textwidth", 
-                      message = FALSE, 
-                      warning = FALSE
-                      )
-```
-
 ```{r}
-
-
 #directories
 # Figures
 figs_dir <- "../figs_manuscript"
