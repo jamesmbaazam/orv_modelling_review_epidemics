@@ -63,6 +63,9 @@ long_data <- read_rds(file.path(data_dir, "review_data_long_cleaned.rds"))
 compact_data_init <- read_rds(file.path(data_dir, 
                                         "review_data_compact_cleaned.rds")
                               )
+
+# The data with citations 
+compact_data_with_citation_keys_init <- read_rds('../data/compact_data_with_citation_keys_cleaned.rds')
 ```
 
 ```{r}
@@ -79,9 +82,6 @@ validation_dict <- c('compared_with_data' = 'data',
                                  'model_not_validated' = 'none',
                                  ' ' = '_and_'
                                  )
-
-# The data with citations 
-compact_data_with_citation_keys_init <- read_rds('../data/compact_data_with_citation_keys_cleaned.rds')
 
 compact_data_with_citation_keys <- compact_data_with_citation_keys_init %>% 
     mutate(vax_modelled = ifelse(str_detect(intervention_modelled, 'vaccination'), 
