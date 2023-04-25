@@ -105,3 +105,5 @@ analyses/scripts/full_data_extraction_citation_table.tex
 analyses/scripts/orv_sys_rev_data_analysis.tex
 
 analyses/scripts/orv_sys_rev_data_analysis_by_collab_type.tex
+
+*.xlsx
