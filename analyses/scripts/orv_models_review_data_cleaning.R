@@ -1,14 +1,12 @@
 suppressPackageStartupMessages({
   library("tidyverse")
-  library("ggthemes")
-  library("scales")
   library("janitor")
   library("bib2df")
   library("xlsx")
 })
 
 # Define global variables
-data_dir <- "./data"
+data_dir <- "./analyses/data"
 
 
 # load the review data extraction results and remove extraneous variables
