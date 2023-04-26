@@ -63,87 +63,22 @@ source("./orv_models_review_data_cleaning.R")
 long_data <- read_rds(file.path(data_dir, "review_data_long_cleaned.rds"))
 
 #The cleaned data without citations
-compact_data_init <- read_rds(file.path(data_dir, 
-                                        "review_data_compact_cleaned.rds")
-                              )
+compact_data_init <- read_rds(
+  file.path(data_dir, "review_data_compact_cleaned.rds")
+  )
 
 # The data with citations 
-compact_data_with_citation_keys_init <- read_rds('../data/compact_data_with_citation_keys_cleaned.rds')
-```
+compact_data_with_citation_keys <- read_rds(
+  '../data/compact_data_with_citation_keys_cleaned.rds'
+  )
 
-```{r}
-# Dictionary of parametrization methods descriptions
-parametrization_dict <- c('values_from_literature' = 'literature', 
-                  'values_from_guess_and_expert_opion' = 'expert_opinion', 
-                  'values_fitted_to_ts' = 'fitted',
-                  ' ' = ' and ' #replace space with 'and' to make it more readable
-                  )
-
-# Dictionary of validation methods descriptions
-validation_dict <- c('compared_with_data' = 'data',
-                                 'compared_with_other_model_output' = 'another_model',
-                                 'model_not_validated' = 'none',
-                                 ' ' = '_and_'
-                                 )
-
-compact_data_with_citation_keys <- compact_data_with_citation_keys_init %>% 
-    mutate(vax_modelled = ifelse(str_detect(intervention_modelled, 'vaccination'), 
-                               'yes', 
-                               'no')
-         ) %>% 
-  mutate(intervention_type = case_when(
-    vax_modelled == 'no' & vax_modelled_with_non_vax == 'no' ~ 'no_vax', #Vaccination was not modelled
-    vax_modelled == 'yes' & vax_modelled_with_non_vax == 'no' ~ 'vax_combination_with_others', #when vax was modelled but not for comparison as a single intervention
-    vax_modelled == 'yes' & vax_modelled_with_non_vax == 'yes' ~ 'vax_single', #when vax was modelled as a single intervention
-  )) %>% 
-  mutate(publication_year = as.numeric(publication_year), 
-         author_in_country_studied = as.character(author_in_country_studied)) %>% 
-  arrange(publication_year) %>%
-  mutate(
-    author_affiliation_type = str_replace_all(author_affiliation_type, ' ', ' + '),
-    author_in_country_studied = if_else(author_in_country_studied == 'NA', 'not_applicable',
-                                        author_in_country_studied
-                                        )
-    ) %>% 
-  mutate(year_aggreg = as.numeric(ifelse(publication_year < 2006, #An approach to aggregate the years before 2006 into one group because of the low number of papers
-                                         2005, 
-                                         publication_year
-                                         )
-                                  ), 
-         collab_type = as_factor(if_else(author_affiliation_type == 'academic_institutions', 
-                                         'purely_academic', 
-                                         'mixed')
-                                 )
-         )
-
-#replace the original descriptions of parametrization and validation with shorter strings
-compact_data_with_citation_keys <- compact_data_with_citation_keys %>% 
-  mutate(parametrization = str_replace_all(parametrization, 
-                                           parametrization_dict
-                                           )
-         ) %>% 
-  mutate(validation = str_replace_all(validation, 
-                                      validation_dict
-                                      )
-         ) %>% 
-  mutate(model_structure = str_replace(model_structure, 'deterministic stochastic', 'both'))
-  
-
-#Rearrange the columns
-compact_data_with_citation_keys <- compact_data_with_citation_keys %>% 
-  relocate(c(title, bibtexkey), .before = publication_year) %>% 
-  relocate(publication_year, .before = bibtexkey) %>% 
-  relocate(c(x0_reviewer, category, author:language), 
-           .after = collab_type
-           )
-
-# Remove the FMD papers (NB: We only use the FMD papers for comparison)
+# Keep the human disease studies (NB: We only use the FMD papers for comparison)
 long_data_no_fmd <- long_data %>% filter(disease != 'fmd') 
 
 compact_data_with_citation_keys_no_fmd <- compact_data_with_citation_keys %>% 
   filter(disease != 'fmd') 
 
-#Filter the FMD data
+# Filter the FMD data
 fmd_data <- compact_data_with_citation_keys %>% 
   filter(disease == 'fmd') 
 ```
