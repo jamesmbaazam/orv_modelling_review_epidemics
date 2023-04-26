@@ -6,7 +6,7 @@ suppressPackageStartupMessages({
 })
 
 # Define global variables
-data_dir <- "./analyses/data"
+data_dir <- "./data"
 
 
 # load the review data extraction results and remove extraneous variables
