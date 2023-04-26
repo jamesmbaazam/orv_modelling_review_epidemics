@@ -54,6 +54,11 @@ data_dir <- "../data"
 
 
 ```{r}
+#' re-run the data cleaning step, in case something has changed 
+#' TO DO: Use GNU make for this
+
+source("./orv_models_review_data_cleaning.R")
+
 # Load the cleaned data 
 long_data <- read_rds(file.path(data_dir, "review_data_long_cleaned.rds"))
 
