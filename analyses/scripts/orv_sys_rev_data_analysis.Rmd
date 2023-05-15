@@ -1,8 +1,6 @@
 ---
 title: "Analysis of the included studies"
 output:
-  # word_document:
-  #   toc: yes
   pdf_document:
     toc: yes
     keep_tex: yes
