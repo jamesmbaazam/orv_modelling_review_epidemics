@@ -119,6 +119,11 @@ rows, the table could not be printed in one go and was instead printed a few col
 at a time. In actual fact, it is just a repetition of the title column along with
 the presented columns.
 
+## Table 1
+
+This section presents extracted data on the author affiliation type (affiliation_type), 
+whether it is a purely academic collaboration (academic_collab), and the location
+that was studied.
 
 ```{r cols_1_to_6}
 # Make a neat table of papers from columns 1(title)-5
@@ -141,6 +146,12 @@ knitr::kable(cols_1_to_6,
   kableExtra::landscape() 
 ```
 
+## Table 2
+
+This section presents extracted data on the disease studied (disease), 
+type of objective studied (objectives), whether the paper had an author in
+the location studied (author_in_country_studied), and how individuals were 
+represented (individual_representation).
 
 ```{r cols_7_to_10}
 # Make a neat table of papers from columns 1, 2 (title), and 7-10
@@ -162,6 +173,11 @@ knitr::kable(cols_7_to_10,
   kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
   kableExtra::landscape() 
 ```
+## Table 3
+
+This section presents extracted data on whether spatial heterogeneity was
+represented (space_representation), the type of model structure 
+(model_structure), the type of parametrization and validation method used.
 
 ```{r cols_11_to_14}
 # Make a neat table of papers from columns 1, 2 (title) and 11-15
@@ -183,6 +199,10 @@ knitr::kable(cols_11_to_14,
   kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
   kableExtra::landscape() 
 ```
+## Table 4
+
+This section presents extracted data on the type of outbreak and the interventions 
+studied.
 
 ```{r cols_15_to_16}
 # Make a neat table of papers from columns 1, 2 (title) and 15-18
@@ -203,6 +223,12 @@ knitr::kable(cols_15_to_16,
   kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
   kableExtra::landscape() 
 ```
+## Table 5
+
+This section presents extracted data on whether vaccination was modelled as 
+a sole intervention for comparison against other interventions 
+(vax_modelled_with_non_vax) and the studies' conclusion on the impact of 
+vaccination (is_vax_effective).
 
 ```{r cols_17_to_18}
 # Make a neat table of papers from columns 1, 2 (title) and 19-24
@@ -225,6 +251,11 @@ knitr::kable(cols_17_to_18,
   kableExtra::landscape() 
 ```
 
+## Table 6
+
+This section presents extracted data on the outcomes measured and whether a 
+sensitivity analysis was conducted.
+
 ```{r cols_19_to_20}
 # Make a neat table of papers from columns 1, 2 (title) and 19-24
 cols_19_to_20 <- final_citation_table %>% 
@@ -246,6 +277,12 @@ knitr::kable(cols_19_to_20,
   kableExtra::landscape() 
 ```
 
+## Table 7
+
+This section presents extracted data on whether observed data was used for 
+model validation (data_used), and whether the data was made available 
+(data_available).
+
 ```{r cols_21_to_22}
 # Make a neat table of papers from columns 1, 2 (title) and 19-24
 cols_21_to_22 <- final_citation_table %>% 
@@ -265,6 +302,11 @@ knitr::kable(cols_21_to_22,
   kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
   kableExtra::landscape() 
 ```
+## Table 8
+
+This section presents extracted data on whether the simulation code was made 
+available (simulation_code_available) and whether vaccination was modelled 
+(vax_modelled).
 
 ```{r cols_23_to_24}
 # Make a neat table of papers from columns 1, 2 (title) and 19-24
