@@ -70,7 +70,7 @@ review_data_compact_cleaning_step2 <- review_data_compact_cleaning_step1 %>%
       objectives == "assess_impact_past" ~ "past",
       objectives == "assess_impact_past assess_impact_future" ~ "both"
     )
-  ) |>
+  ) %>%
   # if entry is NA, change it to 'not_applicable' for easy analysis in R
   mutate(
     author_in_country_studied =
