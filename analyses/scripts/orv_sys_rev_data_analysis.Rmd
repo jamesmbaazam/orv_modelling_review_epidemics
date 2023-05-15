@@ -98,7 +98,9 @@ studies_per_collab_type <- compact_data_with_citation_keys_no_fmd %>%
 
 knitr::kable(studies_per_collab_type, 
              caption = 'Number of studies per collaboration type (Human VPDs)',
-             format = "latex", booktabs = TRUE) %>% 
+             format = "latex", 
+             booktabs = TRUE
+             ) %>% 
         kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'))
 ```
 
