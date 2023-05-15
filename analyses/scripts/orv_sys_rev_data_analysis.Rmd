@@ -21,14 +21,17 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ```{r}
 #' load packages
-library('tidyverse')
-library('ggthemes')
-library('scales')
-library('janitor')
-library('countrycode')
-library('bib2df')
-library('conflicted')
-library('ggwordcloud')
+suppressPackageStartupMessages({
+  library('tidyverse')
+  library('ggthemes')
+  library('scales')
+  library('janitor')
+  library('countrycode')
+  library('bib2df')
+  library('conflicted')
+  library('ggwordcloud')
+  library('here')
+  })
 
 #resolve package function conflicts
 conflict_prefer('filter', 'dplyr')
@@ -37,19 +40,19 @@ conflict_prefer('kable', 'knitr')
 ```
 
 ```{r}
-#directories
-# Figures
-figs_dir <- "../figs_manuscript"
+#I/O directories
+figs_dir <- "analyses/figs"
+data_dir <- "analyses/data"
+scripts_dir <- "analyses/scripts"
 
-# Create a folder for storing the manuscript figures if it doesn't exist
-if (!dir.exists('../figs_manuscript'))
-    {
-    dir.create('../figs_manuscript', 
-               showWarnings = FALSE)
-    }
+here::i_am("analyses/scripts/orv_sys_rev_data_analysis.Rmd")
+# Create a folder for storing the figures
 
-
-data_dir <- "../data"
+if (!dir.exists(here::here(figs_dir))) {
+  dir.create(here::here(figs_dir),
+    showWarnings = TRUE
+  )
+}
 ```
 
 
@@ -57,20 +60,19 @@ data_dir <- "../data"
 #' re-run the data cleaning step, in case something has changed 
 #' TO DO: Use GNU make for this
 
-source("./orv_models_review_data_cleaning.R")
+source(here::here(scripts_dir, "orv_models_review_data_cleaning.R"))
 
 # Load the cleaned data 
-long_data <- read_rds(file.path(data_dir, "review_data_long_cleaned.rds"))
+long_data <- read_rds(here::here(data_dir, "review_data_long_cleaned.rds"))
 
 #The cleaned data without citations
 compact_data_init <- read_rds(
-  file.path(data_dir, "review_data_compact_cleaned.rds")
+  here::here(data_dir, "review_data_compact_cleaned.rds")
   )
 
 # The data with citations 
 compact_data_with_citation_keys <- read_rds(
-  '../data/compact_data_with_citation_keys_cleaned.rds'
-  )
+  here::here(data_dir, 'compact_data_with_citation_keys_cleaned.rds'))
 
 # Keep the human disease studies (NB: We only use the FMD papers for comparison)
 long_data_no_fmd <- long_data %>% filter(disease != 'fmd') 
