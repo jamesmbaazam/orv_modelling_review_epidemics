@@ -56,13 +56,13 @@ review_data_compact_cleaning_step2 <- review_data_compact_cleaning_step1 %>%
   mutate(
     country_studied_other =
       str_replace_all(country_studied_other, " ", "_")
-  ) |>
+  ) %>%
   #' make titles lower case
   mutate(
     title = str_to_lower(paper_title),
     disease = str_to_lower(disease),
     country_studied_other = str_to_lower(country_studied_other)
-  ) |>
+  ) %>%
   #' contract long entries
   mutate(
     objectives = case_when(
@@ -90,7 +90,7 @@ review_data_compact_cleaning_step2 <- review_data_compact_cleaning_step1 %>%
         "not_applicable",
         data_available
       )
-  ) |>
+  ) %>%
   mutate(
     country_studied = case_when(
       country_studied == "none" ~ "none",
@@ -100,7 +100,7 @@ review_data_compact_cleaning_step2 <- review_data_compact_cleaning_step1 %>%
         country_studied != "multiple" &
         country_studied != "other" ~ country_studied
     )
-  ) |>
+  ) %>%
   mutate(
     intervention_modelled = str_replace_all(
       intervention_modelled,
@@ -112,7 +112,7 @@ review_data_compact_cleaning_step2 <- review_data_compact_cleaning_step1 %>%
       " ",
       ","
     )
-  ) |>
+  ) %>%
   # make some columns factors
   mutate(across(
     .cols = c(
@@ -253,7 +253,7 @@ compact_data_with_citation_keys <- compact_data_with_citation_keys %>%
     ) %>%
   mutate(
     author_affiliation_type = str_replace_all(author_affiliation_type, ' ', ' + ')
-    ) |>
+    ) %>%
   mutate(
     author_in_country_studied = if_else(author_in_country_studied == 'NA',
                                         'not_applicable',
@@ -264,7 +264,7 @@ compact_data_with_citation_keys <- compact_data_with_citation_keys %>%
   mutate(year_aggreg = as.numeric(
     ifelse(publication_year < 2006, 2005, publication_year)
     )
-    ) |>
+    ) %>%
   mutate(
   collab_type = as_factor(
     if_else(author_affiliation_type == 'academic_institutions',
@@ -273,7 +273,7 @@ compact_data_with_citation_keys <- compact_data_with_citation_keys %>%
     ),
   purely_academic_collab = if_else(
     author_affiliation_type == 'academic_institutions', TRUE, FALSE)
-  ) |>
+  ) %>%
   relocate(purely_academic_collab, .after = author_affiliation_type)
 
 # Clean descriptions of parametrization and validation with shorter labels
@@ -313,16 +313,17 @@ compact_data_with_citation_keys <- compact_data_with_citation_keys %>%
   relocate(publication_year, .before = bibtexkey) %>%
   relocate(c(x0_reviewer, category, author:language),
            .after = collab_type
-  ) |>
+  ) %>%
   arrange(title)
 
 
 
 # save the cleaned data
 saveRDS(compact_data_with_citation_keys,
-  file = file.path(data_dir, "compact_data_with_citation_keys_cleaned.rds")
+  file = here(data_dir, "compact_data_with_citation_keys_cleaned.rds")
 )
 
 openxlsx::write.xlsx(x = compact_data_with_citation_keys,
-                     file = file.path(data_dir, "included_studies_database.xlsx")
+                     file = here(data_dir, "included_studies_database.xlsx")
                      )
+
