@@ -1,24 +1,19 @@
 ---
-output: 
+title: "Supplementary material"
+output:
   pdf_document:
-    df_print: kable
-    latex_engine: xelatex
-    keep_tex: true
+    fig_crop: no
 ---
 ```{r setup, include=FALSE}
-# options(kableExtra.auto_format = FALSE,
-#         knitr.table.format = "latex"
-#         )
-
 knitr::opts_chunk$set(echo = FALSE, 
-                      include = FALSE,
-                      # dev = 'jpeg', 
-                      fig.width = 8, 
-                      fig.height = 6, 
-                      message = FALSE,
-                      warning = FALSE,
-                      cache = FALSE
+                      dev = 'png', 
+                      out.height = "\\textheight",  
+                      out.width = "\\textwidth", 
+                      message = FALSE, 
+                      warning = FALSE
                       )
+
+options(kableExtra.auto_format = FALSE)
 ```
 
 ```{r}
@@ -90,82 +85,203 @@ compact_data_with_citation_keys <- compact_data_with_citation_keys %>%
                doi, bibtexkey
                )
             ) %>% 
-     arrange(desc(publication_year))
+     arrange(desc(publication_year)) %>% 
+  mutate(num = seq_len(nrow(.))) %>% 
+  relocate(num, .before = "title") 
+
+# Shorten names
+
+names_dict <- c(year = "publication_year",
+                affiliation_type = "author_affiliation_type",
+                academic_collab = "purely_academic_collab",
+                location = "country_studied",
+                interventions = "intervention_modelled"
+                )
+
+ final_citation_table <-  final_citation_table %>% 
+  rename(names_dict)
 ```
 
-```{r}
+```{r helper_functions}
+#' Function to print the table caption using a template 
+#' It extracts the column names and combines them into a comma-separated
+#' list and attaches a preceding sentence, which defaults to 
+#' ""List of included studies by:""
+make_table_caption <- function(df, preceding_sentence = "List of included studies by:"){
+  paste(preceding_sentence, paste(names(df)[-c(1)], collapse = ", "))
+} 
+```
+The following table contains information on the data extracted from
+each of the included studies. 
+
+Technical note: Due to the large number of 
+rows, the table could not be printed in one go and was instead printed a few columns 
+at a time. In actual fact, it is just a repetition of the title column along with
+the presented columns.
+
+
+```{r cols_1_to_6}
 # Make a neat table of papers from columns 1(title)-5
-final_citation_table %>% 
-    select(1:5) %>% 
-    kable()
+cols_1_to_6 <- final_citation_table %>% 
+    select(1:6) 
 
-# booktabs = TRUE,
-#       longtable = FALSE#,
-#       # caption = 'Extracted data per paper: publication_year, author_affiliation_type, country_studied, author_in_country_studied.'
-#          ) %>%
-#     kable_styling(latex_options = c('striped',
-#                                     'scale_down',
-#                                     'hold_position',
-#                                     'repeat_header'
-#                                     )
-#                   ) %>%
-#     column_spec(column = c(1, 3), width = "5cm") #%>%
-    # landscape()
+knitr::kable(cols_1_to_6, 
+    format = "latex", 
+    booktabs = TRUE,
+    longtable = TRUE
+    # caption = make_table_caption(cols_1_to_6)
+    ) %>% 
+  kableExtra::kable_styling(latex_options = c("striped", 
+                                  "scale_down", 
+                                  "hold_position", 
+                                  "repeat_header"),
+                            font_size = 9
+                ) %>% 
+  kableExtra::column_spec(column = c(2), width = "4cm") %>% 
+  kableExtra::landscape() 
 ```
 
 
-<!--  ```{r} -->
-<!-- # Make a neat table of papers from columns 1 (title), and 6-10  -->
-<!-- final_citation_table %>% -->
-<!--   select(c(1, 6:10)) %>% -->
-<!--   kable( -->
-<!--     booktabs = TRUE, -->
-<!--     longtable = FALSE, -->
-<!--     caption = "Extracted data per paper: disease, objectives, individual_representation, space_representation, model_structure." -->
-<!--   ) %>% -->
-<!--   kable_styling(latex_options = c("striped",  -->
-<!--                                   "scale_down",  -->
-<!--                                   "hold_position",  -->
-<!--                                   "repeat_header" -->
-<!--                                   ) -->
-<!--                 ) %>% -->
-<!--   column_spec(column = c(1), width = "5cm") %>% -->
-<!--   landscape() -->
-<!-- ``` -->
+```{r cols_7_to_10}
+# Make a neat table of papers from columns 1, 2 (title), and 7-10
+cols_7_to_10 <- final_citation_table %>% 
+    select(c(1, 2, 7:10))
 
-<!-- ```{r} -->
-<!-- # Make a neat table of papers from columns 1 (title) and 11-15  -->
-<!-- final_citation_table %>% -->
-<!--   select(1, 11:15) %>% -->
-<!--   kable( -->
-<!--     longtable = FALSE, -->
-<!--     caption = "Extracted data per paper: parametrization, validation, outbreak_type, intervention_modelled, vax_modelled_with_non_vax." -->
-<!--   ) %>% -->
-<!--   kable_styling(latex_options = c("striped",  -->
-<!--                                   "scale_down",  -->
-<!--                                   "hold_position",  -->
-<!--                                   "repeat_header" -->
-<!--                                   ) -->
-<!--                 ) %>% -->
-<!--   column_spec(column = c(1, 2, 5), width = "4cm") %>% -->
-<!--   landscape() -->
-<!-- ``` -->
+knitr::kable(cols_7_to_10, 
+    format = "latex", 
+    booktabs = TRUE,
+    longtable = TRUE
+    # caption = make_table_caption(cols_7_to_10)
+    ) %>% 
+  kableExtra::kable_styling(latex_options = c("striped", 
+                                  "scale_down", 
+                                  "hold_position", 
+                                  "repeat_header"),
+                            font_size = 9
+                ) %>% 
+  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::landscape() 
+```
 
-<!--  ```{r} -->
-<!-- # Make a neat table of papers from columns 1 (title) and 16-22 -->
-<!-- final_citation_table %>% -->
-<!--   select(1, 16:22) %>% -->
-<!--   kable( -->
-<!--     booktabs = TRUE, -->
-<!--     longtable = FALSE, -->
-<!--     caption = "Extracted data per paper: is_vax_effective, outcome_measured, sensitivity_analysis, data_used, data_available, simulation_code_available, vax_modelled." -->
-<!--   ) %>% -->
-<!--   kable_styling(latex_options = c("striped", -->
-<!--                                   "scale_down",  -->
-<!--                                   "hold_position",  -->
-<!--                                   "repeat_header" -->
-<!--                                   ) -->
-<!--                 ) %>% -->
-<!--   column_spec(column = c(1, 3), width = "5cm") %>% -->
-<!--   landscape() -->
-<!-- ``` -->
+```{r cols_11_to_14}
+# Make a neat table of papers from columns 1, 2 (title) and 11-15
+cols_11_to_14 <- final_citation_table %>% 
+    select(c(1, 2, 11:14))
+
+knitr::kable(cols_11_to_14, 
+    format = "latex", 
+    booktabs = TRUE,
+    longtable = TRUE
+    # caption = make_table_caption(cols_11_to_14)
+    ) %>% 
+  kableExtra::kable_styling(latex_options = c("striped", 
+                                  "scale_down", 
+                                  "hold_position", 
+                                  "repeat_header"),
+                            font_size = 9
+                ) %>% 
+  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::landscape() 
+```
+
+```{r cols_15_to_16}
+# Make a neat table of papers from columns 1, 2 (title) and 15-18
+cols_15_to_16 <- final_citation_table %>% 
+    select(c(1, 2, 15:16))
+
+knitr::kable(cols_15_to_16, 
+    format = "latex", 
+    booktabs = TRUE,
+    longtable = TRUE
+    ) %>% 
+  kableExtra::kable_styling(latex_options = c("striped", 
+                                  "scale_down", 
+                                  "hold_position", 
+                                  "repeat_header"),
+                            font_size = 9
+                ) %>% 
+  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::landscape() 
+```
+
+```{r cols_17_to_18}
+# Make a neat table of papers from columns 1, 2 (title) and 19-24
+cols_17_to_18 <- final_citation_table %>% 
+    select(c(1, 2, 17:18))
+
+knitr::kable(cols_17_to_18, 
+    format = "latex", 
+    booktabs = TRUE,
+    longtable = TRUE
+    # caption = make_table_caption(cols_1_to_6)
+    ) %>% 
+  kableExtra::kable_styling(latex_options = c("striped", 
+                                  "scale_down", 
+                                  "hold_position", 
+                                  "repeat_header"),
+                            font_size = 9
+                ) %>% 
+  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::landscape() 
+```
+
+```{r cols_19_to_20}
+# Make a neat table of papers from columns 1, 2 (title) and 19-24
+cols_19_to_20 <- final_citation_table %>% 
+    select(c(1, 2, 19:20))
+
+knitr::kable(cols_19_to_20, 
+    format = "latex", 
+    booktabs = TRUE,
+    longtable = TRUE
+    # caption = make_table_caption(cols_1_to_6)
+    ) %>% 
+  kableExtra::kable_styling(latex_options = c("striped", 
+                                  "scale_down", 
+                                  "hold_position", 
+                                  "repeat_header"),
+                            font_size = 9
+                ) %>% 
+  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::landscape() 
+```
+
+```{r cols_21_to_22}
+# Make a neat table of papers from columns 1, 2 (title) and 19-24
+cols_21_to_22 <- final_citation_table %>% 
+    select(c(1, 2, 21:22))
+
+knitr::kable(cols_21_to_22, 
+    format = "latex", 
+    booktabs = TRUE,
+    longtable = TRUE
+    ) %>% 
+  kableExtra::kable_styling(latex_options = c("striped", 
+                                  "scale_down", 
+                                  "hold_position", 
+                                  "repeat_header"),
+                            font_size = 9
+                ) %>% 
+  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::landscape() 
+```
+
+```{r cols_23_to_24}
+# Make a neat table of papers from columns 1, 2 (title) and 19-24
+cols_23_to_24 <- final_citation_table %>% 
+    select(c(1, 2, 23:24))
+
+knitr::kable(cols_23_to_24, 
+     format = "latex",
+     booktabs = TRUE,
+     longtable = TRUE
+   ) %>% 
+  kableExtra::kable_styling(latex_options = c("striped", 
+                                  "scale_down", 
+                                  "hold_position", 
+                                  "repeat_header"),
+                            font_size = 9
+                ) %>% 
+  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::landscape() 
+```
