@@ -1,26 +1,23 @@
 suppressPackageStartupMessages({
-  library("tidyverse")
-  library("janitor")
-  library("bib2df")
-  library("xlsx")
+  library(tidyverse)
+  library(janitor)
+  library(bib2df)
+  library(xlsx)
+  library(here)
 })
 
-# Define global variables
-data_dir <- "./data"
-
+# I/O paths
+data_dir <- "analyses/data"
 
 # load the review data extraction results and remove extraneous variables
 review_data_compact <- read_delim(
-  file.path(
-    data_dir,
-    "orv_review_compact_data.csv"
-  ),
+  here(data_dir, "orv_review_compact_data.csv"),
   delim = ";",
   na = c("", "NA")
 )
 
 # load the citation data for merging
-citation_data <- bib2df(file.path(data_dir, "included_studies.bib"),
+citation_data <- bib2df(here(data_dir, "included_studies.bib"),
   separate_names = FALSE
 ) %>%
   mutate(year = as.numeric(YEAR))
@@ -173,7 +170,7 @@ review_data_compact_cleaned <- review_data_compact_cleaning_step3 %>%
 
 # save the cleaned compact dataset
 saveRDS(review_data_compact_cleaned,
-  file = file.path(data_dir, "review_data_compact_cleaned.rds")
+  file = here(data_dir, "review_data_compact_cleaned.rds")
 )
 
 
@@ -195,7 +192,7 @@ review_data_wide_to_long <- review_data_compact_cleaned %>%
 
 # save the cleaned data
 saveRDS(review_data_wide_to_long,
-  file = file.path(data_dir, "review_data_long_cleaned.rds")
+  file = here(data_dir, "review_data_long_cleaned.rds")
 )
 
 # Clean the citation database
