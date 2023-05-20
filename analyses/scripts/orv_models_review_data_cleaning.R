@@ -1,3 +1,17 @@
+# I/O paths
+data_dir <- "data"
+
+.args <- if (interactive()) {
+  c(
+    file.path(data_dir, "orv_review_compact_data.csv"),
+    file.path(data_dir, "included_studies.bib"),
+    file.path(data_dir, "compact_data_with_citation_keys_cleaned.rds")
+  )
+} else {
+  commandArgs(trailingOnly = TRUE)
+}
+
+
 suppressPackageStartupMessages({
   library(tidyverse)
   library(janitor)
@@ -6,18 +20,15 @@ suppressPackageStartupMessages({
   library(here)
 })
 
-# I/O paths
-data_dir <- "analyses/data"
-
 # load the review data extraction results and remove extraneous variables
 review_data_compact <- read_delim(
-  here(data_dir, "orv_review_compact_data.csv"),
+  here(.args[1]),
   delim = ";",
   na = c("", "NA")
 )
 
 # load the citation data for merging
-citation_data <- bib2df(here(data_dir, "included_studies.bib"),
+citation_data <- bib2df(here(.args[2]),
   separate_names = FALSE
 ) %>%
   mutate(year = as.numeric(YEAR))
@@ -316,11 +327,6 @@ compact_data_with_citation_keys <- compact_data_with_citation_keys %>%
 
 
 # save the cleaned data
-saveRDS(compact_data_with_citation_keys,
-  file = here(data_dir, "compact_data_with_citation_keys_cleaned.rds")
-)
+saveRDS(compact_data_with_citation_keys, tail(.args, 1))
 
-openxlsx::write.xlsx(x = compact_data_with_citation_keys,
-                     file = here(data_dir, "included_studies_database.xlsx")
-                     )
 
