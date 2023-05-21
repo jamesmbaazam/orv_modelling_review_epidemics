@@ -1,11 +1,11 @@
 # I/O paths
-data_dir <- "data"
+data_dir <- "./data"
 
 .args <- if (interactive()) {
   c(
-    file.path(data_dir, "orv_review_compact_data.csv"),
-    file.path(data_dir, "included_studies.bib"),
-    file.path(data_dir, "compact_data_with_citation_keys_cleaned.rds")
+    here::here(data_dir, "orv_review_compact_data.csv"),
+    here::here(data_dir, "included_studies.bib"),
+    here::here(data_dir, "compact_data_with_citation_keys_cleaned.rds")
   )
 } else {
   commandArgs(trailingOnly = TRUE)

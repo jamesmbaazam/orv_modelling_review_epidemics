@@ -38,12 +38,22 @@ conflict_prefer('kable', 'knitr')
 ```
 
 ```{r}
-#I/O directories
-figs_dir <- "analyses/figs"
-data_dir <- "analyses/data"
-scripts_dir <- "analyses/scripts"
+#' if sourced, re-run the data cleaning step, in case something has changed 
+#' else if through the terminal, use the arguments passed through the
+#' commandline/make
+if (is_null(getOption('knitr.in.progress'))) {
+source(here::here('./scripts/orv_models_review_data_cleaning.R'))
+args <- c(
+  here::here("data", "review_data_long_cleaned.rds"),
+  here::here("data", "review_data_compact_cleaned.rds"),
+  here::here("data", "compact_data_with_citation_keys_cleaned.rds")
+  )
+} else {
+ args <- commandArgs(trailingOnly = TRUE)
+}
+```
 
-here::i_am("analyses/scripts/orv_sys_rev_data_analysis.Rmd")
+```{r}
 # Create a folder for storing the figures
 
 if (!dir.exists(here::here(figs_dir))) {
@@ -53,24 +63,15 @@ if (!dir.exists(here::here(figs_dir))) {
 }
 ```
 
-
 ```{r}
-#' re-run the data cleaning step, in case something has changed 
-#' TO DO: Use GNU make for this
-
-source(here::here(scripts_dir, "orv_models_review_data_cleaning.R"))
-
 # Load the cleaned data 
-long_data <- read_rds(here::here(data_dir, "review_data_long_cleaned.rds"))
+long_data <- read_rds(args[1])
 
 #The cleaned data without citations
-compact_data_init <- read_rds(
-  here::here(data_dir, "review_data_compact_cleaned.rds")
-  )
+compact_data_init <- read_rds(args[2])
 
 # The data with citations 
-compact_data_with_citation_keys <- read_rds(
-  here::here(data_dir, 'compact_data_with_citation_keys_cleaned.rds'))
+compact_data_with_citation_keys <- read_rds(args[3])
 
 # Keep the human disease studies (NB: We only use the FMD papers for comparison)
 long_data_no_fmd <- long_data %>% filter(disease != 'fmd') 
