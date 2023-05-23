@@ -163,12 +163,6 @@ review_data_compact_cleaning_step3 <- review_data_compact_cleaning_step2 %>%
     )
   )
 
-# View(review_data_compact_cleaning_step3)
-
-
-
-# View(review_data_compact_cleaning_step3)
-
 #' Step 3A
 # Remove the "other" and "multiple" columns
 review_data_compact_cleaned <- review_data_compact_cleaning_step3 %>%
@@ -177,7 +171,6 @@ review_data_compact_cleaned <- review_data_compact_cleaning_step3 %>%
     #' instead of "other"
     -c(paper_title, country_studied_multiple)
   )
-# View(review_data_compact_cleaned)
 
 # save the cleaned compact dataset
 saveRDS(review_data_compact_cleaned,
