@@ -48,15 +48,43 @@ if (!dir.exists(here::here(figs_dir))) {
 }
 ```
 
+```{r rerun_data_cleaning_if_interactive}
+#' if this script is being knit interactively, re-run the data cleaning step,
+#' and assign the generated cleaned data (in case something has changed) 
+#' else if through the terminal, use the 
+#' arguments passed through the commandline/make
+# knitting_interactively <- isFALSE(is.null(getOption('knitr.in.progress')))
+# 
+# if (knitting_interactively) {
+#   source(here::here("scripts", "orv_models_review_data_cleaning.R"))
+# args <- c(
+#   here::here("data", "review_data_long_cleaned.rds"),
+#   here::here("data", "review_data_compact_cleaned.rds"),
+#   here::here("data", "compact_data_with_citation_keys_cleaned.rds")
+#   )
+# } else {
+#  args <- commandArgs(trailingOnly = TRUE)
+# }
+```
+
+```{r}
+args <- c(
+  here::here("data", "review_data_long_cleaned.rds"),
+  here::here("data", "review_data_compact_cleaned.rds"),
+  here::here("data", "compact_data_with_citation_keys_cleaned.rds")
+  )
+```
+
+
 ```{r}
 # Load the cleaned data 
-long_data <- read_rds(args[1])
+long_data <- readRDS(args[1])
 
 #The cleaned data without citations
-compact_data_init <- read_rds(args[2])
+compact_data_init <- readRDS(args[2])
 
 # The data with citations 
-compact_data_with_citation_keys <- read_rds(args[3])
+compact_data_with_citation_keys <- readRDS(args[3])
 
 # Keep the human disease studies (NB: We only use the FMD papers for comparison)
 long_data_no_fmd <- long_data %>% filter(disease != 'fmd') 
