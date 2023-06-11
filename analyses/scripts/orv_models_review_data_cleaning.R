@@ -282,9 +282,6 @@ compact_data_with_citation_keys <- left_join(review_data_compact_cleaned,
 
 # Clean individual variables
 compact_data_with_citation_keys <- compact_data_with_citation_keys %>%
-  mutate(publication_year = as.numeric(publication_year),
-         author_in_country_studied = as.character(author_in_country_studied)
-         ) %>%
   arrange(publication_year) %>%
   mutate(vax_modelled = ifelse(
     str_detect(intervention_modelled, 'vaccination'), 'yes', 'no')) %>%
