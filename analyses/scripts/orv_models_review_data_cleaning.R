@@ -293,13 +293,13 @@ compact_data_with_citation_keys <- compact_data_with_citation_keys %>%
     # When vax was not modelled at all
     vax_modelled == 'no' & vax_modelled_with_non_vax == 'no' ~ 'no_vax',
     # When vax was modelled but not for comparison as a single intervention
-    vax_modelled == 'yes' & vax_modelled_with_non_vax == 'no' ~ 'vax_combination_with_others',
+    vax_modelled == 'yes' & vax_modelled_with_non_vax == 'yes' ~ 'vax_combination_with_others',
     # When vax was modelled as a single intervention to be compared with others
-    vax_modelled == 'yes' & vax_modelled_with_non_vax == 'yes' ~ 'vax_single'
+    vax_modelled == 'yes' & vax_modelled_with_non_vax == 'no' ~ 'vax_single'
     )
     ) %>%
   mutate(
-    author_affiliation_type = str_replace_all(author_affiliation_type, ' ', ' + ')
+    author_affiliation_type = str_replace_all(author_affiliation_type, " ",  " + ")
     ) %>%
   mutate(
     author_in_country_studied = if_else(author_in_country_studied == 'NA',
