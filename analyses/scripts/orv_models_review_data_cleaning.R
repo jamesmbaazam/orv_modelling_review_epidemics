@@ -207,6 +207,16 @@ review_data_compact_cleaning_step3 <- review_data_compact_cleaning_step2 %>%
         paste0(outcome_measured, ",", outcome_measured_other)
       )
     )
+  ) %>%
+  mutate(
+    outcome_measured = str_remove(
+      outcome_measured,
+      ",outcome_other|outcome_other,"
+    ),
+    intervention_modelled = str_remove(
+      intervention_modelled,
+      ",intervention_other|intervention_other,"
+    )
   )
 
 #' Step 3A
