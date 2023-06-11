@@ -142,6 +142,43 @@ review_data_compact_cleaning_step2 <- review_data_compact_cleaning_step1 %>%
 #' Combine the intervention and outcome columns, replace the commas with
 #' space, and remove the "other" variables
 review_data_compact_cleaning_step3 <- review_data_compact_cleaning_step2 %>%
+  # trim/remove white space from both ends of the variables
+  mutate(
+    intervention_modelled_other = str_trim(intervention_modelled_other,
+      side = "both"
+      ),
+    outcome_measured_other = str_trim(outcome_measured_other,
+      side = "both"
+      )
+  ) %>%
+  # make lower case
+  mutate(
+    intervention_modelled_other = str_to_lower(intervention_modelled_other),
+    outcome_measured_other = str_to_lower(outcome_measured_other)
+    ) %>%
+  #remove the spaces after "," before next operation
+  mutate(
+    intervention_modelled_other = str_replace_all(
+      intervention_modelled_other,
+      ", ", ","
+    ),
+    outcome_measured_other = str_replace_all(
+      outcome_measured_other,
+      ", ", ","
+    )
+  ) %>%
+  # replace spaces between words with an underscore
+  mutate(
+    intervention_modelled_other = str_replace_all(
+      intervention_modelled_other,
+      " ", "_"
+    ),
+    outcome_measured_other = str_replace_all(
+      outcome_measured_other,
+      " ", "_"
+    )
+  ) %>%
+  # reconstruct the intervention_modelled and outcomes_measured columns to include those recorded in the "other" column. The "other" columns will be removed later
   mutate(
     intervention_modelled = case_when(
       is.na(intervention_modelled_other) ~ intervention_modelled,
@@ -155,10 +192,7 @@ review_data_compact_cleaning_step3 <- review_data_compact_cleaning_step2 %>%
     outcome_measured = case_when(
       is.na(outcome_measured_other) ~ outcome_measured,
       !is.na(outcome_measured_other) ~ str_to_lower(
-        paste(outcome_measured,
-          outcome_measured_other,
-          sep = ","
-        )
+        paste0(outcome_measured, ",", outcome_measured_other)
       )
     )
   )
