@@ -27,6 +27,18 @@ review_data_compact <- read_delim(
   na = c("", "NA")
 )
 
+#' Further papers to be removed
+#' 1. On the Regional Control of a Reaction–Diffusion System SIR:
+    #' Reason: about Ebola in Gorillas
+#' 2. Analysis of a tb model with treatment interruptions:
+  #' Reason: Duplicate of "A Mathematical Study of a TB Model with Treatment
+  #' Interruptions and Two Latent Periods"
+exclusions <- c("On the Regional Control of a Reaction–Diffusion System SIR",
+              "Analysis of a TB model with treatment interruptions"
+              )
+review_data_compact <- review_data_compact %>%
+  filter(!paper_title %in% exclusions)
+
 # load the citation data for merging
 citation_data <- bib2df(here(.args[2]),
   separate_names = FALSE
