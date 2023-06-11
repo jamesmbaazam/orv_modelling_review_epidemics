@@ -189,8 +189,12 @@ review_data_compact_cleaning_step3 <- review_data_compact_cleaning_step2 %>%
       outcome_measured_other,
       " ", "_"
     )
-  ) %>%
-  # reconstruct the intervention_modelled and outcomes_measured columns to include those recorded in the "other" column. The "other" columns will be removed later
+  )
+
+#' reconstruct the intervention_modelled and outcomes_measured columns to
+#' include those recorded in the "other" column. The "other" columns will
+#' be removed later
+review_data_compact_cleaning_step4 <- review_data_compact_cleaning_step3 %>%
   mutate(
     intervention_modelled = case_when(
       is.na(intervention_modelled_other) ~ intervention_modelled,
@@ -221,7 +225,7 @@ review_data_compact_cleaning_step3 <- review_data_compact_cleaning_step2 %>%
 
 #' Step 3A
 # Remove the "other" and "multiple" columns
-review_data_compact_cleaned <- review_data_compact_cleaning_step3 %>%
+review_data_compact_cleaned <- review_data_compact_cleaning_step4 %>%
   select(
     -contains("othe"), #' one column was miss-labelled as "_othe"
     #' instead of "other"
