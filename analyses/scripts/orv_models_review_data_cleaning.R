@@ -227,9 +227,10 @@ saveRDS(review_data_compact_cleaned,
 
 #' Step 4
 #' Separate columns with multiple entries into single rows and
-#' remove unwanted rows
+#' remove unwanted rows. This step is necessary to aid counting entries with
+#' multiple answers as individual counts where necessary
 review_data_wide_to_long <- review_data_compact_cleaned %>%
-  separate_rows(author_affiliation_type, sep = " ") %>%
+  # separate_rows(author_affiliation_type, sep = " ") %>%
   separate_rows(disease, sep = " ") %>%
   separate_rows(model_structure, sep = " ") %>%
   separate_rows(parametrization, sep = " ") %>%
