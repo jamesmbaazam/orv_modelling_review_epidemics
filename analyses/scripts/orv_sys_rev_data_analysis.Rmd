@@ -273,51 +273,56 @@ knitr::kable(author_connectedness_to_location_aggreg, caption = 'At least one au
         kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'))
 ```
 
-<!-- ## Diseases studied per collab type -->
+## Diseases studied per collab type
 
-<!-- ```{r echo=FALSE} -->
-<!-- #count the number of unique diseases studied -->
-<!-- disease_studied_by_collab_type <- compact_data_with_citation_keys_no_fmd %>%  -->
-<!--   separate_rows(disease,  sep = ' ') %>%  -->
-<!--   distinct(title, disease, .keep_all = TRUE) %>%  -->
-<!--   count(collab_type, disease, sort = TRUE) %>% -->
-<!--   pivot_wider(names_from = collab_type, values_from = n) %>%  -->
-<!--   replace_na(list(purely_academic = 0, mixed = 0)) %>%  -->
-<!--   adorn_totals(where = c('row', 'col')) %>%  -->
-<!--   adorn_percentages(... = c('purely_academic', 'mixed')) %>%  -->
-<!--   adorn_pct_formatting(... = c('purely_academic', 'mixed')) %>%  -->
-<!--   adorn_ns(... = c('purely_academic', 'mixed')) %>%  -->
-<!--   mutate(disease = str_to_sentence(str_replace(disease, '_', ' '))) %>%  -->
-<!--   arrange(desc(Total)) -->
+```{r echo=FALSE}
+#count the number of unique diseases studied
+disease_studied_by_collab_type <- compact_data_with_citation_keys_no_fmd %>%
+  separate_rows(disease,  sep = ' ') %>%
+  distinct(title, disease, .keep_all = TRUE) %>%
+  count(collab_type, disease, sort = TRUE) %>%
+  pivot_wider(names_from = collab_type, values_from = n) %>%
+  replace_na(list(purely_academic = 0, mixed = 0)) %>%
+  adorn_totals(where = c('row', 'col')) %>%
+  adorn_percentages(... = c('purely_academic', 'mixed')) %>%
+  adorn_pct_formatting(... = c('purely_academic', 'mixed')) %>%
+  adorn_ns(... = c('purely_academic', 'mixed')) %>%
+  mutate(disease = str_to_sentence(str_replace(disease, '_', ' '))) %>%
+  arrange(desc(Total))
 
-<!-- knitr::kable(disease_studied_by_collab_type, caption = 'Number of studies per disease and collaboration type', format = "latex", booktabs = TRUE) %>%  -->
-<!--         kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position')) -->
-<!-- ``` -->
+disease_studied_by_collab_type_mod <- rbind(disease_studied_by_collab_type[-1, ], 
+                   disease_studied_by_collab_type[1, ])
 
-
-
-<!-- ```{r} -->
-<!-- #tally the diseases by collaboration type -->
-<!-- disease_by_collab_type_long <- compact_data_with_citation_keys_no_fmd %>%  -->
-<!--   separate_rows(disease,  sep = ' ') %>%  -->
-<!--   count(collab_type, disease, sort = TRUE)  -->
+knitr::kable(disease_studied_by_collab_type_mod, 
+             caption = 'Number of studies per disease and collaboration type', 
+             format = "latex", booktabs = TRUE) %>%
+        kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'))
+```
 
 
-<!-- disease_by_collab_type_plot <- ggplot(disease_by_collab_type_long) +  -->
-<!--   geom_bar(aes(x = reorder(disease, n),  -->
-<!--                y = n,  -->
-<!--                fill = collab_type -->
-<!--                ),  -->
-<!--            color = 'black', -->
-<!--            stat = 'identity', -->
-<!--            position = position_fill(reverse = TRUE) -->
-<!--            ) +  -->
-<!--   labs(x = '**Disease**', y = '**Number of studies**') +  -->
-<!--   coord_flip() + -->
-<!--   md_theme_minimal(base_size = 12) -->
 
-<!-- print(disease_by_collab_type_plot) -->
-<!-- ``` -->
+```{r}
+#tally the diseases by collaboration type
+disease_by_collab_type_long <- compact_data_with_citation_keys_no_fmd %>%
+  separate_rows(disease,  sep = ' ') %>%
+  count(collab_type, disease, sort = TRUE)
+
+
+disease_by_collab_type_plot <- ggplot(disease_by_collab_type_long) +
+  geom_bar(aes(x = reorder(disease, n),
+               y = n,
+               fill = collab_type
+               ),
+           color = 'black',
+           stat = 'identity',
+           position = position_fill(reverse = TRUE)
+           ) +
+  labs(x = 'Disease', y = 'Number of studies') +
+  coord_flip() +
+  theme_minimal(base_size = 12)
+
+print(disease_by_collab_type_plot)
+```
 
 ## Interventions
 
@@ -666,73 +671,56 @@ ggsave(filename = 'outcomes_tally_plot.tiff',
 ```
 
 
-<!-- ### Parametrization methods -->
+### Parametrization methods
 
-<!-- ```{r} -->
-<!-- #wide data for table -->
-<!-- model_parametrization_wide <- compact_data_with_citation_keys_no_fmd %>%  -->
-<!--   count(collab_type, parametrization, sort = TRUE) %>%  -->
-<!--   pivot_wider(names_from = parametrization, values_from = n) %>%  -->
-<!--   adorn_totals(where = c('row', 'col')) %>%  -->
-<!--   adorn_percentages(... = -c('Total', 'collab_type')) %>%  -->
-<!--   adorn_pct_formatting(... = -c('Total', 'collab_type')) %>%  -->
-<!--   adorn_ns(... = -c('Total', 'collab_type'))  -->
+```{r}
+#wide data for table
+model_parametrization_wide <- compact_data_with_citation_keys_no_fmd %>%
+  count(collab_type, parametrization, sort = TRUE) %>%
+  pivot_wider(names_from = parametrization, values_from = n) %>%
+  adorn_totals(where = c('row', 'col')) %>%
+  adorn_percentages(... = -c('Total', 'collab_type')) %>%
+  adorn_pct_formatting(... = -c('Total', 'collab_type')) %>%
+  adorn_ns(... = -c('Total', 'collab_type'))
 
-<!-- #table -->
-<!-- knitr::kable(model_parametrization_wide, caption = 'How model parameters are obtained',  -->
-<!--              format = "latex", booktabs = TRUE) %>%  -->
-<!--         kableExtra::kable_styling(latex_options = c('striped', 'scale_down', 'HOLD_position')) -->
-<!-- ``` -->
+#table
+knitr::kable(model_parametrization_wide, 
+             caption = 'How model parameters are obtained',
+             format = "latex", booktabs = TRUE) %>%
+        kableExtra::kable_styling(latex_options = c('striped', 
+                                                    'scale_down', 
+                                                    'HOLD_position')
+                                  )
+```
 
-<!-- ```{r eval=FALSE} -->
-<!-- #long data for plotting -->
-<!-- model_parametrization_long <- compact_data_with_citation_keys_no_fmd %>%  -->
-<!--   group_by(collab_type) %>%  -->
-<!--   count(parametrization, sort = TRUE) -->
+### Validation methods
 
-<!-- #plotting -->
-<!-- ggplot(data = model_parametrization_long,  -->
-<!--        aes(fill = collab_type,  -->
-<!--            area = n,  -->
-<!--            label = parametrization, -->
-<!--            subgroup = parametrization -->
-<!--            ) -->
-<!--        ) +  -->
-<!--   geom_treemap() + -->
-<!--   geom_treemap_text(colour = "white", -->
-<!--                     place = "centre", -->
-<!--                     size = 15, -->
-<!--                     grow = TRUE -->
-<!--                     ) + -->
-<!--   md_theme_minimal(base_size = 12)  -->
+```{r}
+#wide data for table
+model_validation_wide <- compact_data_with_citation_keys_no_fmd %>%
+  count(collab_type, validation, sort = TRUE) %>%
+  pivot_wider(names_from = validation, values_from = n) %>%
+  replace_na(list(none = 0,
+                  data = 0,
+                  another_model = 0,
+                  none_and_data = 0,
+                  data_and_another_model = 0
+                  )
+             ) %>%
+  adorn_totals(where = c('row', 'col')) %>%
+  adorn_percentages(... = -c('Total', 'collab_type')) %>%
+  adorn_pct_formatting(... = -c('Total', 'collab_type')) %>%
+  adorn_ns(... = -c('Total', 'collab_type'))
 
-
-<!-- ``` -->
-
-<!-- ### Validation methods  -->
-
-<!-- ```{r} -->
-<!-- #wide data for table -->
-<!-- model_validation_wide <- compact_data_with_citation_keys_no_fmd %>%  -->
-<!--   count(collab_type, validation, sort = TRUE) %>%  -->
-<!--   pivot_wider(names_from = validation, values_from = n) %>%  -->
-<!--   replace_na(list(none = 0,  -->
-<!--                   data = 0,  -->
-<!--                   another_model = 0,  -->
-<!--                   none_and_data = 0,  -->
-<!--                   data_and_another_model = 0 -->
-<!--                   ) -->
-<!--              ) %>%  -->
-<!--   adorn_totals(where = c('row', 'col')) %>%  -->
-<!--   adorn_percentages(... = -c('Total', 'collab_type')) %>%  -->
-<!--   adorn_pct_formatting(... = -c('Total', 'collab_type')) %>%  -->
-<!--   adorn_ns(... = -c('Total', 'collab_type'))  -->
-
-<!-- #table -->
-<!-- knitr::kable(model_validation_wide, caption = 'How the model\'s performance is assessed',  -->
-<!--              format = "latex", booktabs = TRUE) %>%  -->
-<!--         kableExtra::kable_styling(latex_options = c('striped', 'scale_down', 'HOLD_position')) -->
-<!-- ``` -->
+#table
+knitr::kable(model_validation_wide, 
+             caption = 'How the model\'s performance is assessed',
+             format = "latex", booktabs = TRUE) %>%
+        kableExtra::kable_styling(latex_options = c('striped', 
+                                                    'scale_down', 
+                                                    'HOLD_position')
+                                  )
+```
 
 
 ## Sensitivity analysis
