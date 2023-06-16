@@ -49,8 +49,13 @@ citation_data <- bib2df(here(.args[2]),
 # Data cleaning
 ############################################
 
-
-
+# Initialize steps; shorten some variables and entries
+review_data_compact <- review_data_compact %>%
+  mutate(is_vax_effective = ifelse(
+    is_vax_effective == "the_outcomes_were_inconclusive",
+    "inconclusive",
+    is_vax_effective),
+    )
 
 # Step 1
 #' Remove extraneous variables and clean the column names
