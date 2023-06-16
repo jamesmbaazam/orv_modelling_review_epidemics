@@ -304,7 +304,9 @@ compact_data_with_citation_keys <- left_join(review_data_compact_cleaned,
 compact_data_with_citation_keys <- compact_data_with_citation_keys %>%
   arrange(publication_year) %>%
   mutate(vax_modelled = ifelse(
-    str_detect(intervention_modelled, 'vaccination'), 'yes', 'no')) %>%
+    str_detect(intervention_modelled, 'vaccination|immunization|immunisation'),
+    'yes', 'no')
+    ) %>%
   mutate(
     intervention_type = case_when(
     # When vax was not modelled at all
