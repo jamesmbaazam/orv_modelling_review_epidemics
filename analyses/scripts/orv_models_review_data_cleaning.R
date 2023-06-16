@@ -307,14 +307,15 @@ compact_data_with_citation_keys <- compact_data_with_citation_keys %>%
     str_detect(intervention_modelled, 'vaccination|immunization|immunisation'),
     'yes', 'no')
     ) %>%
+  # Vaccination modelling categories
   mutate(
     intervention_type = case_when(
     # When vax was not modelled at all
     vax_modelled == 'no' & vax_modelled_with_non_vax == 'no' ~ 'no_vax',
     # When vax was modelled but not for comparison as a single intervention
-    vax_modelled == 'yes' & vax_modelled_with_non_vax == 'yes' ~ 'vax_combination_with_others',
+    vax_modelled == 'yes' & vax_modelled_with_non_vax == 'no' ~ 'vax_as_mixed_intervention',
     # When vax was modelled as a single intervention to be compared with others
-    vax_modelled == 'yes' & vax_modelled_with_non_vax == 'no' ~ 'vax_single'
+    vax_modelled == 'yes' & vax_modelled_with_non_vax == 'yes' ~ 'vax_compared_to_others'
     )
     ) %>%
   mutate(
