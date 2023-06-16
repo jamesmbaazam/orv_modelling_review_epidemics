@@ -29,6 +29,7 @@ suppressPackageStartupMessages({
   library('conflicted')
   library('ggwordcloud')
   library('here')
+  library("jsonlite")
   })
 
 #resolve package function conflicts
