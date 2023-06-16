@@ -327,12 +327,24 @@ intervention_categories <- compact_data_with_citation_keys_no_fmd %>%
   count(collab_type, intervention_type, sort = TRUE) %>% 
   pivot_wider(names_from = intervention_type, values_from = n) %>% 
   adorn_totals(where = c('row', 'col')) %>% 
-  adorn_percentages(... = c('no_vax', 'vax_combination_with_others', 'vax_single')) %>% 
-  adorn_pct_formatting(... = c('no_vax', 'vax_combination_with_others', 'vax_single')) %>% 
-  adorn_ns(... = c('no_vax', 'vax_combination_with_others', 'vax_single')) 
+  adorn_percentages(... = c('no_vax', 
+                            'vax_as_mixed_intervention', 
+                            'vax_compared_to_others')
+                    ) %>% 
+  adorn_pct_formatting(... = c('no_vax', 
+                               'vax_as_mixed_intervention', 
+                               'vax_compared_to_others')
+                       ) %>% 
+  adorn_ns(... = c('no_vax', 
+                   'vax_as_mixed_intervention', 
+                   'vax_compared_to_others'
+                   )
+           ) 
 
 
-knitr::kable(intervention_categories, caption = 'Number of studies per intervention categories', format = "latex", booktabs = TRUE) %>% 
+knitr::kable(intervention_categories, 
+             caption = 'Number of studies per intervention categories', 
+             format = "latex", booktabs = TRUE) %>% 
         kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'))
 ```
 
@@ -340,11 +352,10 @@ knitr::kable(intervention_categories, caption = 'Number of studies per intervent
 
 ```{r}
 vax_impact_conclusions <- compact_data_with_citation_keys_no_fmd %>% 
-  filter(intervention_type == 'vax_single') %>% 
-  count(collab_type, is_vax_effective, sort = T) %>% 
+  filter(intervention_type == 'vax_compared_to_others') %>% 
+  count(collab_type, is_vax_effective, sort = TRUE) %>% 
   pivot_wider(names_from = is_vax_effective, values_from = n) %>% 
     replace_na(list(yes = 0, n0 = 0, the_outcomes_were_inconclusive = 0)) %>% 
-  rename('inconclusive' = 'the_outcomes_were_inconclusive') %>% 
   adorn_totals(where = c('row', 'col')) %>% 
   adorn_percentages(... = c('yes', 'no', 'inconclusive')) %>% 
   adorn_pct_formatting(... = c('yes', 'no', 'inconclusive')) %>% 
@@ -379,10 +390,9 @@ knitr::kable(no_vax_modelled, caption = 'Number of studies per disease for which
 
 ```{r eval=FALSE}
 vax_impact_by_disease <- compact_data_with_citation_keys_no_fmd %>% 
-  filter(intervention_type == 'vax_single') %>% 
+  filter(intervention_type == 'vax_compared_to_others') %>% 
   count(disease, is_vax_effective, sort = T) %>% 
   pivot_wider(names_from = is_vax_effective, values_from = n) %>% 
-  rename('inconclusive' = 'the_outcomes_were_inconclusive') %>% 
     replace_na(list(yes = 0, no = 0, inconclusive = 0)) %>% 
   adorn_totals(where = c('row', 'col')) %>% 
   adorn_percentages(... = c('yes', 'no', 'inconclusive')) %>% 
@@ -414,8 +424,9 @@ write.xlsx(no_vax_impact_by_disease_citation_table, file = '../citation_tables/n
 
 ```{r eval=FALSE}
 vax_as_single_intervention_studies <- compact_data_with_citation_keys_no_fmd %>% 
-  filter(intervention_type == 'vax_single') %>% 
-  select(title, disease, bibtexkey, publication_year, intervention_modelled)
+  filter(intervention_type == 'vax_compared_to_others') %>% 
+  select(title, author, publication_year, disease, paper_doi, 
+         intervention_modelled)
 
 #Print the results
 # knitr::kable(no_vax_impact_by_disease_citation_table, 
@@ -974,9 +985,9 @@ intervention_categories_fmd <- fmd_data %>%
   count(collab_type, intervention_type, sort = TRUE) %>% 
   pivot_wider(names_from = intervention_type, values_from = n) %>% 
   adorn_totals(where = c('row', 'col')) %>% 
-  adorn_percentages(... = c('no_vax', 'vax_combination_with_others', 'vax_single')) %>% 
-  adorn_pct_formatting(... = c('no_vax', 'vax_combination_with_others', 'vax_single')) %>% 
-  adorn_ns(... = c('no_vax', 'vax_combination_with_others', 'vax_single')) 
+  adorn_percentages(... = c('no_vax', 'vax_as_mixed_intervention', 'vax_compared_to_others')) %>% 
+  adorn_pct_formatting(... = c('no_vax', 'vax_as_mixed_intervention', 'vax_compared_to_others')) %>% 
+  adorn_ns(... = c('no_vax', 'vax_as_mixed_intervention', 'vax_compared_to_others')) 
 
 
 
@@ -988,11 +999,10 @@ knitr::kable(intervention_categories_fmd, caption = 'Number of studies per inter
 
 ```{r}
 fmd_vax_impact_conclusions <- fmd_data %>% 
-  filter(intervention_type == 'vax_single') %>% 
+  filter(intervention_type == 'vax_compared_to_others') %>% 
   count(collab_type, is_vax_effective, sort = T) %>% 
   pivot_wider(names_from = is_vax_effective, values_from = n) %>% 
   replace_na(list(no = 0, inconclusive = 0, yes = 0)) %>% 
-  rename('inconclusive' = 'the_outcomes_were_inconclusive') %>% 
   adorn_totals(where = c('row', 'col')) %>% 
   adorn_percentages(... = c('yes', 'no', 'inconclusive')) %>% 
   adorn_pct_formatting(... = c('yes', 'no', 'inconclusive')) %>% 
