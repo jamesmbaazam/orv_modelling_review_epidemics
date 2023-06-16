@@ -413,21 +413,6 @@ knitr::kable(vax_impact_by_disease,
 ```
 
 
-
-```{r eval=FALSE}
-no_vax_impact_by_disease_citation_table <- compact_data_with_citation_keys_no_fmd %>% 
-  filter(intervention_type == 'vax_single', is_vax_effective %in% c('no', 'the_outcomes_were_inconclusive')) %>% 
-  select(title, disease, bibtexkey, publication_year, intervention_modelled, is_vax_effective)
-
-#Print the results
-# knitr::kable(no_vax_impact_by_disease_citation_table, 
-#              caption = 'Studies that did not find vaccination as most impactful'
-#              )
-
-write.xlsx(no_vax_impact_by_disease_citation_table, file = '../citation_tables/no_vax_impact_by_disease_citation_table.xlsx')
-```
-
-
 ```{r eval=FALSE}
 vax_as_single_intervention_studies <- compact_data_with_citation_keys_no_fmd %>% 
   filter(intervention_type == 'vax_compared_to_others') %>% 
