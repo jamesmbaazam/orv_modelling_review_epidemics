@@ -120,7 +120,7 @@ compact_data_with_citation_keys_no_fmd <- compact_data_with_citation_keys %>% fi
 ```
 ```{r echo=FALSE}
 #' Count by collaboration types and make a bar plot
-collab_types_count <- compact_data_no_fmd %>%
+collab_types_count <- data_without_fmd %>%
     count(author_affiliation_type, sort = TRUE) %>% 
     mutate(author_affiliation_type = as_factor(author_affiliation_type))
 
@@ -420,7 +420,7 @@ print(paste('Number of studies between 2006 and 2019:', n_studies_btwn_2006_2019
 #            percentage = round(num_of_studies/sum(num_of_studies)*100, 1)
 #            )
 
-countries_studied_by_count <- compact_data_with_citation_keys_no_fmd %>% 
+countries_studied_by_count <- data_without_fmd %>% 
     separate_rows(country_studied, sep = ' ') %>%
     distinct(title, country_studied, .keep_all = TRUE) %>% 
     count(collab_type, country_studied, name = 'num_of_studies', sort = T) 
@@ -609,7 +609,7 @@ long_data_no_fmd <- long_data %>% filter(disease != 'fmd')
 
 compact_data_no_fmd <- compact_data %>% filter(disease != 'fmd') 
 
-compact_data_with_citation_keys_no_fmd <- compact_data_with_citation_keys %>% filter(disease != 'fmd') 
+data_without_fmd <- compact_data_with_citation_keys %>% filter(disease != 'fmd') 
 ```
 
 ### Interventions types (FMD)
@@ -692,7 +692,7 @@ knitr::kable(vax_impact_categories_citations_fmd,
 ## Citations of studies during 2009-2011
 ```{r echo=FALSE}
 #Citation table of studies during 2009-2011 (Peak period)
-studies_in_2009_2011_df <- compact_data_with_citation_keys_no_fmd %>%
+studies_in_2009_2011_df <- data_without_fmd %>%
   separate_rows(disease, sep = ' ') %>% 
   filter(publication_year >= 2009, publication_year <= 2011) %>%
   arrange(disease) %>%
@@ -714,7 +714,7 @@ knitr::kable(n_studies_2009_2011_df, caption = 'Studies published during 2009-20
 
 ## Citation table of studies during 2015-2016 per disease and objective type (Peak period)
 ```{r echo=FALSE}
-studies_between_2015_2016_df <- compact_data_with_citation_keys_no_fmd %>%
+studies_between_2015_2016_df <- data_without_fmd %>%
   separate_rows(disease, sep = ' ') %>% 
   filter(publication_year >= 2015, publication_year <= 2016) %>%
   arrange(disease, publication_year) %>%
@@ -737,7 +737,7 @@ knitr::kable(n_studies_between_2015_2016_df, caption = 'Papers published in 2015
 
 ## Citation table of studies in 2019 (Peak period)
 ```{r echo=FALSE}
-studies_in_2019_df <- compact_data_with_citation_keys_no_fmd %>%
+studies_in_2019_df <- data_without_fmd %>%
   filter(publication_year == 2019) %>%
   arrange(disease) %>%
   select(title, publication_year, disease, objectives, bibtexkey) %>% 
