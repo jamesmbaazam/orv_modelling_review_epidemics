@@ -74,10 +74,7 @@ args <- c(
   here::here("data", "review_data_compact_cleaned.rds"),
   here::here("data", "compact_data_with_citation_keys_cleaned.rds")
   )
-```
 
-
-```{r}
 # Load the cleaned data 
 long_data <- readRDS(args[1])
 
