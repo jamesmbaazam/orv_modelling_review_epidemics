@@ -45,9 +45,8 @@ citation_data <- bib2df(here(.args[2]),
 ) %>%
   mutate(year = as.numeric(YEAR))
 
-############################################
-# Data cleaning
-############################################
+
+# Data cleaning ----
 
 # Initialize steps; shorten some variables and entries
 review_data_compact <- review_data_compact %>%
@@ -228,6 +227,7 @@ review_data_compact_cleaning_step4 <- review_data_compact_cleaning_step3 %>%
     )
   )
 
+# compact dataset (cleaned) ====
 #' Step 3A
 # Remove the "other" and "multiple" columns
 review_data_compact_cleaned <- review_data_compact_cleaning_step4 %>%
@@ -260,6 +260,7 @@ review_data_wide_to_long <- review_data_compact_cleaned %>%
   filter(outcome_measured != "outcome_other") %>%
   filter(intervention_modelled != "intervention_other")
 
+# long dataset (cleaned) ====
 # save the cleaned data
 saveRDS(review_data_wide_to_long,
   file = here(data_dir, "review_data_long_cleaned.rds")
@@ -384,7 +385,7 @@ compact_data_with_citation_keys <- compact_data_with_citation_keys %>%
   arrange(title)
 
 
-
+# full dataset with citation information (cleaned) ====
 # save the cleaned data
 saveRDS(compact_data_with_citation_keys, tail(.args, 1))
 
