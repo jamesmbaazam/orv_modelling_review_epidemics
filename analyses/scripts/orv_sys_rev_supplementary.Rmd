@@ -18,6 +18,7 @@ library('janitor')
 library('countrycode')
 library('bib2df')
 library('conflicted')
+library('here')
 
 #resolve package function conflicts
 conflict_prefer('filter', 'dplyr')
