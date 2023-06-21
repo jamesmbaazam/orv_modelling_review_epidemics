@@ -97,7 +97,16 @@ knitr::kable(collab_types_count )
 ```
 
 # Number of studies per disease and intervention.
+## Diseases studied
+```{r echo=FALSE}
+disease_studied_count <- long_data_no_fmd %>% 
+  group_by(disease) %>% 
+  distinct(title) %>% 
+  count(disease, name = 'num_of_studies', sort = TRUE) %>%
+  ungroup() 
 
+knitr::kable(disease_studied_count, col.names = c('Disease', 'Number of studies'))
+```
 ```{r echo=FALSE}
 #count the number of unique interventions modelled
 interventions_unique_entries <- long_data_no_fmd %>% 
