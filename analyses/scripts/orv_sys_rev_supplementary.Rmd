@@ -71,19 +71,15 @@ knitr::kable(collab_types_count )
 ### Trend in collaboration over the years
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
-    
-collap_types_count_barplot <- collab_types_count %>%
-    ggplot() + geom_bar(aes(x = reorder(author_affiliation_type, n),
-                            y = n
-                            ),
-                        stat = 'identity',
-                        color = 'black'
-                        ) +
+collap_types_count_barplot <- ggplot(data = collab_types_count) + 
+  geom_bar(aes(x = reorder(author_affiliation_type, n), y = n),
+           stat = 'identity',
+           color = 'black') +
     scale_y_continuous(breaks = seq(0, 140, 20),
                        labels = seq(0, 140, 20)
-                       ) +
+                       ) + 
     labs(title = 'Number of studies per collaboration type', 
-         x = '', 
+         x = ' ', 
          y = 'Number of studies') + 
   coord_flip() +
   theme_minimal() +
