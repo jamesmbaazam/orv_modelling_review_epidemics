@@ -242,53 +242,24 @@ knitr::kable(disease_studied_by_objective_type)
 ```
 
 ## Geographic analyses
-```{r echo=FALSE}
-fmd_studies_by_collab_type <- data_fmd_only %>% 
-  mutate(disease = as_factor(disease), 
-         author_affiliation_type = as_factor(str_replace(author_affiliation_type, ' ', '+'))
-         ) %>% 
-  mutate(collab_type = as_factor(if_else(author_affiliation_type == 'academic_institutions', 
-                                         'purely_academic', 
-                                         'mixed')
-                                 )
-         ) %>% 
-  count(collab_type, sort = TRUE, name = 'num_of_studies') 
-
-knitr::kable(fmd_studies_by_collab_type)
-```
-## FMD by objective type
-```{r echo=FALSE}
-fmd_studies_by_objective_and_outbreak_type <- data_fmd_only %>% 
-  count(objectives, outbreak_type, name = 'num_of_studies') %>% 
-  pivot_wider(names_from = outbreak_type, values_from = num_of_studies)
-
-knitr::kable(fmd_studies_by_objective_and_outbreak_type)
-```
 
 ### Countries studied
 
 ```{r}
-#Tally of how many times and percentage of times each COUNTRY has been studied
-# countries_studied_by_count <- long_data_no_fmd %>% 
-#     group_by(country_studied) %>%
-#     distinct(title) %>% 
-#     count(country_studied, name = 'num_of_studies', sort = T) %>% 
-#     ungroup(country_studied) %>% 
-#     mutate(country_studied = as_factor(country_studied), 
-#            percentage = round(num_of_studies/sum(num_of_studies)*100, 1)
-#            )
-
 countries_studied_by_count <- data_without_fmd %>% 
     distinct(title, country_studied, .keep_all = TRUE) %>% 
     count(collab_type, country_studied, name = 'num_of_studies', sort = TRUE) 
 
-#'Modify the data frame to lump together all countries with less than some number of studies as 'other' and recalculate the percentage studied
+#' Modify the data frame to lump together all countries with less than some 
+#' number of studies as 'other' and recalculate the percentage studied
 countries_studied_by_count_aggregated <- countries_studied_by_count %>% 
   group_by(country_studied) %>%
   summarise(num_of_studies = sum(num_of_studies),
             .groups = 'drop'
             ) %>% 
-  filter(!(country_studied %in% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region'))) %>% 
+  filter(!(country_studied %in% c('none', 'west_africa', 'global', 
+                                  'northern_hemisphere', 'southeast_asia', 
+                                  'who_southeast_asia_region'))) %>% 
   arrange(desc(num_of_studies)) %>% 
   adorn_totals(where = c('row')) %>% 
   adorn_percentages(denominator = 'col') %>% 
