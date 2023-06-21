@@ -418,7 +418,7 @@ vax_impact_categories_fmd <- data_fmd_only %>%
         ) 
 
 #Print the results
-knitr::kable(vax_impact_categories_fmd %>% adorn_totals, 
+knitr::kable(vax_impact_categories_fmd %>% adorn_totals(), 
              col.names = c('Vaccination is most impactful', 
                            'Number of studies'
                            ),
