@@ -140,7 +140,7 @@ outcomes_unique_entries <- long_data_no_fmd %>%
   
 #Count the number of studies 
 outcomes_count <- outcomes_unique_entries %>% 
-  count(outcome_measured, name = 'num_of_studies', sort = T) %>% 
+  count(outcome_measured, name = 'num_of_studies', sort = TRUE) %>% 
   ungroup() %>% 
   filter(outcome_measured != 's') 
 
@@ -280,7 +280,7 @@ knitr::kable(fmd_studies_by_objective_and_outbreak_type)
 
 countries_studied_by_count <- data_without_fmd %>% 
     distinct(title, country_studied, .keep_all = TRUE) %>% 
-    count(collab_type, country_studied, name = 'num_of_studies', sort = T) 
+    count(collab_type, country_studied, name = 'num_of_studies', sort = TRUE) 
 
 #'Modify the data frame to lump together all countries with less than some number of studies as 'other' and recalculate the percentage studied
 countries_studied_by_count_aggregated <- countries_studied_by_count %>% 
@@ -408,7 +408,7 @@ vax_impact_categories_fmd <- data_fmd_only %>%
   filter(vax_modelled_with_non_vax == 'yes') %>% 
   count(is_vax_effective, 
         name = 'num_of_studies', 
-        sort = T
+        sort = TRUE
         ) 
 
 #Print the results
