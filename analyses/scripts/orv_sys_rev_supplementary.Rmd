@@ -150,8 +150,6 @@ outcome_count_plot <- ggplot(data = outcomes_count) +
   theme_minimal()
 
 plot(outcome_count_plot)
-
-
 ```
 
 # Number of studies per model structure type
@@ -208,7 +206,6 @@ parametrization_and_validation_count <- data_without_fmd %>%
 
 #Print the table
 knitr::kable(parametrization_and_validation_count)
-
 ```
 
 # How is sensitivity analysis distributed by model structure?
@@ -226,7 +223,6 @@ sensitivity_analysis_count <- sensitivity_analysis_unique_entries %>%
 
 #Print the table
 knitr::kable(sensitivity_analysis_count)
-
 ```
 
 # Data use and availability
@@ -244,7 +240,6 @@ code_and_data_availability_count <- data_without_fmd %>%
 
 #Print the results
 knitr::kable(code_and_data_availability_count, caption = 'Data use and availability')
-
 ```
 # Code availability
 
@@ -255,10 +250,10 @@ code_availability_count <- data_without_fmd %>%
 
 #Print the results
 knitr::kable(code_availability_count, caption = 'Code availability')
-
 ```
 
 # Number of studies per disease 
+
 ## By outbreak type
 
 ```{r echo=FALSE}
@@ -467,7 +462,6 @@ knitr::kable(continents_studied_by_count %>% arrange(desc(percentage)),
                            ),
              caption = 'Number/percent of studies by continent'
              )
-
 ```
 
 ### Interventions types (FMD)
