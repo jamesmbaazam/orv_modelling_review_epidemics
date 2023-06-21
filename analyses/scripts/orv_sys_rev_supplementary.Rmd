@@ -125,38 +125,6 @@ model_structure_unique_count <- model_structure_unique_entries %>%
 knitr::kable(model_structure_unique_count)
 ```
 
-# Model structure, parametrization, and validation types
-
-```{r echo=FALSE}
-#Cross tally the model structure with parametrization and validation categories
-#FIXME: Check that studies are either not being under counted or double-counted. What do I want to count here? Is it the unique studies per method or combined method because most studies used a combination of parametrization methods especially
-parametrization_and_validation_by_model_structure <- data_without_fmd %>%
-  count(model_structure, parametrization, validation) %>% 
-  pivot_wider(names_from = model_structure, values_from = n)
-  
-
-#Print the table of results
-knitr::kable(parametrization_and_validation_by_model_structure,
-             caption = 'Parametrization and validation types per model structure')
-
-```
-
-# Model parametrization & validation
-
-```{r echo=FALSE}
-#Keep only the unique entries
-parametrization_and_validation_count <- data_without_fmd %>% 
-  count(parametrization, 
-        validation, 
-        name = 'num_of_studies'
-        ) %>% 
-  group_by(parametrization) %>% 
-  arrange(desc(num_of_studies), .by_group = T)   
-
-#Print the table
-knitr::kable(parametrization_and_validation_count)
-```
-
 # How is sensitivity analysis distributed by model structure?
 
 ```{r echo=FALSE}
