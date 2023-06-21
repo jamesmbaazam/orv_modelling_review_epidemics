@@ -82,13 +82,11 @@ interventions_per_disease <- interventions_unique_entries %>%
   mutate(intervention_modelled = str_trim(intervention_modelled)) %>% 
   filter(intervention_modelled != 'e.g.') %>% #remove false rows
   filter(intervention_modelled != 'various') %>% #remove false rows
-  group_by(disease) %>% 
-  count(intervention_modelled, name = 'num_of_studies') %>% 
+  count(disease, intervention_modelled, name = 'num_of_studies') %>% 
   arrange(disease, desc(num_of_studies)) %>% 
   ungroup()
 
 knitr::kable(interventions_per_disease)
-
 ```
 
 # Number of studies per outcome
@@ -102,7 +100,6 @@ outcomes_unique_entries <- long_data_no_fmd %>%
   
 #Count the number of studies 
 outcomes_count <- outcomes_unique_entries %>% 
-  group_by(outcome_measured) %>% 
   count(outcome_measured, name = 'num_of_studies', sort = T) %>% 
   ungroup() %>% 
   filter(outcome_measured != 's') 
@@ -122,8 +119,7 @@ model_structure_unique_entries <- long_data_no_fmd %>%
 
 #Count the number of studies
 model_structure_unique_count <- model_structure_unique_entries %>%
-    group_by(model_structure) %>% 
-    count(model_structure, name = 'num_of_studies') 
+    count(model_structure, model_structure, name = 'num_of_studies') 
 
 #Print the table
 knitr::kable(model_structure_unique_count)
