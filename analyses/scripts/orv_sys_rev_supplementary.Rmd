@@ -388,6 +388,31 @@ knitr::kable(continents_studied_by_count %>% arrange(desc(percentage)),
 ```
 
 ### Connection of authors to the studied locations 
+# Foot and mouth disease
+
+## Collaboration types
+```{r echo=FALSE}
+fmd_studies_by_collab_type <- data_fmd_only %>% 
+  mutate(disease = as_factor(disease), 
+         author_affiliation_type = as_factor(str_replace(author_affiliation_type, ' ', '+'))
+         ) %>% 
+  mutate(collab_type = as_factor(if_else(author_affiliation_type == 'academic_institutions', 
+                                         'purely_academic', 
+                                         'mixed')
+                                 )
+         ) %>% 
+  count(collab_type, sort = TRUE, name = 'num_of_studies') 
+
+knitr::kable(fmd_studies_by_collab_type)
+```
+## Objective types
+```{r echo=FALSE}
+fmd_studies_by_objective_and_outbreak_type <- data_fmd_only %>% 
+  count(objectives, outbreak_type, name = 'num_of_studies') %>% 
+  pivot_wider(names_from = outbreak_type, values_from = num_of_studies)
+
+knitr::kable(fmd_studies_by_objective_and_outbreak_type)
+```
 
 ## Interventions types 
 ```{r echo=FALSE}
