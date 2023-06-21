@@ -293,6 +293,7 @@ knitr::kable(disease_studied_by_objective_type)
 
 ```{r}
 countries_studied_by_count <- data_without_fmd %>% 
+  separate_rows(country_studied, sep = " ") %>%
     distinct(title, country_studied, .keep_all = TRUE) %>% 
     count(collab_type, country_studied, name = 'num_of_studies', sort = TRUE) 
 
