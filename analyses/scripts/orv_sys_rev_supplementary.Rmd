@@ -553,8 +553,7 @@ data_without_fmd <- compact_data_with_citation_keys %>% filter(disease != 'fmd')
 ### Interventions types (FMD)
 
 ```{r echo=FALSE}
-intervention_categories_fmd <- compact_data %>% 
-  filter(disease == 'fmd') %>% 
+intervention_categories_fmd <- data_fmd_only %>% 
   group_by(intervention_type, vax_modelled_with_non_vax) %>% 
   count(is_vax_effective, sort = TRUE) %>% 
   filter(vax_modelled_with_non_vax == 'yes') %>% 
