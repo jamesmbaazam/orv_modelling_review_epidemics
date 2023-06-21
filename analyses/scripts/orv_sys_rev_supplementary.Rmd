@@ -346,10 +346,11 @@ continents_studied <- continents_studied_by_count %>%
   group_by(continent_studied) %>%
   summarise(num_of_studies = sum(num_of_studies )) %>%
   ungroup() %>%
-  mutate(percentage = round(num_of_studies/sum(num_of_studies)*100, 1))
+  mutate(percentage = round(num_of_studies/sum(num_of_studies)*100, 1)) %>% 
+  arrange(desc(percentage))
 
 #Print table of results
-knitr::kable(continents_studied_by_count %>% arrange(desc(percentage)),
+knitr::kable(continents_studied,
              col.names = c('Continent',
                            'Number of studies',
                            'Percentage'
