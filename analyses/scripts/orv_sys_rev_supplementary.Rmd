@@ -135,21 +135,8 @@ outcomes_count <- outcomes_unique_entries %>%
   ungroup() %>% 
   filter(outcome_measured != 's') 
 
-knitr::kable(outcomes_count)
-
-#Plot the result
-outcome_count_plot <- ggplot(data = outcomes_count) + 
-  geom_point(aes(x = reorder(outcome_measured, 
-                             num_of_studies), 
-               y = num_of_studies
-               ), 
-           stat = 'identity',
-           color = 'darkslategray4'
-           ) +
-  coord_flip() +
-  theme_minimal()
-
-plot(outcome_count_plot)
+knitr::kable(outcomes_count,
+             caption = "Count of outcomes measured")
 ```
 
 # Number of studies per model structure type
