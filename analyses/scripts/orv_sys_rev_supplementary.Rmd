@@ -96,7 +96,53 @@ collab_types_count <- data_without_fmd %>%
 knitr::kable(collab_types_count)
 ```
 
-# Number of studies per disease and intervention.
+### Mixed collaborations with and without academics
+
+```{r echo=FALSE}
+academic_collabs_versus_others <- data_without_fmd %>% 
+  filter(author_affiliation_type != 'academic_institutions') %>% 
+  mutate(year_aggreg = as.numeric(ifelse(publication_year < 2006, 2005, publication_year
+                                         )
+                                  ), 
+         collab_type = as_factor(if_else(str_detect(author_affiliation_type, 
+                                                    'academic_institutions'),
+                                         'including_academics', 
+                                         'excluding_academics')
+                                 )
+         ) %>% 
+  count(year_aggreg, collab_type, name = 'num_of_studies')
+
+#The plot
+# Modify the x-axis labels to account for the lumping of the years from 2005 and below
+x_axis_labels <- as.character(seq(2005, 2020, 2))
+
+x_axis_labels[1] <- '1970-2005'
+
+#plot the result
+academic_collabs_trend <- ggplot(data = academic_collabs_versus_others) + 
+  geom_bar(aes(x = year_aggreg,
+               y = num_of_studies,
+               fill = collab_type
+               ),
+           color = 'black',
+           stat = 'identity',
+           position = position_fill(reverse = TRUE)  
+             ) +
+  scale_fill_manual(values = c("tan1", "turquoise1")) +
+  scale_x_continuous(breaks = seq(2005, 2020, 2),
+                     labels = x_axis_labels
+                     ) +
+  coord_flip() +
+  labs(title = 'Proportion of mixed collaborations per year',
+       x = 'Year',
+       y = 'Proportion of publications',
+       fill = 'Mixed collaboration type' 
+         ) +
+  theme_minimal(base_size = 12)
+
+plot(academic_collabs_trend)
+```
+
 ## Diseases studied
 ```{r echo=FALSE}
 disease_studied_count <- long_data_no_fmd %>% 
