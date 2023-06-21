@@ -343,42 +343,6 @@ continents_studied_by_count <- countries_studied_by_count %>%
 
 #Print the results
 knitr::kable(continents_studied_by_count, 
-             caption = 'Number of studies per country'
-             )
-``` 
-
-### Country most studied
-```{r echo=FALSE}
-countries_studied_most <- countries_studied_by_count %>%
-    filter(country_studied != 'none') %>%
-    filter(num_of_studies == max(num_of_studies))
-
-#Print the result as a table
-knitr::kable(countries_studied_most,
-             col.names = c('Country',
-                           'Number of studies',
-                           'Percentage'
-                           ),
-             caption = 'Most studied country'
-             )
-```
-
-### Continent most studied
-```{r echo=FALSE}
-
-continent_studied_most <- continents_studied_by_count %>%
-    dplyr::filter(continent_studied != 'none') %>%
-    filter(num_of_studies == max(num_of_studies))
-
-
-#Print the result as a table
-knitr::kable(continent_studied_most,
-             col.names = c('Continent',
-                           'Number of studies',
-                           'Percentage'
-                           ),
-             caption = 'Most studied continent'
-             )
 ```
 
 #### Studies per continent
