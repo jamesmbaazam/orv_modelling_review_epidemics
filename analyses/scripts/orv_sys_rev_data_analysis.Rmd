@@ -50,25 +50,6 @@ if (!dir.exists(here::here(figs_dir))) {
 }
 ```
 
-```{r rerun_data_cleaning_if_interactive}
-#' if this script is being knit interactively, re-run the data cleaning step,
-#' and assign the generated cleaned data (in case something has changed) 
-#' else if through the terminal, use the 
-#' arguments passed through the commandline/make
-# knitting_interactively <- isFALSE(is.null(getOption('knitr.in.progress')))
-# 
-# if (knitting_interactively) {
-#   source(here::here("scripts", "orv_models_review_data_cleaning.R"))
-# args <- c(
-#   here::here("data", "review_data_long_cleaned.rds"),
-#   here::here("data", "review_data_compact_cleaned.rds"),
-#   here::here("data", "compact_data_with_citation_keys_cleaned.rds")
-#   )
-# } else {
-#  args <- commandArgs(trailingOnly = TRUE)
-# }
-```
-
 ```{r}
 args <- c(
   here::here("data", "review_data_long_cleaned.rds"),
