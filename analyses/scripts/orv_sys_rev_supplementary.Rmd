@@ -61,10 +61,11 @@ data_fmd_only <- compact_data_with_citation_keys %>%
 ```{r echo=FALSE}
 #' Count by collaboration types and make a bar plot
 collab_types_count <- data_without_fmd %>%
-    count(author_affiliation_type, sort = TRUE) %>% 
-    mutate(author_affiliation_type = as_factor(author_affiliation_type))
+  count(author_affiliation_type, sort = TRUE) %>% 
+  mutate(author_affiliation_type = as_factor(author_affiliation_type)) %>% 
+  arrange(desc(n))
 
-knitr::kable(collab_types_count %>% arrange(desc(n)))
+knitr::kable(collab_types_count )
 ```
 
 ### Trend in collaboration over the years
