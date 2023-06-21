@@ -370,6 +370,26 @@ knitr::kable(continents_studied,
 ```
 
 ### Connection of authors to the studied locations 
+```{r}
+author_location_count_by_disease <- data_without_fmd %>%
+  mutate(author_in_country_studied = as_factor(author_in_country_studied), 
+         disease = as_factor(disease)
+         ) %>% 
+  group_by(disease) %>%
+  distinct(title, .keep_all = TRUE) %>% 
+  count(author_in_country_studied, sort = TRUE, name = "num_of_studies") %>% 
+  complete(author_in_country_studied, fill = list(num_of_studies = 0)) %>% 
+  pivot_wider(names_from = author_in_country_studied, values_from = num_of_studies) %>% 
+  replace_na(list(yes = 0, no = 0, not_applicable = 0)) %>% 
+  mutate(total = not_applicable + no + yes) %>% 
+  ungroup(disease) %>% 
+  arrange(desc(total))
+
+
+knitr::kable(author_location_count_by_disease,
+             caption = "Author connection to the location studied by disease")
+```
+
 # Foot and mouth disease
 
 ## Collaboration types
