@@ -58,6 +58,34 @@ data_fmd_only <- compact_data_with_citation_keys %>%
   filter(disease == 'fmd') 
 ```
 
+# Human vaccine-preventable diseases
+
+## Studies per collaboration type
+
+```{r echo=FALSE}
+#' Count the number of each author affiliation type per year (including FMD)
+collap_types_by_year <- data_without_fmd %>% 
+  mutate(year_aggreg = as.numeric(ifelse(publication_year < 2006, 
+                                         2005, 
+                                         publication_year
+                                         )
+                                  ), 
+         collab_type = as_factor(if_else(author_affiliation_type == 'academic_institutions', 
+                                         'Purely academic', 
+                                         'Mixed')
+                                 )
+         ) %>% 
+  count(year_aggreg, collab_type, name = 'num_of_studies') %>% 
+  pivot_wider(names_from = collab_type, values_from = num_of_studies)
+
+knitr::kable(collap_types_by_year %>% 
+               clean_names() %>% 
+               adorn_totals(... = c(mixed, purely_academic), 
+                            where = c("row", "col")
+                            )
+             )
+```
+
 ```{r echo=FALSE}
 #' Count by collaboration types and make a bar plot
 collab_types_count <- data_without_fmd %>%
