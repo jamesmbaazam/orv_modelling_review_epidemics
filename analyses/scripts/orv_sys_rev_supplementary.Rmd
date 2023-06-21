@@ -332,18 +332,19 @@ continents_studied_by_count <- countries_studied_by_count %>%
                                           )
          ) %>% 
   mutate(continent_studied = str_to_lower(continent_studied), 
-         continent_studied = case_when(str_detect(continent_studied, 'asia') == TRUE ~ 'asia', 
-                                         str_detect(continent_studied, 'africa') == TRUE ~ 'africa', 
-                                         TRUE ~ continent_studied
-                                       )
+         continent_studied = case_when(
+           str_detect(continent_studied, 'asia') == TRUE ~ 'asia',
+           str_detect(continent_studied, 'africa') == TRUE ~ 'africa',
+           TRUE ~ continent_studied)
            ) %>% 
   group_by(continent_studied) %>%
   summarise(num_of_studies = sum(num_of_studies), .groups = 'drop') %>% 
-  mutate(percentage = round(num_of_studies/sum(num_of_studies), 2)*100) %>% 
-  arrange(desc(num_of_studies)) 
+  arrange(desc(num_of_studies)) %>% 
+  filter(!(continent_studied %in% c('none', 'northern_hemisphere', 'global'))) 
 
 #Print the results
-knitr::kable(continents_studied_by_count, 
+knitr::kable(continents_studied_by_count %>% adorn_totals(), 
+             caption = "Number of studies per continent studied")
 ```
 
 #### Studies per continent
