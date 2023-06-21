@@ -1,9 +1,10 @@
 ---
-title: "Analysis of the included studies"
+title: "Outbreak response models of vaccine-preventable diseases in humans (1970-2019) - A systematic review"
+subtitle: "Supplementary file (analysis for main manuscript)"
+author: "James M. Azam, Xiaoxi Pang, Elisha B. Are, Juliet R.C. Pulliam, Matthew J. Ferrari"
 output:
   pdf_document:
     toc: yes
-    keep_tex: yes
     fig_crop: no
 ---
 

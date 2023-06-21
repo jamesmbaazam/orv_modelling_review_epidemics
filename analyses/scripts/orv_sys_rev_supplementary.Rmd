@@ -1,11 +1,11 @@
 ---
-title: "Outbreak response models of vaccine-preventable diseases in humans (1970-2019) - A systematic review (Supplementary Files)"
-author: "James Azam"
-date: '`r format(Sys.Date(), "%B %d, %Y")`'
+title: "Outbreak response models of vaccine-preventable diseases in humans (1970-2019) - A systematic review"
+subtitle: "Supplementary file"
+author: "James M. Azam, Xiaoxi Pang, Elisha B. Are, Juliet R.C. Pulliam, Matthew J. Ferrari"
 output:
-  word_document:
-    keep_md: yes
+  pdf_document:
     toc: yes
+    fig_crop: no
 ---
 
 ```{r echo=FALSE, message=FALSE, include=FALSE}
