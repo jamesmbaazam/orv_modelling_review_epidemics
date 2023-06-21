@@ -176,7 +176,6 @@ knitr::kable(code_availability_count, caption = 'Code availability')
 ```{r echo=FALSE}
 #count the number of unique diseases studied
 disease_studied_by_outbreak_type <- data_without_fmd %>% 
-  separate_rows(disease,  sep = ' ') %>% 
   mutate(disease = as_factor(disease), 
          outbreak_type = as_factor(str_replace(outbreak_type, ' ', '+'))
          ) %>% 
@@ -196,7 +195,6 @@ knitr::kable(disease_studied_by_outbreak_type)
 ```{r echo=FALSE}
 #count the number of unique diseases studied
 disease_studied_by_objective_type <- data_without_fmd %>% 
-  separate_rows(disease,  sep = ' ') %>% 
   mutate(disease = as_factor(disease), 
          objectives = as_factor(objectives)
          ) %>% 
@@ -251,7 +249,6 @@ knitr::kable(fmd_studies_by_objective_and_outbreak_type)
 #            )
 
 countries_studied_by_count <- data_without_fmd %>% 
-    separate_rows(country_studied, sep = ' ') %>%
     distinct(title, country_studied, .keep_all = TRUE) %>% 
     count(collab_type, country_studied, name = 'num_of_studies', sort = T) 
 
@@ -495,7 +492,6 @@ plot(academic_collabs_trend)
 # Connection of authors to the studied locations 
 ```{r}
 author_location_count_by_disease <- data_without_fmd %>%
-  separate_rows(disease, sep = ' ') %>% 
   mutate(author_in_country_studied = as_factor(author_in_country_studied), 
          disease = as_factor(disease)
          ) %>% 
