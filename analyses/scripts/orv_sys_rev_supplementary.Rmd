@@ -61,9 +61,9 @@ data_fmd_only <- compact_data_with_citation_keys %>%
 ```{r echo=FALSE}
 #' Count by collaboration types and make a bar plot
 collab_types_count <- data_without_fmd %>%
-  count(author_affiliation_type, sort = TRUE) %>% 
+  count(author_affiliation_type, sort = TRUE, name = "num_of_studies") %>% 
   mutate(author_affiliation_type = as_factor(author_affiliation_type)) %>% 
-  arrange(desc(n))
+  arrange(desc(num_of_studies))
 
 knitr::kable(collab_types_count )
 ```
@@ -179,7 +179,7 @@ knitr::kable(sensitivity_analysis_count)
 ```{r echo=FALSE}
 #Keep only the unique entries
 code_and_data_availability_count <- data_without_fmd %>% 
-  count(data_used, data_available) %>% 
+  count(data_used, data_available, name = 'num_of_studies') 
   pivot_wider(names_from = data_available, values_from = n) %>% 
   replace_na(list(not_applicable = 0, 
                   yes = 0, 
@@ -195,7 +195,7 @@ knitr::kable(code_and_data_availability_count, caption = 'Data use and availabil
 ```{r echo=FALSE}
 #Keep only the unique entries
 code_availability_count <- data_without_fmd %>% 
-  count(simulation_code_available) 
+  count(simulation_code_available, name = 'num_of_studies') 
 
 #Print the results
 knitr::kable(code_availability_count, caption = 'Code availability')
@@ -214,8 +214,8 @@ disease_studied_by_outbreak_type <- data_without_fmd %>%
          ) %>% 
   group_by(disease) %>% 
   distinct(title, .keep_all = TRUE) %>% 
-  count(disease, outbreak_type, sort = TRUE) %>%
-  pivot_wider(names_from = outbreak_type, values_from = n) %>% 
+  count(disease, outbreak_type, sort = TRUE, name = 'num_of_studies') %>%
+  pivot_wider(names_from = outbreak_type, values_from = 'num_of_studies') %>% 
   replace_na(list(hypothetical_outbreak = 0, real_outbreak = 0)) %>% 
   mutate(total = hypothetical_outbreak + real_outbreak) %>% 
   arrange(desc(total))
@@ -234,8 +234,8 @@ disease_studied_by_objective_type <- data_without_fmd %>%
          ) %>% 
   group_by(disease) %>% 
   distinct(title, .keep_all = TRUE) %>% 
-  count(disease, objectives) %>%
-  pivot_wider(names_from = objectives, values_from = n) %>% 
+  count(disease, objectives, name = 'num_of_studies') %>%
+  pivot_wider(names_from = objectives, values_from = num_of_studies) %>% 
   replace_na(list(future = 0, past = 0, both = 0)) %>% 
   mutate(total = future + past + both) %>% 
   arrange(desc(total))
@@ -254,15 +254,15 @@ fmd_studies_by_collab_type <- data_fmd_only %>%
                                          'mixed')
                                  )
          ) %>% 
-  count(collab_type, sort = TRUE) 
+  count(collab_type, sort = TRUE, name = 'num_of_studies') 
 
 knitr::kable(fmd_studies_by_collab_type)
 ```
 ## FMD by objective type
 ```{r echo=FALSE}
 fmd_studies_by_objective_and_outbreak_type <- data_fmd_only %>% 
-  count(objectives, outbreak_type) %>% 
-  pivot_wider(names_from = outbreak_type, values_from = n)
+  count(objectives, outbreak_type, name = 'num_of_studies') %>% 
+  pivot_wider(names_from = outbreak_type, values_from = num_of_studies)
 
 knitr::kable(fmd_studies_by_objective_and_outbreak_type)
 ```
@@ -397,9 +397,9 @@ knitr::kable(continents_studied_by_count %>% arrange(desc(percentage)),
 ```{r echo=FALSE}
 intervention_categories_fmd <- data_fmd_only %>% 
   group_by(intervention_type, vax_modelled_with_non_vax) %>% 
-  count(is_vax_effective, sort = TRUE) %>% 
+  count(is_vax_effective, sort = TRUE, name = 'num_of_studies') %>% 
   filter(vax_modelled_with_non_vax == 'yes') %>% 
-  pivot_wider(names_from = is_vax_effective, values_from = n) %>% 
+  pivot_wider(names_from = is_vax_effective, values_from = num_of_studies) %>% 
   adorn_totals(where = 'col')
 
 
@@ -460,8 +460,8 @@ collap_types_by_year <- data_without_fmd %>%
                                          'Mixed')
                                  )
          ) %>% 
-  count(year_aggreg, 
-        collab_type, 
+  count(year_aggreg, collab_type, , name = 'num_of_studies') %>% 
+  pivot_wider(names_from = collab_type, values_from = num_of_studies)
         name = 'total_publications'
         ) %>% 
   pivot_wider(names_from = collab_type, values_from = total_publications)
@@ -487,7 +487,7 @@ academic_collabs_versus_others <- data_without_fmd %>%
          ) %>% 
   count(year_aggreg, 
         collab_type, 
-        name = 'total_publications'
+        name = 'num_of_studies'
         )
 
 #The plot
@@ -499,7 +499,7 @@ x_axis_labels[1] <- '1970-2005'
 #plot the result
 academic_collabs_trend <- ggplot(data = academic_collabs_versus_others) + 
   geom_bar(aes(x = year_aggreg,
-               y = total_publications,
+               y = num_of_studies,
                fill = collab_type
                ),
            color = 'black',
@@ -533,9 +533,9 @@ author_location_count_by_disease <- data_without_fmd %>%
          ) %>% 
   group_by(collab_type, disease) %>%
   distinct(title, .keep_all = TRUE) %>% 
-  count(author_in_country_studied, sort = TRUE) %>% 
-  complete(author_in_country_studied, fill = list(n = 0)) %>% 
-  pivot_wider(names_from = author_in_country_studied, values_from = n) %>% 
+  count(author_in_country_studied, sort = TRUE, name = "num_of_studies") %>% 
+  complete(author_in_country_studied, fill = list(num_of_studies = 0)) %>% 
+  pivot_wider(names_from = author_in_country_studied, values_from = num_of_studies) %>% 
   replace_na(list(yes = 0, no = 0, not_applicable = 0)) %>% 
   mutate(total = not_applicable + no + yes) %>% 
   ungroup(collab_type) %>% 
