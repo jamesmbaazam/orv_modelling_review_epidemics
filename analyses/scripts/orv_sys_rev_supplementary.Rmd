@@ -148,12 +148,6 @@ knitr::kable(sensitivity_analysis_count)
 #Keep only the unique entries
 code_and_data_availability_count <- data_without_fmd %>% 
   count(data_used, data_available, name = 'num_of_studies') 
-  pivot_wider(names_from = data_available, values_from = n) %>% 
-  replace_na(list(not_applicable = 0, 
-                  yes = 0, 
-                  no = 0
-                  )
-             )
 
 #Print the results
 knitr::kable(code_and_data_availability_count, caption = 'Data use and availability')
