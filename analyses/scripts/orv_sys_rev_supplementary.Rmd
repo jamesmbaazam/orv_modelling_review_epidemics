@@ -387,6 +387,7 @@ fmd_studies_by_collab_type <- data_fmd_only %>%
 
 knitr::kable(fmd_studies_by_collab_type)
 ```
+
 ## Objective types
 ```{r echo=FALSE}
 fmd_studies_by_objective_and_outbreak_type <- data_fmd_only %>% 
