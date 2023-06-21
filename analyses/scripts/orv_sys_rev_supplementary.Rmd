@@ -337,10 +337,8 @@ continents_studied_by_count <- countries_studied_by_count %>%
                                        )
            ) %>% 
   group_by(continent_studied) %>%
-  summarise(num_of_studies = sum(num_of_studies), 
-            .groups = 'drop'
-            ) %>% 
-mutate(percentage = round(num_of_studies/sum(num_of_studies), 2)*100) %>% 
+  summarise(num_of_studies = sum(num_of_studies), .groups = 'drop') %>% 
+  mutate(percentage = round(num_of_studies/sum(num_of_studies), 2)*100) %>% 
   arrange(desc(num_of_studies)) 
 
 #Print the results
