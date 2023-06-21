@@ -107,6 +107,9 @@ disease_studied_count <- long_data_no_fmd %>%
 
 knitr::kable(disease_studied_count, col.names = c('Disease', 'Number of studies'))
 ```
+
+## Diseases and interventions
+
 ```{r echo=FALSE}
 #count the number of unique interventions modelled
 interventions_unique_entries <- long_data_no_fmd %>% 
@@ -126,7 +129,7 @@ interventions_per_disease <- interventions_unique_entries %>%
 knitr::kable(interventions_per_disease)
 ```
 
-# Number of studies per outcome
+## Outcomes studied
 
 ```{r echo=FALSE}
 #count the number of unique outcomes measured
@@ -145,7 +148,7 @@ knitr::kable(outcomes_count,
              caption = "Count of outcomes measured")
 ```
 
-# Number of studies per model structure type
+## Model structure type
 
 ```{r echo=FALSE}
 #Keep only the unique entries 
@@ -162,7 +165,7 @@ model_structure_unique_count <- model_structure_unique_entries %>%
 knitr::kable(model_structure_unique_count)
 ```
 
-# How is sensitivity analysis distributed by model structure?
+## Model structure and sensitivity analysis
 
 ```{r echo=FALSE}
 #Keep only the unique entries
@@ -179,7 +182,7 @@ sensitivity_analysis_count <- sensitivity_analysis_unique_entries %>%
 knitr::kable(sensitivity_analysis_count)
 ```
 
-# Data use and availability
+## Data use and availability
 
 ```{r echo=FALSE}
 #Keep only the unique entries
@@ -189,8 +192,8 @@ code_and_data_availability_count <- data_without_fmd %>%
 #Print the results
 knitr::kable(code_and_data_availability_count, caption = 'Data use and availability')
 ```
-# Code availability
 
+## Code availability
 ```{r echo=FALSE}
 #Keep only the unique entries
 code_availability_count <- data_without_fmd %>% 
@@ -200,9 +203,7 @@ code_availability_count <- data_without_fmd %>%
 knitr::kable(code_availability_count, caption = 'Code availability')
 ```
 
-# Number of studies per disease 
-
-## By outbreak type
+## Outbreak type
 
 ```{r echo=FALSE}
 #count the number of unique diseases studied
@@ -221,7 +222,7 @@ disease_studied_by_outbreak_type <- data_without_fmd %>%
 knitr::kable(disease_studied_by_outbreak_type)
 ```
 
-## By objective type
+## Objective types
 
 ```{r echo=FALSE}
 #count the number of unique diseases studied
@@ -240,7 +241,7 @@ disease_studied_by_objective_type <- data_without_fmd %>%
 knitr::kable(disease_studied_by_objective_type)
 ```
 
-## FMD by collaboration type
+## Geographic analyses
 ```{r echo=FALSE}
 fmd_studies_by_collab_type <- data_fmd_only %>% 
   mutate(disease = as_factor(disease), 
@@ -263,8 +264,6 @@ fmd_studies_by_objective_and_outbreak_type <- data_fmd_only %>%
 
 knitr::kable(fmd_studies_by_objective_and_outbreak_type)
 ```
-
-## Locations studied and connection of authors to the location
 
 ### Countries studied
 
@@ -367,7 +366,7 @@ knitr::kable(continent_studied_most,
              )
 ```
 
-## Number of studies per continent
+#### Studies per continent
 ```{r echo=FALSE}
 continents_studied <- continents_studied_by_count %>%
   filter(continent_studied != 'none') %>%
@@ -388,8 +387,9 @@ knitr::kable(continents_studied_by_count %>% arrange(desc(percentage)),
              )
 ```
 
-### Interventions types (FMD)
+### Connection of authors to the studied locations 
 
+## Interventions types 
 ```{r echo=FALSE}
 intervention_categories_fmd <- data_fmd_only %>% 
   group_by(intervention_type, vax_modelled_with_non_vax) %>% 
@@ -402,7 +402,7 @@ intervention_categories_fmd <- data_fmd_only %>%
 knitr::kable(intervention_categories_fmd)
 ```
 
-## Vaccine impact categories (FMD)
+## Vaccine impact categories 
 ```{r echo=FALSE}
 vax_impact_categories_fmd <- data_fmd_only %>%
   filter(vax_modelled_with_non_vax == 'yes') %>% 
