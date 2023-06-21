@@ -54,7 +54,7 @@ data_without_fmd <- compact_data_with_citation_keys %>%
   filter(disease != 'fmd') 
 
 # Filter the FMD data
-fmd_data <- compact_data_with_citation_keys %>% 
+data_fmd_only <- compact_data_with_citation_keys %>% 
   filter(disease == 'fmd') 
 ```
 
@@ -177,7 +177,7 @@ knitr::kable(model_structure_unique_count)
 ```{r echo=FALSE}
 #Cross tally the model structure with parametrization and validation categories
 #FIXME: Check that studies are either not being under counted or double-counted. What do I want to count here? Is it the unique studies per method or combined method because most studies used a combination of parametrization methods especially
-parametrization_and_validation_by_model_structure <- compact_data_no_fmd %>%
+parametrization_and_validation_by_model_structure <- data_without_fmd %>%
   mutate(parametrization = str_replace(parametrization, ' ', ' + '),
          validation = str_replace(validation, ' ', ' + ')
          ) %>% 
@@ -195,7 +195,7 @@ knitr::kable(parametrization_and_validation_by_model_structure,
 
 ```{r echo=FALSE}
 #Keep only the unique entries
-parametrization_and_validation_count <- compact_data_no_fmd %>% 
+parametrization_and_validation_count <- data_without_fmd %>% 
   mutate(parametrization = str_replace(parametrization, ' ', ' + '), 
          validation = str_replace(validation, ' ', ' + ')
          ) %>% 
@@ -233,7 +233,7 @@ knitr::kable(sensitivity_analysis_count)
 
 ```{r echo=FALSE}
 #Keep only the unique entries
-code_and_data_availability_count <- compact_data_no_fmd %>% 
+code_and_data_availability_count <- data_without_fmd %>% 
   count(data_used, data_available) %>% 
   pivot_wider(names_from = data_available, values_from = n) %>% 
   replace_na(list(not_applicable = 0, 
@@ -250,7 +250,7 @@ knitr::kable(code_and_data_availability_count, caption = 'Data use and availabil
 
 ```{r echo=FALSE}
 #Keep only the unique entries
-code_availability_count <- compact_data_no_fmd %>% 
+code_availability_count <- data_without_fmd %>% 
   count(simulation_code_available) 
 
 #Print the results
@@ -263,7 +263,7 @@ knitr::kable(code_availability_count, caption = 'Code availability')
 
 ```{r echo=FALSE}
 #count the number of unique diseases studied
-disease_studied_by_outbreak_type <- compact_data_no_fmd %>% 
+disease_studied_by_outbreak_type <- data_without_fmd %>% 
   separate_rows(disease,  sep = ' ') %>% 
   mutate(disease = as_factor(disease), 
          outbreak_type = as_factor(str_replace(outbreak_type, ' ', '+'))
@@ -283,7 +283,7 @@ knitr::kable(disease_studied_by_outbreak_type)
 
 ```{r echo=FALSE}
 #count the number of unique diseases studied
-disease_studied_by_objective_type <- compact_data_no_fmd %>% 
+disease_studied_by_objective_type <- data_without_fmd %>% 
   separate_rows(disease,  sep = ' ') %>% 
   mutate(disease = as_factor(disease), 
          objectives = as_factor(objectives)
@@ -301,8 +301,7 @@ knitr::kable(disease_studied_by_objective_type)
 
 ## FMD by collaboration type
 ```{r echo=FALSE}
-fmd_studies_by_collab_type <- compact_data %>% 
-  filter(disease == 'fmd') %>% 
+fmd_studies_by_collab_type <- data_fmd_only %>% 
   mutate(disease = as_factor(disease), 
          author_affiliation_type = as_factor(str_replace(author_affiliation_type, ' ', '+'))
          ) %>% 
@@ -317,8 +316,7 @@ knitr::kable(fmd_studies_by_collab_type)
 ```
 ## FMD by objective type
 ```{r echo=FALSE}
-fmd_studies_by_objective_and_outbreak_type <- compact_data %>% 
-  filter(disease == 'fmd') %>% 
+fmd_studies_by_objective_and_outbreak_type <- data_fmd_only %>% 
   count(objectives, outbreak_type) %>% 
   pivot_wider(names_from = outbreak_type, values_from = n)
 
@@ -569,8 +567,7 @@ knitr::kable(intervention_categories_fmd)
 
 ## Vaccine impact categories (FMD)
 ```{r echo=FALSE}
-vax_impact_categories_fmd <- compact_data %>%
-  filter(disease == 'fmd') %>% 
+vax_impact_categories_fmd <- data_fmd_only %>%
   filter(vax_modelled_with_non_vax == 'yes') %>% 
   count(is_vax_effective, 
         name = 'num_of_studies', 
@@ -791,7 +788,7 @@ knitr::kable(disease_studied_most)
 
 ```{r echo=FALSE}
 #' Count the number of each author affiliation type per year (including FMD)
-collap_types_by_year <- compact_data_no_fmd %>% 
+collap_types_by_year <- data_without_fmd %>% 
   mutate(year_aggreg = as.numeric(ifelse(publication_year < 2006, 
                                          2005, 
                                          publication_year
@@ -816,7 +813,7 @@ knitr::kable(collap_types_by_year %>% clean_names() %>% adorn_totals(... = c(mix
 ### Academic collaborations versus other non-academic collaborations (excluding purely academic collaborations).
 
 ```{r echo=FALSE}
-academic_collabs_versus_others <- compact_data_no_fmd %>% 
+academic_collabs_versus_others <- data_without_fmd %>% 
   filter(author_affiliation_type != 'academic_institutions') %>% 
   mutate(year_aggreg = as.numeric(ifelse(publication_year < 2006, 2005, publication_year
                                          )
@@ -868,7 +865,7 @@ plot(academic_collabs_trend)
 
 # Connection of authors to the studied locations 
 ```{r}
-author_location_count_by_disease <- compact_data_no_fmd %>%
+author_location_count_by_disease <- data_without_fmd %>%
   separate_rows(disease, sep = ' ') %>% 
   mutate(author_in_country_studied = as_factor(author_in_country_studied), 
          disease = as_factor(disease)
