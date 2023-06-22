@@ -433,9 +433,10 @@ modelling_objectives_count <- compact_data_with_citation_keys_no_fmd %>%
   count(collab_type, objectives, name = 'num_of_studies') %>% 
   pivot_wider(names_from = objectives, values_from = num_of_studies) %>% 
   adorn_totals(where = c('row', 'col')) %>% 
-  adorn_percentages(... = c('both', 'future', 'past')) %>% 
-  adorn_pct_formatting(... = c('both', 'future', 'past')) %>% 
-  adorn_ns(... = c('both', 'future', 'past'))
+  adorn_percentages(... = c('prospective_analysis', 'retrospective_analysis')) %>% 
+  adorn_pct_formatting(... = c('prospective_analysis', 'retrospective_analysis')) %>% 
+  adorn_ns(... = c('prospective_analysis', 'retrospective_analysis'),
+           position = "front")
 
 #Print a table of the results
 knitr::kable(modelling_objectives_count,
