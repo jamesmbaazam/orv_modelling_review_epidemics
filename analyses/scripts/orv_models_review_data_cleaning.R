@@ -146,7 +146,11 @@ review_data_compact_cleaning_step2 <- review_data_compact_cleaning_step1 %>%
       data_available
     ),
     .fns = ~ as.factor(.x)
-  ))
+  )) %>%
+  mutate(objectives = ifelse(objectives == "future",
+                             "prospective_analysis",
+                             "retrospective_analysis")
+         )
 
 
 #' step 2a. Convert string columns to factor
