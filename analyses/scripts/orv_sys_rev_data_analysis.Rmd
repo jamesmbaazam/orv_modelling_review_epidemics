@@ -937,9 +937,9 @@ plot(collabs_per_year_plot)
 
 ```
 
-<!-- ## Collaboration patterns in geographic space -->
+## Geographic analyses
 
-## Geographic connection of authors to the studied locations 
+### Connection of authors to the studied locations 
 ```{r}
 author_connectedness_to_location_fmd <- fmd_data %>% 
   filter(author_in_country_studied != 'not_applicable') %>% 
