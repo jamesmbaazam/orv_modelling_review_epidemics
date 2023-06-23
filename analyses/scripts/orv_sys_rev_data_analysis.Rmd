@@ -491,11 +491,11 @@ objectives_by_collab_type <- compact_data_with_citation_keys_no_fmd %>%
   pivot_wider(names_from = objectives, 
               values_from = num_of_studies
               ) %>% 
-  replace_na(list(future = 0, past = 0, both = 0)) %>% 
+  replace_na(list(prospective_analysis = 0, retrospective_analysis = 0, both = 0)) %>% 
   adorn_totals(where = c('row', 'col')) %>% 
-  adorn_percentages(... = c('future', 'past', 'both')) %>% 
-  adorn_pct_formatting(... = c('future', 'past', 'both')) %>% 
-  adorn_ns(... = c('future', 'past', 'both')) 
+  adorn_percentages(... = c('prospective_analysis', 'retrospective_analysis', 'both')) %>% 
+  adorn_pct_formatting(... = c('prospective_analysis', 'retrospective_analysis', 'both')) %>% 
+  adorn_ns(... = c('prospective_analysis', 'retrospective_analysis', 'both')) 
 
 knitr::kable(objectives_by_collab_type, 
              caption = 'Number of studies per objective by collaboration type', 
@@ -1028,9 +1028,9 @@ modelling_objectives_fmd <- fmd_data %>%
   count(collab_type, objectives, name = 'num_of_studies') %>% 
   pivot_wider(names_from = objectives, values_from = num_of_studies) %>% 
   adorn_totals(where = c('row', 'col')) %>% 
-  adorn_percentages(... = c('future', 'past')) %>% 
-  adorn_pct_formatting(... = c('future', 'past')) %>% 
-  adorn_ns(... = c('future', 'past'))
+  adorn_percentages(... = c('prospective_analysis', 'retrospective_analysis')) %>% 
+  adorn_pct_formatting(... = c('prospective_analysis', 'retrospective_analysis')) %>% 
+  adorn_ns(... = c('prospective_analysis', 'retrospective_analysis'))
 
 #Print a table of the results
 knitr::kable(modelling_objectives_fmd,
@@ -1048,11 +1048,11 @@ knitr::kable(modelling_objectives_fmd,
 <!--   pivot_wider(names_from = objectives,  -->
 <!--               values_from = num_of_studies -->
 <!--               ) %>%  -->
-<!--   replace_na(list(future = 0, past = 0, both = 0)) %>%  -->
+<!--   replace_na(list(prospective_analysis = 0, retrospective_analysis = 0, both = 0)) %>%  -->
 <!--   adorn_totals(where = c('row', 'col')) %>%  -->
-<!--   adorn_percentages(... = c('future', 'past')) %>%  -->
-<!--   adorn_pct_formatting(... = c('future', 'past')) %>%  -->
-<!--   adorn_ns(... = c('future', 'past'))  -->
+<!--   adorn_percentages(... = c('prospective_analysis', 'retrospective_analysis')) %>%  -->
+<!--   adorn_pct_formatting(... = c('prospective_analysis', 'retrospective_analysis')) %>%  -->
+<!--   adorn_ns(... = c('prospective_analysis', 'retrospective_analysis'))  -->
 
 <!-- knitr::kable(objectives_and_outbreak_types_fmd,  -->
 <!--              caption = 'Number of studies per objective and outbreak type',  -->
