@@ -129,7 +129,10 @@ knitr::kable(location_types_tally,
 larger_geographies_tally <- compact_data_with_citation_keys_no_fmd %>% 
     separate_rows(country_studied, sep = ' ') %>%
     distinct(title, country_studied, .keep_all = TRUE) %>%
-    filter(country_studied %in% c('west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region')) %>% 
+    filter(country_studied %in% c('west_africa', 'global', 
+                                  'northern_hemisphere', 'southeast_asia', 
+                                  'who_southeast_asia_region')
+           ) %>% 
     count(country_studied) %>% 
   arrange(desc(n)) %>% 
    adorn_totals(where = c('row')) %>% 
@@ -137,9 +140,10 @@ larger_geographies_tally <- compact_data_with_citation_keys_no_fmd %>%
   adorn_pct_formatting() %>% 
   adorn_ns()
 
-knitr::kable(larger_geographies_tally, caption = 'Number of studies per location larger than one country', format = "latex", booktabs = TRUE) %>% 
+knitr::kable(larger_geographies_tally, 
+             caption = 'Number of studies per location larger than one country', 
+             format = "latex", booktabs = TRUE) %>% 
         kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'))
-  
 ```
 
 
@@ -157,7 +161,10 @@ countries_studied_by_count_aggregated <- countries_studied_by_count %>%
   summarise(num_of_studies = sum(num_of_studies),
             .groups = 'drop'
             ) %>% 
-  filter(!country_studied %in% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region')) %>% 
+  filter(!country_studied %in% c('none', 'west_africa', 'global', 
+                                 'northern_hemisphere', 'southeast_asia', 
+                                 'who_southeast_asia_region')
+         ) %>% 
   arrange(desc(num_of_studies)) %>% 
   adorn_totals(where = c('row')) %>% 
   adorn_percentages(denominator = 'col') %>% 
@@ -170,7 +177,9 @@ countries_studied_by_count_aggregated <- countries_studied_by_count %>%
 knitr::kable(countries_studied_by_count_aggregated, 
              caption = 'Number of studies per country', 
              format = "latex", booktabs = TRUE) %>% 
-        kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'), font_size = 7)
+        kableExtra::kable_styling(latex_options = c('striped', 
+                                                    'HOLD_position'), 
+                                  font_size = 7)
 ``` 
 
 ### Continents studied
@@ -186,8 +195,10 @@ continents_studied_by_count <- countries_studied_by_count %>%
          ) %>% 
   mutate(continent_studied = str_to_lower(continent_studied)
          ) %>% 
-  mutate(continent_studied = case_when(str_detect(continent_studied, 'asia') == TRUE ~ 'asia', 
-                                         str_detect(continent_studied, 'africa') == TRUE ~ 'africa', 
+  mutate(continent_studied = case_when(str_detect(continent_studied, 
+                                                  'asia') == TRUE ~ 'asia', 
+                                         str_detect(continent_studied, 
+                                                    'africa') == TRUE ~ 'africa', 
                                          TRUE ~ continent_studied
                                        )
            ) %>% 
@@ -215,7 +226,9 @@ knitr::kable(continents_studied_by_count,
 ```{r}
 author_connectedness_top_5_countries <- compact_data_with_citation_keys_no_fmd %>% 
   filter(author_in_country_studied != 'not_applicable') %>% 
-  filter(!country_studied %in% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region')) %>% 
+  filter(!country_studied %in% c('none', 'west_africa', 'global', 
+                                 'northern_hemisphere', 'southeast_asia', 
+                                 'who_southeast_asia_region')) %>% 
 separate_rows(country_studied,  sep = ' ') %>% 
   group_by(collab_type) %>% 
   count(country_studied, author_in_country_studied, sort = TRUE) %>% 
@@ -228,9 +241,12 @@ separate_rows(country_studied,  sep = ' ') %>%
   adorn_ns(... = c('yes', 'no')) %>% 
   ungroup()
 
-knitr::kable(author_connectedness_top_5_countries, caption = 'Studies with at least one author affiliation in the location studied', 
+knitr::kable(author_connectedness_top_5_countries, 
+             caption = 'Studies with at least one author affiliation in the location studied', 
              format = "latex", booktabs = TRUE, longtable = TRUE) %>% 
-        kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position', 'repeat_header'), font_size = 8)
+        kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position', 
+                                                    'repeat_header'), 
+                                  font_size = 8)
 ```
 
 ### Author affiliation in the studied location (overall)
@@ -238,7 +254,8 @@ knitr::kable(author_connectedness_top_5_countries, caption = 'Studies with at le
 ```{r}
 author_connectedness_to_location_aggreg <- compact_data_with_citation_keys_no_fmd %>% 
   filter(author_in_country_studied != 'not_applicable') %>% 
-  filter(!country_studied %in% c('other', 'none', 'northern_hemisphere', 'west_africa', 'global')) %>% 
+  filter(!country_studied %in% c('other', 'none', 'northern_hemisphere', 
+                                 'west_africa', 'global')) %>% 
   count(collab_type, author_in_country_studied, sort = TRUE) %>% 
   pivot_wider(names_from = author_in_country_studied, values_from = n) %>% 
   replace_na(list(yes = 0, no = 0)) %>% 
@@ -247,7 +264,8 @@ author_connectedness_to_location_aggreg <- compact_data_with_citation_keys_no_fm
   adorn_pct_formatting(... = c('yes', 'no')) %>% 
   adorn_ns(... = c('yes', 'no')) 
 
-knitr::kable(author_connectedness_to_location_aggreg, caption = 'At least one author with an affiliation in the studied location', 
+knitr::kable(author_connectedness_to_location_aggreg, 
+             caption = 'At least one author with an affiliation in the studied location', 
              format = "latex", booktabs = TRUE) %>% 
         kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'))
 ```
