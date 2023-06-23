@@ -41,7 +41,8 @@ conflict_prefer('kable', 'knitr')
 
 ```{r}
 # if the figs folder doesn't exist, create it for storing the figures
-figs_dir <- "figs"
+gh_figs_dir <- "../figs/"
+dropbox_figs_dir <- "~/Dropbox/My Academic Repository/Manuscripts/First author/In review/2022 - Systematic review of ORV models/Epidemics/submission2/manuscript_writeup/figs/"
 
 if (!dir.exists(here::here(figs_dir))) {
   dir.create(here::here(figs_dir),
