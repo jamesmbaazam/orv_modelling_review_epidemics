@@ -77,6 +77,62 @@ compact_data_with_citation_keys_no_fmd <- compact_data_with_citation_keys %>%
 fmd_data <- compact_data_with_citation_keys %>% 
   filter(disease == 'fmd') 
 ```
+# General analyses
+
+## Number of studied included
+Number of studies included `r nrow(compact_data_with_citation_keys)` in review.
+
+## Breakdown of studies before and after 2005
+```{r}
+before_2005 <- data_without_fmd %>% 
+  select(publication_year) %>% 
+  mutate(before_2005 = ifelse(publication_year <= 2005, "yes", "no")) %>% 
+  count(before_2005) %>% 
+  adorn_percentages(denominator = 'col') %>% 
+  adorn_pct_formatting() %>% 
+  adorn_ns(position = "front")
+  
+
+knitr::kable(before_2005)
+```
+
+
+## Publications per year
+```{r}
+publications_per_year <- data_without_fmd %>%
+  count(publication_year)
+
+publications_per_year_plot <- ggplot(data = publications_per_year) +
+  geom_bar(aes(x = publication_year,
+               y = n
+               ),
+           stat = 'identity',
+           color = 'black',
+           fill = 'tomato3'
+           ) +
+  scale_y_continuous(breaks = seq(0, 30, 2),
+                     labels = seq(0, 30, 2)
+                     ) +
+  labs(x = "Year of publication", y = "Number of papers") +
+  theme_minimal(base_size = 12)
+
+
+plot(publications_per_year_plot)
+
+# Save to github
+ggsave(filename = "publications_per_year.tiff",
+       plot = publications_per_year_plot,
+       device = 'tiff',
+       path = figs_dir
+       )
+
+# Save to dropbox folder
+ggsave(filename = "fig2_publications_per_year.png",
+       plot = publications_per_year_plot,
+       device = 'tiff',
+       path = dropbox_figs_dir
+       )
+```
 
 # Human vaccine-preventable diseases
 
