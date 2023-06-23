@@ -113,3 +113,5 @@ analyses/data/compact_data_with_citation_keys_cleaned.rds
 .DS_Store
 
 *.rds
+
+analyses/figs/
