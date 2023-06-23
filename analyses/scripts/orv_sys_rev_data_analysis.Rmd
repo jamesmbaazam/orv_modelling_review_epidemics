@@ -100,9 +100,11 @@ knitr::kable(studies_per_collab_type,
 
 
 
-## Locations studied
+## Geographic analyses
 
-### Real versus hypothetical 
+### Location studied
+
+#### Real versus hypothetical 
 
 ```{r}
 location_types_tally <- compact_data_with_citation_keys_no_fmd %>% 
@@ -123,7 +125,7 @@ knitr::kable(location_types_tally,
   
 ```
 
-### Larger than one country
+#### Larger than one country
 
 ```{r}
 larger_geographies_tally <- compact_data_with_citation_keys_no_fmd %>% 
@@ -147,7 +149,7 @@ knitr::kable(larger_geographies_tally,
 ```
 
 
-### Countries studied
+#### Countries studied
 
 ```{r}
 countries_studied_by_count <- compact_data_with_citation_keys_no_fmd %>% 
@@ -182,7 +184,7 @@ knitr::kable(countries_studied_by_count_aggregated,
                                   font_size = 7)
 ``` 
 
-### Continents studied
+#### Continents studied
 
 ```{r}
 continents_studied_by_count <- countries_studied_by_count %>% 
@@ -221,7 +223,7 @@ knitr::kable(continents_studied_by_count,
 
 
 
-## Geographic connection of authors to the studied locations 
+## Connection of authors to the studied locations 
 
 ```{r}
 author_connectedness_top_5_countries <- compact_data_with_citation_keys_no_fmd %>% 
