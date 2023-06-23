@@ -943,7 +943,9 @@ plot(collabs_per_year_plot)
 ```{r}
 author_connectedness_to_location_fmd <- fmd_data %>% 
   filter(author_in_country_studied != 'not_applicable') %>% 
-  filter(!country_studied %in% c('none', 'west_africa', 'global', 'northern_hemisphere', 'southeast_asia', 'who_southeast_asia_region')) %>% 
+  filter(!country_studied %in% c('none', 'west_africa', 'global', 
+                                 'northern_hemisphere', 'southeast_asia',
+                                 'who_southeast_asia_region')) %>% 
   group_by(collab_type) %>% 
   count(country_studied, author_in_country_studied, sort = TRUE) %>% 
   pivot_wider(names_from = author_in_country_studied, values_from = n) %>% 
@@ -955,7 +957,8 @@ author_connectedness_to_location_fmd <- fmd_data %>%
   adorn_ns(... = c('yes', 'no')) %>% 
   ungroup()
 
-knitr::kable(author_connectedness_to_location_fmd, caption = 'Studies with at least one author affiliation in the location studied', 
+knitr::kable(author_connectedness_to_location_fmd, 
+             caption = 'Studies with at least one author affiliation in the location studied', 
              format = "latex", booktabs = TRUE) %>% 
         kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'))
 ```
