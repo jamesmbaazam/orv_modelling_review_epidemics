@@ -140,7 +140,9 @@ ggsave(filename = "fig2_publications_per_year.png",
 
 # Human vaccine-preventable diseases
 
-## Collaboration types (aggregated)
+## Analysis of collaboration type compositions
+
+### Aggregated
 ```{r}
 #' Count by collaboration types and make a bar plot
 studies_per_collab_type <- compact_data_with_citation_keys_no_fmd %>%
