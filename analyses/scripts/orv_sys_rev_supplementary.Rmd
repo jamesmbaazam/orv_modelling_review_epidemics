@@ -60,89 +60,6 @@ data_fmd_only <- compact_data_with_citation_keys %>%
 
 # Human vaccine-preventable diseases
 
-## Studies per collaboration type
-
-```{r echo=FALSE}
-#' Count the number of each author affiliation type per year (including FMD)
-collap_types_by_year <- data_without_fmd %>% 
-  mutate(year_aggreg = as.numeric(ifelse(publication_year < 2006, 
-                                         2005, 
-                                         publication_year
-                                         )
-                                  ), 
-         collab_type = as_factor(if_else(author_affiliation_type == 'academic_institutions', 
-                                         'Purely academic', 
-                                         'Mixed')
-                                 )
-         ) %>% 
-  count(year_aggreg, collab_type, name = 'num_of_studies') %>% 
-  pivot_wider(names_from = collab_type, values_from = num_of_studies)
-
-knitr::kable(collap_types_by_year %>% 
-               clean_names() %>% 
-               adorn_totals(... = c(mixed, purely_academic), 
-                            where = c("row", "col")
-                            )
-             )
-```
-
-```{r echo=FALSE}
-#' Count by collaboration types and make a bar plot
-collab_types_count <- data_without_fmd %>%
-  count(author_affiliation_type, sort = TRUE, name = "num_of_studies") %>% 
-  mutate(author_affiliation_type = as_factor(author_affiliation_type)) %>% 
-  arrange(desc(num_of_studies))
-
-knitr::kable(collab_types_count)
-```
-
-### Mixed collaborations with and without academics
-
-```{r echo=FALSE}
-academic_collabs_versus_others <- data_without_fmd %>% 
-  filter(author_affiliation_type != 'academic_institutions') %>% 
-  mutate(year_aggreg = as.numeric(ifelse(publication_year < 2006, 2005, publication_year
-                                         )
-                                  ), 
-         collab_type = as_factor(if_else(str_detect(author_affiliation_type, 
-                                                    'academic_institutions'),
-                                         'including_academics', 
-                                         'excluding_academics')
-                                 )
-         ) %>% 
-  count(year_aggreg, collab_type, name = 'num_of_studies')
-
-#The plot
-# Modify the x-axis labels to account for the lumping of the years from 2005 and below
-x_axis_labels <- as.character(seq(2005, 2020, 2))
-
-x_axis_labels[1] <- '1970-2005'
-
-#plot the result
-academic_collabs_trend <- ggplot(data = academic_collabs_versus_others) + 
-  geom_bar(aes(x = year_aggreg,
-               y = num_of_studies,
-               fill = collab_type
-               ),
-           color = 'black',
-           stat = 'identity',
-           position = position_fill(reverse = TRUE)  
-             ) +
-  scale_fill_manual(values = c("tan1", "turquoise1")) +
-  scale_x_continuous(breaks = seq(2005, 2020, 2),
-                     labels = x_axis_labels
-                     ) +
-  coord_flip() +
-  labs(title = 'Proportion of mixed collaborations per year',
-       x = 'Year',
-       y = 'Proportion of publications',
-       fill = 'Mixed collaboration type' 
-         ) +
-  theme_minimal(base_size = 12)
-
-plot(academic_collabs_trend)
-```
-
 ## Diseases studied
 ```{r echo=FALSE}
 disease_studied_count <- long_data_no_fmd %>% 
@@ -152,27 +69,6 @@ disease_studied_count <- long_data_no_fmd %>%
   ungroup() 
 
 knitr::kable(disease_studied_count, col.names = c('Disease', 'Number of studies'))
-```
-
-## Diseases and interventions
-
-```{r echo=FALSE}
-#count the number of unique interventions modelled
-interventions_unique_entries <- long_data_no_fmd %>% 
-  group_by(title) %>% 
-  distinct(intervention_modelled, .keep_all = TRUE) %>% 
-  ungroup()
-
-#interventions are disease specific
-interventions_per_disease <- interventions_unique_entries %>% 
-  mutate(intervention_modelled = str_trim(intervention_modelled)) %>% 
-  filter(intervention_modelled != 'e.g.') %>% #remove false rows
-  filter(intervention_modelled != 'various') %>% #remove false rows
-  count(disease, intervention_modelled, name = 'num_of_studies') %>% 
-  arrange(disease, desc(num_of_studies)) %>% 
-  ungroup()
-
-knitr::kable(interventions_per_disease)
 ```
 
 ## Outcomes studied
