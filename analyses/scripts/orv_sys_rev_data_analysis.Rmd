@@ -161,7 +161,214 @@ knitr::kable(studies_per_collab_type,
         kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'))
 ```
 
+### Number of studies per year and broken down by collaboration types
 
+```{r echo=FALSE}
+#' Count the number of each author affiliation type per year (including FMD)
+collap_types_by_year <- compact_data_with_citation_keys_no_fmd %>% 
+  mutate(year_aggreg = as.numeric(ifelse(publication_year < 2006, 
+                                         2005, 
+                                         publication_year
+                                         )
+                                  ), 
+         collab_type = as_factor(if_else(author_affiliation_type == 'academic_institutions', 
+                                         'Purely academic', 
+                                         'Mixed')
+                                 )
+         ) %>% 
+  count(year_aggreg, collab_type, name = 'num_of_studies') %>% 
+  pivot_wider(names_from = collab_type, values_from = num_of_studies) %>% 
+  clean_names() %>% 
+  adorn_totals(... = c(mixed, purely_academic), where = c("row", "col"))
+
+knitr::kable(collap_types_by_year,
+             caption = "Breakdown of studies per year by collaboration types")
+```
+
+```{r echo=FALSE}
+#' Count by collaboration types and make a bar plot
+collab_types_count <- compact_data_with_citation_keys_no_fmd %>%
+  count(author_affiliation_type, sort = TRUE, name = "num_of_studies") %>% 
+  mutate(author_affiliation_type = as_factor(author_affiliation_type)) %>% 
+  arrange(desc(num_of_studies)) %>% 
+  adorn_totals() %>% 
+  adorn_percentages(denominator = 'col') %>% 
+  adorn_pct_formatting() %>% 
+  adorn_ns(position = "front")
+
+knitr::kable(collab_types_count)
+```
+
+### Number of publications per year by collaboration type 
+
+```{r} 
+ #' Count the number of each author affiliation type per year
+ collabs_per_year <- compact_data_with_citation_keys_no_fmd %>%
+   count(year_aggreg,
+     collab_type,
+     name = "total_publications"
+   )
+ x_axis_labels <- as.character(seq(2005, 2020, 2))
+
+ collabs_per_year_plot <- ggplot(
+   data = collabs_per_year,
+   aes(
+     x = year_aggreg,
+     y = total_publications
+   ),
+   color = "black"
+ ) +
+   geom_bar(aes(fill = collab_type),
+     stat = "identity",
+     position = "dodge"
+   ) +
+   scale_fill_manual(values = c("tan3", "turquoise2")) +
+   scale_x_continuous(
+     breaks = seq(2005, 2020, 2),
+     labels = x_axis_labels,
+     expand = c(0, 0)
+   ) +
+   scale_y_continuous(
+     breaks = seq(0, 20, 2),
+     labels = seq(0, 20, 2)
+   ) +
+   labs(
+     x = "Year",
+     y = "Total publications",
+     fill = "Collaboration type"
+   ) +
+   theme_minimal(base_size = 12) +
+   theme(legend.position = "bottom")
+
+ plot(collabs_per_year_plot)
+
+ ggsave(
+   filename = "total_collabs_per_year_plot.tiff",
+   plot = collabs_per_year_plot,
+   path = gh_figs_dir
+ )
+
+ ggsave(
+   filename = "total_collabs_per_year_plot.tiff",
+   plot = collabs_per_year_plot,
+   path = dropbox_figs_dir
+ )
+``` 
+
+Even though non-academic collaborations increased over time, the share of 
+total publications per year over time decreased. 
+
+### Proportion of the total publications per year by collaboration type
+
+```{r echo=FALSE, fig.width=8} 
+#' Count the number of each author affiliation type per year (including FMD) 
+collap_types_by_year <- compact_data_with_citation_keys_no_fmd %>%
+  count(year_aggreg,
+    collab_type,
+    name = "total_publications"
+  )
+
+
+# The plot
+# Modify the x-axis labels to account for the lumping of the years from 2005 and below
+x_axis_labels <- as.character(seq(2005, 2020, 2))
+
+x_axis_labels[1] <- "1970-2005"
+
+
+collab_proportions_plot <- ggplot(data = collap_types_by_year) +
+  geom_bar(
+    aes(
+      x = year_aggreg,
+      y = total_publications,
+      fill = collab_type
+    ),
+    color = "black",
+    stat = "identity",
+    position = position_fill(reverse = TRUE) # ,
+    # show.legend = FALSE
+  ) +
+  scale_fill_manual(values = c("tan3", "turquoise2")) +
+  scale_x_continuous(
+    breaks = seq(2005, 2020, 2),
+    labels = x_axis_labels,
+    expand = c(0, 0)
+  ) +
+  labs(
+    x = "Year",
+    y = "Proportion of total publications",
+    fill = "Collaboration type"
+  ) +
+  theme(legend.position = "none") +
+  theme_minimal(base_size = 12)
+
+
+plot(collab_proportions_plot)
+
+ggsave(
+  filename = "collab_proportions.tiff",
+  plot = collab_proportions_plot,
+  path = gh_figs_dir
+)
+
+ggsave(
+  filename = "collab_proportions.tiff",
+  plot = collab_proportions_plot,
+  path = dropbox_figs_dir
+)
+``` 
+
+### Mixed collaborations with and without academics
+
+```{r echo=FALSE}
+academic_collabs_versus_others <- compact_data_with_citation_keys_no_fmd %>%
+  filter(author_affiliation_type != "academic_institutions") %>%
+  mutate(
+    year_aggreg = as.numeric(ifelse(publication_year < 2006, 2005, publication_year)),
+    collab_type = as_factor(if_else(str_detect(
+      author_affiliation_type,
+      "academic_institutions"
+    ),
+    "including_academics",
+    "excluding_academics"
+    ))
+  ) %>%
+  count(year_aggreg, collab_type, name = "num_of_studies")
+
+# The plot
+# Modify the x-axis labels to account for the lumping of the years from 2005 and below
+x_axis_labels <- as.character(seq(2005, 2020, 2))
+
+x_axis_labels[1] <- "1970-2005"
+
+# plot the result
+academic_collabs_trend <- ggplot(data = academic_collabs_versus_others) +
+  geom_bar(
+    aes(
+      x = year_aggreg,
+      y = num_of_studies,
+      fill = collab_type
+    ),
+    color = "black",
+    stat = "identity",
+    position = position_fill(reverse = TRUE)
+  ) +
+  scale_fill_manual(values = c("tan1", "turquoise1")) +
+  scale_x_continuous(
+    breaks = seq(2005, 2020, 2),
+    labels = x_axis_labels
+  ) +
+  coord_flip() +
+  labs(
+    title = "Proportion of mixed collaborations per year",
+    x = "Year",
+    y = "Proportion of publications",
+    fill = "Mixed collaboration type"
+  ) +
+  theme_minimal(base_size = 12)
+
+plot(academic_collabs_trend)
+```
 
 ## Geographic analyses
 
@@ -414,6 +621,44 @@ knitr::kable(intervention_categories,
              caption = 'Number of studies per intervention categories', 
              format = "latex", booktabs = TRUE) %>% 
         kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'))
+```
+
+## Diseases and interventions
+
+```{r echo=FALSE}
+#count the number of unique interventions modelled
+interventions_unique_entries <- long_data_no_fmd %>% 
+  group_by(title) %>% 
+  distinct(intervention_modelled, .keep_all = TRUE) %>% 
+  ungroup()
+
+#interventions are disease specific
+interventions_per_disease <- interventions_unique_entries %>% 
+  mutate(intervention_modelled = str_trim(intervention_modelled)) %>% 
+  filter(intervention_modelled != 'e.g.') %>% #remove false rows
+  filter(intervention_modelled != 'various') %>% #remove false rows
+  count(disease, intervention_modelled, name = 'num_of_studies') %>% 
+  arrange(disease, desc(num_of_studies)) %>% 
+  ungroup()
+
+knitr::kable(interventions_per_disease)
+```
+### Diseases and interventions (top 2 per disease)
+
+```{r echo=FALSE}
+#count the number of unique interventions modelled
+interventions_per_disease_top2 <- long_data_no_fmd %>% 
+  group_by(title) %>% 
+  distinct(intervention_modelled, .keep_all = TRUE) %>% 
+  ungroup() %>% 
+  count(disease, intervention_modelled, name = 'num_of_studies') %>% 
+  arrange(disease, desc(num_of_studies)) %>% 
+  group_by(disease) %>% 
+  slice_head(n = 2) %>% #keep only top 2 per group 
+  ungroup()
+
+knitr::kable(interventions_per_disease_top2,
+             caption = "Top 2 most studied intervention per disease")
 ```
 
 ### Impact of vaccination
