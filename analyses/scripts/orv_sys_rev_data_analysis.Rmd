@@ -113,7 +113,11 @@ publications_per_year_plot <- ggplot(data = publications_per_year) +
            fill = 'tomato3'
            ) +
   scale_y_continuous(breaks = seq(0, 30, 2),
-                     labels = seq(0, 30, 2)
+                     labels = seq(0, 30, 2),
+                     expand = c(0, 0)
+                     ) +
+    scale_x_continuous(breaks = seq(1970, 2020, 5),
+                     labels = seq(1970, 2020, 5)
                      ) +
   labs(x = "Year of publication", y = "Number of papers") +
   theme_minimal(base_size = 12)
