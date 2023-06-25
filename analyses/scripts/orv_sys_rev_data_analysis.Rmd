@@ -86,7 +86,7 @@ The review involved `r nrow(compact_data_with_citation_keys)` published between
 
 ## Breakdown of studies before and after 2005
 ```{r}
-before_2005 <- data_without_fmd %>% 
+before_2005 <- compact_data_with_citation_keys_no_fmd %>% 
   select(publication_year) %>% 
   mutate(before_2005 = ifelse(publication_year <= 2005, "yes", "no")) %>% 
   count(before_2005) %>% 
@@ -101,7 +101,7 @@ knitr::kable(before_2005)
 
 ## Publications per year
 ```{r}
-publications_per_year <- data_without_fmd %>%
+publications_per_year <- compact_data_with_citation_keys_no_fmd %>%
   count(publication_year)
 
 publications_per_year_plot <- ggplot(data = publications_per_year) +
