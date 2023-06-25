@@ -128,7 +128,7 @@ plot(publications_per_year_plot)
 # Save to github
 ggsave(filename = "publications_per_year.tiff",
        plot = publications_per_year_plot,
-       path = figs_dir
+       path = gh_figs_dir
        )
 
 # Save to dropbox folder
