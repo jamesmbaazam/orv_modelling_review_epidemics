@@ -44,8 +44,8 @@ conflict_prefer('kable', 'knitr')
 gh_figs_dir <- "../figs/"
 dropbox_figs_dir <- "~/Dropbox/My Academic Repository/Manuscripts/First author/In review/2022 - Systematic review of ORV models/Epidemics/submission2/manuscript_writeup/figs/"
 
-if (!dir.exists(here::here(figs_dir))) {
-  dir.create(here::here(figs_dir),
+if (!dir.exists(here::here(gh_figs_dir))) {
+  dir.create(here::here(gh_figs_dir),
     showWarnings = TRUE
   )
 }
