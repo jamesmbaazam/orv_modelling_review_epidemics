@@ -89,7 +89,7 @@ The review involved `r nrow(compact_data_with_citation_keys)` published between
 before_2005 <- compact_data_with_citation_keys_no_fmd %>% 
   select(publication_year) %>% 
   mutate(before_2005 = ifelse(publication_year <= 2005, "yes", "no")) %>% 
-  count(before_2005) %>% 
+  count(before_2005, name = "num_of_studies") %>% 
   adorn_percentages(denominator = 'col') %>% 
   adorn_pct_formatting() %>% 
   adorn_ns(position = "front")
