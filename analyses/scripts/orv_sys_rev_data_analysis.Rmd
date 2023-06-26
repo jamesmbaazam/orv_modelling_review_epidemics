@@ -922,9 +922,13 @@ outcomes_overall <- compact_data_with_citation_keys_no_fmd %>%
   adorn_ns() 
 
 
-knitr::kable(outcomes_overall, caption = 'Model outcomes by collaboration type', 
+knitr::kable(outcomes_overall, 
+             caption = 'Outcomes studied by the collaboration types', 
              format = "latex", booktabs = TRUE, longtable = TRUE) %>% 
-        kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position', 'repeat_header'), font_size = 8)
+        kableExtra::kable_styling(latex_options = c('striped', 
+                                                    'HOLD_position', 
+                                                    'repeat_header'), 
+                                  font_size = 8)
 ```
 
 
