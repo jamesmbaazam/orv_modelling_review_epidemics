@@ -906,7 +906,7 @@ commonly used by both groups. -->
 
 
 ```{r}
-outcomes_overall <- compact_data_with_citation_keys_no_fmd %>% 
+outcomes_measured_by_collab_type <- compact_data_with_citation_keys_no_fmd %>% 
   mutate(outcome_measured = str_trim(outcome_measured)) %>% 
   separate_rows(outcome_measured, sep = ',') %>% 
   group_by(collab_type, outcome_measured) %>% 
@@ -914,22 +914,40 @@ outcomes_overall <- compact_data_with_citation_keys_no_fmd %>%
   filter(!outcome_measured %in% c('outcome_other', '', 's')) %>% 
   count(collab_type, outcome_measured, name = 'num_of_studies') %>% 
   ungroup(outcome_measured) %>% 
-  arrange(desc(num_of_studies), .by_group = TRUE) %>% 
-  ungroup() %>% 
-  adorn_totals(where = c('row')) %>% 
-  adorn_percentages(denominator = 'col') %>% 
-  adorn_pct_formatting() %>% 
-  adorn_ns() 
+  arrange(desc(num_of_studies), .by_group = TRUE) 
 
-
-knitr::kable(outcomes_overall, 
+knitr::kable(outcomes_measured_by_collab_type, 
              caption = 'Outcomes studied by the collaboration types', 
              format = "latex", booktabs = TRUE, longtable = TRUE) %>% 
         kableExtra::kable_styling(latex_options = c('striped', 
                                                     'HOLD_position', 
-                                                    'repeat_header'), 
-                                  font_size = 8)
+                                                    'repeat_header')
+                                  )
 ```
+
+### Top 6 outcomes measured by collaboration type
+```{r}
+outcomes_measured_by_collab_type_top6 <- outcomes_measured_by_collab_type %>% 
+  group_map(~ {
+    .x %>% 
+      adorn_totals() %>% 
+      adorn_percentages(denominator = "col") %>%
+      adorn_pct_formatting() %>%
+      adorn_ns()},
+    .keep = TRUE) %>% 
+  map(head, n = 6) %>% 
+  list_rbind()
+
+knitr::kable(outcomes_measured_by_collab_type_top6, 
+             caption = 'Top 6 outcomes studied by the collaboration types', 
+             format = "latex", booktabs = TRUE, longtable = TRUE) %>% 
+        kableExtra::kable_styling(latex_options = c('striped', 
+                                                    'HOLD_position', 
+                                                    'repeat_header')
+                                  )
+```
+
+
 
 ## Parametrization methods
 
