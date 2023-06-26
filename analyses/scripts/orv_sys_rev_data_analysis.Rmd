@@ -932,67 +932,6 @@ knitr::kable(outcomes_overall,
 ```
 
 ## Parametrization methods
-```{r eval=FALSE}
-outcomes_tally_by_collab_type <- compact_data_with_citation_keys_no_fmd %>% 
-  mutate(outcome_measured = str_trim(outcome_measured)) %>% 
-  separate_rows(outcome_measured, sep = ',') %>% 
-  group_by(outcome_measured) %>% 
-  distinct(title, .keep_all = TRUE) %>% 
-  ungroup(outcome_measured) %>% 
-  filter(!outcome_measured %in% c('outcome_other', '')) %>% 
-  group_by(collab_type) %>% 
-  count(outcome_measured) %>% 
-  arrange(desc(n), .by_group = TRUE) %>% 
-  # slice(1:6) %>% 
-  ungroup()
-
-
-# outcomes_tally_plot <- ggplot(data = outcomes_tally_by_collab_type, 
-#                               aes(x = reorder(outcome_measured, n), 
-#                                   y = n
-#                                   )
-#                               ) + 
-#   geom_bar(stat = 'identity') + 
-#   labs(x = '**Outcome**', y = '**Number of times used**') +
-#   coord_flip() +
-#   facet_wrap('collab_type') +
-#   md_theme_minimal()
-
-collab_type_labels <- c('purely_academic' = 'Purely academic', 
-                        'mixed' = 'Mixed'
-                        )
-
-outcomes_tally_plot <- ggplot(data = outcomes_tally_by_collab_type, 
-                              aes(label = outcome_measured, 
-                                  size = n
-                                  )
-                              ) + 
-  geom_text_wordcloud_area() +
-  scale_size_area(max_size = 10) + 
-  facet_wrap(~ collab_type, 
-             labeller = as_labeller(collab_type_labels),
-             strip.position = 'top'
-             ) +
-  #theme_minimal() + 
-  theme(strip.text = element_text(size = 15, face = 'bold'))  
-
-
-print(outcomes_tally_plot)
-
-ggsave(filename = 'outcomes_tally_plot.tiff',
-       plot = outcomes_tally_plot, 
-       device = 'tiff',
-       path = figs_dir
-       )
-
-ggsave(filename = 'outcomes_tally_plot.tiff',
-       plot = outcomes_tally_plot, 
-       device = 'tiff',
-       path = save_thesis_fig_here
-       )
-```
-
-
 
 ```{r}
 #wide data for table
