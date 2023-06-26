@@ -28,9 +28,7 @@ suppressPackageStartupMessages({
   library('countrycode')
   library('bib2df')
   library('conflicted')
-  library('ggwordcloud')
   library('here')
-  library("jsonlite")
   })
 
 #resolve package function conflicts
