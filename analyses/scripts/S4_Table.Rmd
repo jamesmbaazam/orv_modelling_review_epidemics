@@ -34,11 +34,10 @@ conflict_prefer('kable', 'knitr')
 ```
 
 ```{r}
-here::i_am("analyses/scripts/full_data_extraction_citation_table.Rmd")
-#I/O paths
-figs_dir <- "analyses/figs"
-data_dir <- "analyses/data"
-scripts_dir <- "analyses/scripts"
+# Paths
+figs_dir <- "../figs/"
+data_dir <- "../data"
+scripts_dir <- "../scripts"
 
 # Create a folder for storing the figures
 
@@ -51,15 +50,9 @@ if (!dir.exists(here::here(figs_dir))) {
 
 
 ```{r load_data}
-#' re-run the data cleaning step, in case something has changed 
-#' TO DO: Use GNU make for this
-
-source(here::here(scripts_dir, "orv_models_review_data_cleaning.R"))
-
+.args <- c(here::here("data", "compact_data_with_citation_keys_cleaned.rds"))
 # The data with citations 
-compact_data_with_citation_keys <- read_rds(
-  here::here(data_dir, 'compact_data_with_citation_keys_cleaned.rds'
-  ))
+compact_data_with_citation_keys <- readRDS(.args[1])
 ```
 
 ```{r}
