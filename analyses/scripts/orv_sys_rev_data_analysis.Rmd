@@ -501,7 +501,7 @@ author_connectedness_top_5_countries <- compact_data_with_citation_keys_no_fmd %
   filter(!country_studied %in% c('none', 'west_africa', 'global', 
                                  'northern_hemisphere', 'southeast_asia', 
                                  'who_southeast_asia_region')) %>% 
-separate_rows(country_studied,  sep = ' ') %>% 
+  separate_rows(country_studied,  sep = ' ') %>% 
   group_by(collab_type) %>% 
   count(country_studied, author_in_country_studied, sort = TRUE) %>% 
   pivot_wider(names_from = author_in_country_studied, values_from = n) %>% 
@@ -910,7 +910,7 @@ commonly used by both groups. -->
 
 ```{r}
 outcomes_overall <- compact_data_with_citation_keys_no_fmd %>% 
-mutate(outcome_measured = str_trim(outcome_measured)) %>% 
+  mutate(outcome_measured = str_trim(outcome_measured)) %>% 
   separate_rows(outcome_measured, sep = ',') %>% 
   group_by(collab_type, outcome_measured) %>% 
   distinct(title, .keep_all = TRUE) %>% 
