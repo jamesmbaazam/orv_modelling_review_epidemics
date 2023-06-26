@@ -931,7 +931,7 @@ knitr::kable(outcomes_overall,
                                   font_size = 8)
 ```
 
-
+## Parametrization methods
 ```{r eval=FALSE}
 outcomes_tally_by_collab_type <- compact_data_with_citation_keys_no_fmd %>% 
   mutate(outcome_measured = str_trim(outcome_measured)) %>% 
@@ -993,7 +993,6 @@ ggsave(filename = 'outcomes_tally_plot.tiff',
 ```
 
 
-### Parametrization methods
 
 ```{r}
 #wide data for table
