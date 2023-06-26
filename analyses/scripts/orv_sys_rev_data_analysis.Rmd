@@ -1255,6 +1255,7 @@ author_connectedness_to_location_fmd <- fmd_data %>%
   filter(!country_studied %in% c('none', 'west_africa', 'global', 
                                  'northern_hemisphere', 'southeast_asia',
                                  'who_southeast_asia_region')) %>% 
+  separate_rows(country_studied,  sep = ' ') %>% 
   group_by(collab_type) %>% 
   count(country_studied, author_in_country_studied, sort = TRUE) %>% 
   pivot_wider(names_from = author_in_country_studied, values_from = n) %>% 
