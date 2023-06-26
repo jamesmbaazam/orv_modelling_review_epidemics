@@ -1015,7 +1015,7 @@ knitr::kable(model_parametrization_wide,
                                   )
 ```
 
-### Validation methods
+## Validation methods
 
 ```{r}
 #wide data for table
