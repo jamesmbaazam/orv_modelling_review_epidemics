@@ -892,9 +892,6 @@ knitr::kable(stochastic_vs_deterministic,
         kableExtra::kable_styling(latex_options = c('striped', 'HOLD_position'))
 ```
 
-
-<!-- ## Modelling methods -->
-
 ## Outcomes measured
 
 <!-- We tallied the overall top five outcomes most used between the 
