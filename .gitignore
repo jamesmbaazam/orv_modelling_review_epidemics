@@ -21,9 +21,6 @@
 *.ps
 *.eps
 
-## Generated if empty string is given at "Please type another file name for output:"
-.pdf
-
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
 *.bcf
@@ -84,36 +81,6 @@ latex.out/
 ## R Environment Variables
 .Renviron
 
-## Specific files
-./analyses/scripts/*.tex 
-./epidemics_manuscript/*.pdf
-
 *.bak
 
-*.jpeg
-
-*.png
-
-*.docx
-
-*.md
-
-*.Rproj
-
-analyses/scripts/full_data_extraction_citation_table.tex
-
-analyses/scripts/orv_sys_rev_data_analysis.tex
-
-analyses/scripts/orv_sys_rev_data_analysis_by_collab_type.tex
-
-*.xlsx
-
-analyses/data/compact_data_with_citation_keys_cleaned.rds
-
 .DS_Store
-
-*.rds
-
-analyses/figs/
-
-*.tiff
