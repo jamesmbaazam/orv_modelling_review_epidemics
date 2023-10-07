@@ -1,0 +1,895 @@
+% Template for PLoS
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL ../submission1/outbreak_response_models_review.tex   Sat Sep  2 17:12:31 2023
+%DIF ADD outbreak_response_models_review_v2.tex               Sat Sep  2 17:12:31 2023
+% Version 3.5 March 2018
+%
+% % % % % % % % % % % % % % % % % % % % % %
+%
+% -- IMPORTANT NOTE
+%
+% This template contains comments intended 
+% to minimize problems and delays during our production 
+% process. Please follow the template instructions
+% whenever possible.
+%
+% % % % % % % % % % % % % % % % % % % % % % % 
+%
+% Once your paper is accepted for publication, 
+% PLEASE REMOVE ALL TRACKED CHANGES in this file 
+% and leave only the final text of your manuscript. 
+% PLOS recommends the use of latexdiff to track changes during review, as this will help to maintain a clean tex file.
+% Visit https://www.ctan.org/pkg/latexdiff?lang=en for info or contact us at latex@plos.org.
+%
+%
+% There are no restrictions on package use within the LaTeX files except that 
+% no packages listed in the template may be deleted.
+%
+% Please do not include colors or graphics in the text.
+%
+% The manuscript LaTeX source should be contained within a single file (do not use \input, \externaldocument, or similar commands).
+%
+% % % % % % % % % % % % % % % % % % % % % % %
+%
+% -- FIGURES AND TABLES
+%
+% Please include tables/figure captions directly after the paragraph where they are first \cited in the text.
+%
+% DO NOT INCLUDE GRAPHICS IN YOUR MANUSCRIPT
+% - Figures should be uploaded separately from your manuscript file. 
+% - Figures generated using LaTeX should be extracted and removed from the PDF before submission. 
+% - Figures containing multiple panels/subfigures must be combined into one image file before submission.
+% For figure citations, please use "Fig" instead of "Figure".
+% See http://journals.plos.org/plosone/s/figures for PLOS figure guidelines.
+%
+% Tables should be cell-based and may not contain:
+% - spacing/line breaks within cells to alter layout or alignment
+% - do not nest tabular environments (no tabular environments within tabular environments)
+% - no graphics or colored text (cell background color/shading OK)
+% See http://journals.plos.org/plosone/s/tables for table guidelines.
+%
+% For tables that exceed the width of the text column, use the adjustwidth environment as illustrated in the example table in text below.
+%
+% % % % % % % % % % % % % % % % % % % % % % % %
+%
+% -- EQUATIONS, MATH SYMBOLS, SUBSCRIPTS, AND SUPERSCRIPTS
+%
+% IMPORTANT
+% Below are a few tips to help format your equations and other special characters according to our specifications. For more tips to help reduce the possibility of formatting errors during conversion, please see our LaTeX guidelines at http://journals.plos.org/plosone/s/latex
+%
+% For inline equations, please be sure to include all portions of an equation in the math environment.  For example, x$^2$ is incorrect; this should be formatted as $x^2$ (or $\mathrm{x}^2$ if the romanized font is desired).
+%
+% Do not include text that is not math in the math environment. For example, CO2 should be written as CO\textsubscript{2} instead of CO$_2$.
+%
+% Please add line breaks to long display equations when possible in order to fit size of the column. 
+%
+% For inline equations, please do not include punctuation (commas, etc) within the math environment unless this is part of the equation.
+%
+% When adding superscript or subscripts outside of brackets/braces, please group using {}.  For example, change "[U(D,E,\gamma)]^2" to "{[U(D,E,\gamma)]}^2". 
+%
+% Do not use \cal for caligraphic font.  Instead, use \mathcal{}
+%
+% % % % % % % % % % % % % % % % % % % % % % % % 
+%
+% Please contact latex@plos.org with any questions.
+%
+% % % % % % % % % % % % % % % % % % % % % % % %
+
+\documentclass[10pt,letterpaper]{article}
+\usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
+
+% amsmath and amssymb packages, useful for mathematical formulas and symbols
+\usepackage{amsmath,amssymb}
+
+% Use adjustwidth environment to exceed column width (see example table in text)
+\usepackage{changepage}
+
+% Use Unicode characters when possible
+\usepackage[utf8x]{inputenc}
+
+% textcomp package and marvosym package for additional characters
+\usepackage{textcomp,marvosym}
+
+% \cite package, to clean up citations in the main text. Do not remove.
+\usepackage{cite}
+
+% Use nameref to \cite supporting information files (see Supporting Information section for more info)
+\usepackage{nameref,hyperref}
+
+% line numbers
+\usepackage[right]{lineno}
+
+% ligatures disabled
+\usepackage{microtype}
+\DisableLigatures[f]{encoding = *, family = * }
+
+% color can be used to apply background shading to table cells only
+\usepackage[table]{xcolor}
+
+% array package and thick rules for tables
+\usepackage{array}
+
+% create "+" rule type for thick vertical lines
+\newcolumntype{+}{!{\vrule width 2pt}}
+
+% create \thickcline for thick horizontal lines of variable length
+\newlength\savedwidth
+\newcommand\thickcline[1]{%
+  \noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+  \cline{#1}%
+  \noalign{\vskip\arrayrulewidth}%
+  \noalign{\global\arrayrulewidth\savedwidth}%
+}
+
+% \thickhline command for thick horizontal lines that span the table
+\newcommand\thickhline{\noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+\hline
+\noalign{\global\arrayrulewidth\savedwidth}}
+
+
+% Remove comment for double spacing
+%\usepackage{setspace} 
+%\doublespacing
+
+% Text layout
+\raggedright
+\setlength{\parindent}{0.5cm}
+\textwidth 5.25in 
+\textheight 8.75in
+
+% Bold the 'Figure #' in the caption and separate it from the title/caption with a period
+% Captions will be left justified
+\usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
+\renewcommand{\figurename}{Fig}
+
+
+% Remove brackets from numbering in List of References
+\makeatletter
+\renewcommand{\@biblabel}[1]{\quad#1.}
+\makeatother
+
+
+
+% Header and Footer with logo
+\usepackage{lastpage,fancyhdr,graphicx}
+\usepackage{epstopdf}
+%\pagestyle{myheadings}
+\pagestyle{fancy}
+\fancyhf{}
+%\setlength{\headheight}{27.023pt}
+%\lhead{\includegraphics[width=2.0in]{PLOS-submission.eps}}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
+\fancyheadoffset[L]{2.25in}
+\fancyfootoffset[L]{2.25in}
+\lfoot{\today}
+
+%% Include all macros below
+
+\newcommand{\lorem}{{\bf LOREM}}
+\newcommand{\ipsum}{{\bf IPSUM}}
+
+%% END MACROS SECTION
+
+
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFaddtex}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdeltex}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF HYPERREF PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{\texorpdfstring{\DIFaddtex{#1}}{#1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{\texorpdfstring{\DIFdeltex{#1}}{}} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF COLORLISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+\begin{document}
+\vspace*{0.2in}
+
+% Title must be 250 characters or less.
+\begin{flushleft}
+{\Large
+\textbf\DIFdelbegin %DIFDELCMD < \newline{Models and modelling practices for assessing the impact of outbreak response interventions to human vaccine-preventable diseases (1970-2019): A systematic review}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \newline{Modelling outbreak response impact in human vaccine-preventable diseases: A systematic review of differences in practices between collaboration types before COVID19}
+\DIFaddend }
+\newline
+\\
+James M. Azam\textsuperscript{\DIFdelbegin \DIFdel{1*}\DIFdelend \DIFaddbegin \DIFadd{1, 2*}\DIFaddend },
+Xiaoxi Pang\textsuperscript{\DIFdelbegin \DIFdel{2}\DIFdelend \DIFaddbegin \DIFadd{3}\DIFaddend },
+Elisha B. Are\textsuperscript{\DIFdelbegin \DIFdel{1}\DIFdelend \DIFaddbegin \DIFadd{2}\DIFaddend , \DIFdelbegin \DIFdel{3}\DIFdelend \DIFaddbegin \DIFadd{4}\DIFaddend },
+Juliet R.C. Pulliam\textsuperscript{\DIFdelbegin \DIFdel{1}\DIFdelend \DIFaddbegin \DIFadd{2}\DIFaddend },
+Matthew J. Ferrari\textsuperscript{\DIFdelbegin \DIFdel{4}\DIFdelend \DIFaddbegin \DIFadd{5}\DIFaddend }
+\\
+\bigskip
+\textbf{1} \DIFaddbegin \DIFadd{Department of Infectious Disease Epidemiology, London School of Hygiene and Tropical Medicine, London, United Kingdom
+}\\
+\textbf{\DIFadd{2}} \DIFaddend DSI-NRF Centre of Excellence in Epidemiological Modelling and Analysis (SACEMA), Stellenbosch University, Stellenbosch 7600, South Africa
+\\
+\textbf{\DIFdelbegin \DIFdel{2}\DIFdelend \DIFaddbegin \DIFadd{3}\DIFaddend } Department of Mathematics, The University of Manchester, Manchester, \DIFdelbegin \DIFdel{UK
+}\DIFdelend \DIFaddbegin \DIFadd{United Kingdom
+}\DIFaddend \\
+\textbf{\DIFdelbegin \DIFdel{3}\DIFdelend \DIFaddbegin \DIFadd{4}\DIFaddend } Department of Mathematics, Simon Fraser University, Burnaby, BC, Canada
+\\
+\textbf{\DIFdelbegin \DIFdel{4}\DIFdelend \DIFaddbegin \DIFadd{5}\DIFaddend } Center for Infectious Disease Dynamics, Department of Biology, The Pennsylvania
+State University, University Park, Pennsylvania, USA
+\\
+\bigskip
+
+* \DIFdelbegin \DIFdel{jamesazam}\DIFdelend \DIFaddbegin \DIFadd{james.azam}\DIFaddend @\DIFdelbegin \DIFdel{sun}\DIFdelend \DIFaddbegin \DIFadd{lshtm}\DIFaddend .ac.\DIFdelbegin \DIFdel{za
+}\DIFdelend \DIFaddbegin \DIFadd{uk
+}\DIFaddend 
+
+\end{flushleft}
+\section*{Abstract}
+\subsection*{Background}
+\DIFdelbegin \DIFdel{Mathematical modelling can aid outbreak response decision-making. However, this would require collaboration among model developers, decision-makers, and local experts to incorporate appropriate realism}\DIFdelend \DIFaddbegin \DIFadd{Outbreak response modelling often involves collaboration among academics, and experts from governmental and non-governmental organisations}\DIFaddend . We conducted a systematic review of modelling studies on human vaccine-preventable disease (VPD) outbreaks to identify patterns in modelling practices \DIFdelbegin \DIFdel{among collaborations}\DIFdelend \DIFaddbegin \DIFadd{between two collaboration types}\DIFaddend . We complemented this with a mini \DIFdelbegin \DIFdel{review of eligible studies from the }\DIFdelend \DIFaddbegin \DIFadd{comparison of }\DIFaddend foot-and-mouth disease (FMD)\DIFdelbegin \DIFdel{literature}\DIFdelend \DIFaddbegin \DIFadd{, a veterinary disease that is controllable by vaccination}\DIFaddend .   
+\subsection*{Methods}
+\DIFdelbegin \DIFdel{Three databases were searched for studies published during 1970-2019 that applied models to assess }\DIFdelend \DIFaddbegin \DIFadd{We searched three databases for modelling studies that assessed }\DIFaddend the impact of an outbreak response. \DIFdelbegin \DIFdel{Per included study, we }\DIFdelend \DIFaddbegin \DIFadd{We }\DIFaddend extracted data on author affiliation type (academic institution, governmental, and non-governmental organizations), \DIFaddbegin \DIFadd{location studied, and }\DIFaddend whether at least one author was affiliated to the \DIFdelbegin \DIFdel{country studied , interventions }\DIFdelend \DIFaddbegin \DIFadd{studied location. We also extracted the outcomes and interventions studied}\DIFaddend , and model characteristics. \DIFdelbegin \DIFdel{Furthermore, the }\DIFdelend \DIFaddbegin \DIFadd{Included }\DIFaddend studies were grouped into two collaboration types: purely academic (papers with only academic affiliations), and mixed (all other combinations) to help investigate differences in modelling patterns between collaboration types in the human disease literature \DIFdelbegin \DIFdel{. Additionally, we compared modelling practices between the human VPD and FMD literature}\DIFdelend \DIFaddbegin \DIFadd{and overall differences with FMD collaboration practices}\DIFaddend . 
+\subsection*{Results}
+Human VPDs formed \DIFdelbegin \DIFdel{228 of 253 }\DIFdelend \DIFaddbegin \DIFadd{227 of 252 }\DIFaddend included studies. Purely academic collaborations dominated the human disease studies (56\%). Notably, mixed collaborations increased in the last seven years (2013 - 2019). Most studies had an author \DIFaddbegin \DIFadd{affiliated to an institution }\DIFaddend in the country studied (75.2\%) but this was more likely among the mixed collaborations. Contrasted to the human VPDs, mixed collaborations dominated the FMD literature (56\%). Furthermore, FMD studies more often had an author \DIFdelbegin \DIFdel{affiliated }\DIFdelend \DIFaddbegin \DIFadd{with an affiliation }\DIFaddend to the country studied (92\%) and used complex model design, including stochasticity, and model parametrization and validation. 
+\subsection*{Conclusion}
+The increase in mixed collaboration studies over the past seven years could suggest an increase in the uptake of modelling for outbreak response decision-making. We encourage more mixed collaborations between academic and non-academic institutions and the involvement of locally affiliated authors to help ensure that the studies suit local contexts.
+
+\subsection*{Keywords}
+Infectious disease dynamics; outbreak response modelling
+
+\section*{Highlights}
+\begin{enumerate}
+	\item We explored \DIFdelbegin \DIFdel{the nature of collaborative modelling }\DIFdelend \DIFaddbegin \DIFadd{differences in collaborative modelling practices }\DIFaddend in the human-vaccine preventable disease outbreak response literature.
+	\item \DIFdelbegin \DIFdel{Author collaborations }\DIFdelend \DIFaddbegin \DIFadd{Collaborations }\DIFaddend were grouped into purely academic and mixed\DIFdelbegin \DIFdel{types}\DIFdelend .
+	\item \DIFaddbegin \DIFadd{The collaboration types differed in terms of their model choices and practices.
+	}\item \DIFaddend Purely academic collaborations dominated the human vaccine-preventable diseases literature.
+	\item Mixed collaborations were more likely to involve local experts and use complex methods.
+\DIFdelbegin %DIFDELCMD < \item %%%
+\item%DIFAUXCMD
+\DIFdel{Mixed collaborations have more potential to lead to decision-making and are recommended.
+}\DIFdelend \end{enumerate}
+
+%DIF < \subsection*{Registration}
+%DIF < A protocol following the PRISMA guidelines for systematic review protocols and outlining the procedures for this systematic review was registered on PROSPERO with registration number CRD42020160803 and published through a peer-reviewed process. 
+\linenumbers
+
+\section*{Introduction}
+Successful outbreak response to infectious diseases is often the result of a highly collaborative process~\cite{Sigfrid2020}. Decision-making during outbreak response usually requires collaborations between academic and field experts, including governmental and Non-Governmental Organizations (NGOs)~\cite{Kretzschmar2020,Kerkhove2012,Okiror2021,Whitty2014,Sigfrid2020}. These collaborations ensure that important perspectives from both research and operations/implementation are accounted for in the decision-making process. 
+
+Outbreak response decision-making often requires adaptations to the affected location ~\cite{Whitty2014,Heesterbeek2015,Sigfrid2020}. The interventions and decisions are usually driven by data/evidence, information, and experiences from the past or in real-time, either locally or from similar phenomena elsewhere ~\cite{Abramowitz2015,Kerkhove2012}. Furthermore, involving local experts in the design of interventions has been found to boost the success of outbreak response efforts ~\cite{Sigfrid2020}. Consequently, outbreak response \DIFdelbegin \DIFdel{teams }\DIFdelend should ideally involve at least one local expert to provide more context~\cite{Sigfrid2020}.  
+
+Mathematical modelling can support outbreak response decision-making~\cite{Lofgren2015}. Modelling is a proven tool for revealing insights about the extent of disease spread, and impact of interventions, \DIFdelbegin \DIFdel{while drawing on lessons learnt to provide }\DIFdelend \DIFaddbegin \DIFadd{and providing }\DIFaddend recommendations for decision-making during outbreaks~\cite{Kretzschmar2020,Whitty2014,Lofgren2015}. Insights from mathematical modelling, though often useful, only form part of the larger context (socio-economic, political, and so forth) to be considered during an outbreak, making it difficult to determine the extent to which it contributes to outbreak response decision-making ~\cite{Kretzschmar2020,Kerkhove2012}. One way to help ensure that modelling contributes to decision-making \DIFdelbegin \DIFdel{could be through }\DIFdelend \DIFaddbegin \DIFadd{is }\DIFaddend the conduct of interdisciplinary research  \DIFaddbegin \DIFadd{--- that is, research conducted by authors with diverse scientific backgrounds --- }\DIFaddend between model developers and decision-makers.
+
+The link between interdisciplinarity in scientific research \DIFdelbegin \DIFdel{--- that is, research conducted by authors with diverse scientific backgrounds --- }\DIFdelend and research impact, for example, number of citations has been well-researched~\cite{Abramo2017,Wagner2011}. However, few studies have investigated the impact of interdisciplinary collaborations on the conduct of scientific research. One such study investigated the impact of interdisciplinarity on the scientific validity of the methods used in a selection of papers that applied machine learning on topics in biology or medicine~\cite{Littmann2020}. The study found that the methods used in the reviewed studies differed according to the nature of the scientific backgrounds of the authors who conducted the research. 
+\DIFdelbegin \DIFdel{Our preliminary searches }\DIFdelend \DIFaddbegin 
+
+\DIFadd{Our preliminary search }\DIFaddend of the literature did not reveal any \DIFdelbegin \DIFdel{of such review studies }\DIFdelend \DIFaddbegin \DIFadd{systematic reviews }\DIFaddend investigating differences in research practices among collaborations in the outbreak response modelling literature. We, therefore, conducted \DIFdelbegin \DIFdel{a }\DIFdelend \DIFaddbegin \DIFadd{this }\DIFaddend systematic review of outbreak response modelling studies of human vaccine-preventable diseases with the \DIFdelbegin \DIFdel{goal }\DIFdelend \DIFaddbegin \DIFadd{aim }\DIFaddend to explore the time and geographic \DIFdelbegin \DIFdel{(countries) patterns of collaboration types}\DIFdelend \DIFaddbegin \DIFadd{patterns in the collaboration landscape}\DIFaddend , and to \DIFdelbegin \DIFdel{ascertain differences in practices between the collaboration types in terms of }\DIFdelend \DIFaddbegin \DIFadd{investigate differences in model choices and modelling practices. We categorised the collaboration landscape into two types: (1) purely academic collaborations: papers with all authors affiliated to academic institutions, and (2) mixed collaborations, that is, papers with authors affiliated to a mixture of academic, government and NGO affiliations. Using this classification, we investigated differences in }\DIFaddend the choice of model \DIFdelbegin \DIFdel{characteristics, modelling methods, and other topics}\DIFdelend \DIFaddbegin \DIFadd{structure, dynamics, individual and spatial heterogeneity, and modelling methods such as model parametrization, validation, sensitivity analysis, the use of data and provision of data and code for reproducibility}\DIFaddend . 
+
+We sought to answer the following questions with respect to the \DIFdelbegin \DIFdel{collaboration landscape }\DIFdelend \DIFaddbegin \DIFadd{two collaboration types }\DIFaddend in the human disease outbreak response modelling literature: (1) How are the studies distributed in time \DIFaddbegin \DIFadd{(years) }\DIFaddend and geographic locations, \DIFdelbegin \DIFdel{and how often is at least one of the collaborators geographically connected to the location being studied? }\DIFdelend (2) \DIFdelbegin \DIFdel{What types of interventions are generally modelled and is }\DIFdelend \DIFaddbegin \DIFadd{Is }\DIFaddend there a difference \DIFdelbegin \DIFdel{between the conclusions drawn about the impact of interventions, especially, vaccination in comparison with other non-vaccination interventions during outbreaks}\DIFdelend \DIFaddbegin \DIFadd{in the practice of including local experts in modelling exercises}\DIFaddend ? (3) Do the \DIFaddbegin \DIFadd{choice of }\DIFaddend model characteristics (structure and dynamics) and modelling \DIFdelbegin \DIFdel{practices (parametrization, validation, and so forth}\DIFdelend \DIFaddbegin \DIFadd{methods/approaches (model parametrization and validation, outcomes of interest, sensitivity analyses, use of data, and code availability}\DIFaddend ) differ between the collaboration types?    
+
+\DIFdelbegin \DIFdel{We acknowledge that there is a parallel body of relevant modelling work in the livestock literature }\DIFdelend \DIFaddbegin \DIFadd{Even though this review is about human VPDs, we acknowledge and include the modelling work done in the veterinary literature and in particular, for foot-and-mouth disease (FMD)}\DIFaddend . Specifically, the outbreak response \DIFdelbegin \DIFdel{effort that resulted }\DIFdelend \DIFaddbegin \DIFadd{modelling effort resulting }\DIFaddend from the 2001 \DIFdelbegin \DIFdel{foot-and-mouth disease }\DIFdelend (FMD) \DIFdelbegin \DIFdel{virus }\DIFdelend outbreak in the United Kingdom has been a foundational example of the application of mathematical modelling \DIFdelbegin \DIFdel{for }\DIFdelend \DIFaddbegin \DIFadd{to }\DIFaddend decision-making. Subsequent work based on this outbreak has been instrumental in the development of FMD outbreak intervention strategies around the world. \DIFdelbegin \DIFdel{Hence, even though the primary scope of this review is the application of models to inform outbreak response for human infectious diseases, we include the }\DIFdelend \DIFaddbegin \DIFadd{We, therefore, include some }\DIFaddend relevant FMD references for comparison. \DIFdelbegin \DIFdel{In the end, we, therefore, }\DIFdelend \DIFaddbegin \DIFadd{Essentially, in this review, we }\DIFaddend study the differences in terms of \DIFdelbegin \DIFdel{collaborations }\DIFdelend \DIFaddbegin \DIFadd{collaboration types }\DIFaddend in the human disease modelling literature, and compare our observations to \DIFdelbegin \DIFdel{that of }\DIFdelend \DIFaddbegin \DIFadd{some parallel results from }\DIFaddend the FMD modelling literature\DIFdelbegin \DIFdel{to further ascertain }\DIFdelend \DIFaddbegin \DIFadd{. This is useful for investigating }\DIFaddend any differences in approaches and practices between the human and livestock literature \DIFaddbegin \DIFadd{and opens up opportunities for future work}\DIFaddend . 
+
+%DIF < The following were the objectives of the systematic review:
+%DIF < \begin{enumerate}
+%DIF < 	\item To ascertain differences in model characteristics and modelling methods between collaboration types. 
+%DIF < 	\item To determine the distribution of outbreak response modelling studies over time (years) overall and in terms of collaboration types, 
+%DIF < 	\item To determine how often at least one of the authors on a paper was geographically connected to the country/location studied and whether there were differences between collaboration types,
+%DIF < 	\item To investigate types of interventions modelled and differences between the conclusions drawn about the impact of interventions.
+%DIF < \end{enumerate}
+   \DIFaddbegin \DIFadd{The following were the objectives of the systematic review:
+}\begin{enumerate}
+	\item \DIFadd{To characterise the nature of collaboration types through geographic space and time,
+	}\item \DIFadd{To investigate if there were differences between the collaboration types regarding the inclusion of local experts,
+	}\item \DIFadd{To report differences between the collaboration types in terms of the choice of model structure, dynamics and heterogeneity, and
+	}\item \DIFadd{To investigate and report differences in modelling methods/approaches (model parametrization, validation, sensitivity analyses, code availability, and so forth) between collaboration types.
+	}\item \DIFadd{To report on miscellaneous interesting aspects captured by each study including the disease, interventions, and outcomes studied.
+}\end{enumerate}
+\DIFaddend 
+
+\section*{Materials and methods}
+We followed the 2020 Preferred Reporting Items for Systematic Reviews and Meta-analyses statement (PRISMA 2020)  to conduct this systematic review \cite{Page2021}.
+
+\subsection*{Eligibility criteria}
+The following definitions were used in the determining study eligibility:
+
+\begin{itemize}
+	\item ``Outbreak'': a new and sudden rise in the number of cases of a disease in a population, which when left uncontrolled, could lead to large scale geographic spread, AND 
+	\item ``Outbreak response'': an intervention directly triggered by the outbreak of an infectious disease, AND
+	\item ``Mechanistic models'': mathematical models that use an equation or system of equations to capture the biological mechanisms driving the transmission dynamics of the infectious disease at the level of an individual or population \cite{Lessler2016a,Reiner2013}, AND
+	\item ``Outbreak intervention assessment'': a mechanistic model-based evaluation of the impact of an outbreak response intervention.
+\end{itemize}
+
+We included studies that used a mechanistic model to investigate the impact of interventions triggered by the outbreak of any of the human vaccine-preventable diseases \DIFdelbegin \DIFdel{we considered }\DIFdelend \DIFaddbegin \DIFadd{listed by the World Health Organization as of 2019 }\DIFaddend (Table 1 in \nameref{S1_File})\DIFdelbegin \DIFdel{, Ebola, or }\DIFdelend \DIFaddbegin \DIFadd{. Aside from the WHO list, we also included Ebola because at the time of conducting this review, a vaccine had been approved for outbreak response purposes. We also included }\DIFaddend foot-and-mouth disease \DIFdelbegin \DIFdel{. }\DIFdelend \DIFaddbegin \DIFadd{for comparison as a candidate veterinary disease that is manageable by vaccination and has been well modelled in the past. 
+}
+
+\DIFaddend Studies were considered unique even if they had a duplicated author list or a slight variation in the author list, probably representing the same modelling group, so far as the content of the paper was different. 
+
+
+We excluded studies that satisfied at least one of the following criteria: 
+
+\begin{itemize}
+	\item Study used a model that is not mechanistic,
+	\item Study is not about an outbreak as defined \DIFaddbegin \DIFadd{above}\DIFaddend ,
+	\item Disease studied is not a human vaccine-preventable disease (Table 1 in \nameref{S1_File}), Ebola or foot-and-mouth disease,
+	\item Study's objective is not to evaluate the impact of an intervention mounted in response to an outbreak, or
+	\item Study is not published in English.
+\end{itemize}
+
+\subsection*{Information sources}
+On January 15, 2020, we searched Scopus, PubMed, and Web of Science for eligible records. We searched each database from its earliest date of coverage through January 15, 2020. 
+
+\subsection*{Search strategy}
+We constructed and validated search strings specific to each database. To validate the search strings, we first ran them in the specific database's search engine and obtained a database of records. We then searched the database for well-known papers that fit the criteria for included studies. We did this for each disease on our list. 
+
+The search strings were constructed by all five reviewers (JMA, XP, EBA, MJF, and JRCP) and in consultation with the Faculty of Science Librarian of Stellenbosch University to reflect three main topics and their synonyms, that is, ``outbreak'', ``intervention'', and ``mechanistic model''. 
+
+The following are the search strings per database. 
+
+\textbf{Scopus (Title, abstract, keywords search)}:
+
+( TITLE-ABS-KEY ( epidemic  OR  outbreak  OR  emergency  OR  reactive  OR  crisis ) )  AND  ( TITLE-ABS-KEY ( respon*  OR  manage*  OR  control  OR  interven*  OR  strateg* ) )  AND  ( TITLE-ABS-KEY ( stochastic  OR  transmission  OR  computational  OR  mathematical  OR  mechanistic  OR  statistical  OR  simulation  OR  "In silico"  OR  dynamic* ) )  AND  ( TITLE-ABS-KEY ( model* ) )  AND  ( ( TITLE-ABS-KEY ( cholera  OR  dengue  OR  diphtheria  OR  ebola  OR  "Foot-and-mouth"  OR  "foot and mouth"  OR  fmd  OR  "Hepatitis A"  OR  "Hepatitis B"  OR  "Hepatitis E"  OR  "Haemophilus influenzae type b"  OR  hib  OR  "Human papillomavirus"  OR  hpv  OR  influenza ) )  OR  ( TITLE-ABS-KEY ( "Japanese encephalitis"  OR  malaria  OR  measles  OR  "Meningococcal meningitis"  OR  mumps  OR  pertussis  OR  "Whooping cough"  OR  "Pneumococcal disease"  OR  poliomyelitis  OR  polio  OR  rabies  OR  rotavirus  OR  rubella ) )  OR  ( TITLE-ABS-KEY ( tetanus  OR  "Tick-borne encephalitis"  OR  tuberculosis  OR  typhoid  OR  varicella  OR  chickenpox  OR  "Yellow Fever"  OR  "vaccine-preventable" ) ) )
+
+\textbf{PubMed (Title and abstract search)}:
+
+Search ((((((Epidemic OR Outbreak OR Emergency OR Reactive OR Crisis))) AND ((Response OR Management OR Control OR Intervention OR Strategies))) AND ((Stochastic OR Transmission OR Computational OR Mathematical OR Mechanistic OR Statistical OR Simulation OR "In silico" OR Dynamic*))) AND model*) AND ((Cholera OR Dengue OR Diphtheria OR Ebola OR "Foot-and-mouth" OR "foot and mouth" OR FMD OR "Hepatitis A" OR "Hepatitis B" OR "Hepatitis E" OR "Haemophilus influenzae type b" OR Hib OR "Human papillomavirus" OR HPV OR Influenza OR "Japanese encephalitis" OR Malaria OR Measles OR "Meningococcal meningitis" OR Mumps OR Pertussis OR "Whooping cough" OR "Pneumococcal disease" OR Poliomyelitis OR Polio OR Rabies OR Rotavirus OR Rubella OR Tetanus OR "Tick-borne encephalitis" OR Tuberculosis OR Typhoid OR Varicella OR Chickenpox OR "Yellow Fever" OR "vaccine-preventable"))
+
+\textbf{Web of Science (Topic search)}:
+
+TOPIC: (Epidemic OR Outbreak OR Emergency OR Reactive OR Crisis) AND TOPIC: (Respon* OR  Manage*  OR  Control  OR  Interven*  OR  Strateg*)) AND TOPIC: (Stochastic OR Transmission OR Computational OR Mathematical OR Mechanistic OR Statistical OR Simulation OR In silico OR Dynamic*) AND TOPIC: (model*) AND TOPIC: (Cholera OR Dengue OR Diphtheria OR Ebola OR "Foot-and-mouth" OR "foot and mouth" OR FMD OR "Hepatitis A" OR "Hepatitis B" OR "Hepatitis E" OR "Haemophilus influenzae type b" OR Hib OR "Human papillomavirus" OR HPV OR Influenza OR "Japanese encephalitis" OR Malaria OR Measles OR "Meningococcal meningitis" OR Mumps OR Pertussis OR "Whooping cough" OR "Pneumococcal disease" OR Poliomyelitis OR Polio OR Rabies OR Rotavirus OR Rubella OR Tetanus OR "Tick-borne encephalitis" OR Tuberculosis OR Typhoid OR Varicella OR Chickenpox OR "Yellow Fever" OR "vaccine-preventable")
+
+
+\subsection*{Study selection}
+We used Endnote version X7.8 and Rayyan web application (\url{https://www.rayyan.ai/}) to combine the results from the three databases and to identify and remove duplicate records. The unique records were exported into Rayyan web application, where they were screened in two stages by three reviewers (JMA, XP, and EBA). 
+
+Stage one screening involved excluding studies based on their title and abstract, using the questionnaire that follows. The reviewers only used the information provided in the title and abstract of each study to decide whether it was eligible for inclusion (``Include''), not eligible (``Exclude''), or likely to be included (``Maybe''). The ``Include'' and ``Maybe'' category of studies further went through stage two screening described ahead, which was more stringent. 
+
+\subsubsection*{Questionnaire for title and abstract screening (Stage 1)}
+\begin{enumerate}
+	\item	Is this article written in English?
+	\begin{itemize}
+		\item 	No: Exclude. Reason: Not English
+	\end{itemize}
+	\item 	Does the title of this article fit the scope of this review?
+	\begin{itemize}
+		\item 	No: Exclude. Reason: Title out of scope
+	\end{itemize}
+	\item	Does the topic of the abstract fit the scope of this review?
+	\begin{itemize}
+		\item 	No: Exclude. Reason: Topic out of scope
+	\end{itemize}
+	\item Is this study entirely a review (literature review, systematic review, scoping review, not indicated)? 
+	\begin{itemize}
+		\item 	Yes: Exclude. Reason: Review
+	\end{itemize}
+	\item Is any part of this study about an outbreak that happened in the past, was ongoing at the time of the study, or a hypothetical one, including one that could happen in the future? We define an outbreak as a new and sudden rise in the number of cases of a disease in a population, which when left uncontrolled, could lead to large scale geographic spread.
+	\begin{itemize}
+		\item 	No: Exclude. Reason: Not an outbreak
+	\end{itemize}
+	\item Is any part of this study about a human infectious disease (Table 1 in \nameref{S1_File}), Ebola or foot-and-mouth disease in livestock?
+	\begin{itemize}
+		\item 	No: Exclude. Reason: Disease not in scope
+	\end{itemize}
+	\item Does this study assess the impact – epidemiological or operational - of a real or hypothetical intervention that was mounted or could potentially be mounted in response to an outbreak of the disease in question? Note that we define an assessment as an evaluation of either the absolute or relative impact of an intervention on one of several outcomes including number/proportion of population reached with the intervention (coverage), and a change in size - number of people, duration, spatial - of the outbreak.
+	\begin{itemize}
+		\item 	No: Exclude. Reason: Not an outbreak intervention assessment
+		\item 	Maybe. Reason: Intervention details unclear
+	\end{itemize}
+	\item Does this study solely use static methods for evaluating the intervention? Static methods include surveys, regression methods, descriptive, and exploratory statistical methods.
+	\begin{itemize}
+		\item 	No: Exclude. Reason: Not a model
+	\end{itemize}
+	\item Does this study use any kind of equation, system of equations, or computer simulation to capture the disease’s transmission process or natural history over time?
+	\begin{itemize}
+		\item 	No: Exclude. Reason: Model not mechanistic
+		\item 	Maybe. Reason: Likely a model
+	\end{itemize}
+\end{enumerate}
+
+Stage one was first piloted with all three reviewers screening the same 50 studies using Rayyan in ``blind mode''. This was so that the reviewers could not see each other's screening decisions (inclusion/exclusion/maybe). After the pilot screening, the results were compared and any inclusion/exclusion conflicts were discussed and resolved. The pilot phase ensured that all the reviewers were using a consistent screening approach. The remaining studies were then screened in duplicate and all conflicting decisions were resolved at the end through discussions among the reviewers. 
+
+Stage 2 involved screening the included studies from stage 1, using their full text, in duplicate and with the following questionnaire.
+
+\subsubsection*{Questionnaire for full text screening (Stage 2)}
+\begin{enumerate}
+	\item Is this article written in English? (This was necessary because some articles could have English abstracts but non-English full text)
+	\begin{itemize}
+		\item 	If no, exclude. Reason: Not English	
+	\end{itemize}
+	\item Is this article a report, commentary or any kind of non-quantitative report?
+	\begin{itemize}
+		\item 	If yes, exclude. Reason: Article type out of scope
+	\end{itemize}
+	\item Is the full text readily available?
+	\begin{itemize}
+		\item 	If no, mark as Maybe. Reason: Full text not available	
+	\end{itemize}
+	\item Is this study entirely a review (literature review, systematic review, scoping review, not indicated)? 
+	\begin{itemize}
+		\item 	If yes, exclude. Reason: Review
+	\end{itemize}
+	\item Is the study or a part of it about an outbreak, real or hypothetical?
+	\begin{itemize}
+		\item 	If no, exclude. Reason: Not an outbreak
+	\end{itemize}
+	\item Is the disease a human vaccine-preventable disease (Table 1 in \nameref{S1_File}), Ebola, or foot-and-mouth disease? 
+	\begin{itemize}
+		\item 	If no, exclude. Reason: Not a listed disease
+	\end{itemize}
+	\item Does this study solely use static methods for evaluating the intervention? Static methods include surveys, regression methods, descriptive, exploratory statistical methods.
+	\begin{itemize}
+		\item 	If no, exclude. Reason: Static model or method
+	\end{itemize}
+	\item Does this study use any kind of equation, system of equations, or computer simulation to capture the disease’s transmission process in a dynamic way?
+	\begin{itemize}
+		\item 	If no, exclude. Reason: Model not mechanistic
+		\item 	If unclear, maybe. Reason: Likely a model
+	\end{itemize}
+	\item Is the model about within-host dynamics?
+	\begin{itemize}
+		\item 	If yes, exclude. Reason: Within-host model
+	\end{itemize}
+	\item Does this study attempt to assess the impact – epidemiological or operational - of a real or hypothetical intervention that was mounted or could potentially be mounted in response to an outbreak of the disease in question? We define an assessment as an evaluation of either the absolute or relative impact of an intervention on one of several outcomes including number/proportion of population reached with the intervention (coverage), and a change in size - number of people, duration, spatial - of the outbreak.
+	\begin{itemize}
+		\item 	If no, exclude. Reason: Not an outbreak intervention assessment
+		\item 	If unclear, maybe. Label: Intervention details unclear
+	\end{itemize}
+\end{enumerate}
+
+\subsection*{Data extraction}
+To extract the data from the studies, we used the data extraction questionnaire implemented with the KoboToolbox web application (Section 3 in \nameref{S1_File}). The questionnaire was first piloted with \DIFdelbegin \DIFdel{10 }\DIFdelend \DIFaddbegin \DIFadd{$10$ }\DIFaddend papers among the three reviewers, who worked in duplicate. All conflicts in terms of extracted data were resolved \DIFaddbegin \DIFadd{through discussion and mutual agreement}\DIFaddend . 
+
+Following the pilot phase, the full list of included studies was shared among three reviewers (JMA, XP, and EBA), who extracted the relevant data independently. The extracted data was cross-checked by one reviewer (JMA). When a discrepancy was found in the extracted data, the reviewer referred to the original paper and resolved the conflict.  
+
+\DIFdelbegin \DIFdel{We }\DIFdelend \DIFaddbegin \DIFadd{From each paper, we }\DIFaddend extracted data on the type of publication \DIFdelbegin \DIFdel{, }\DIFdelend \DIFaddbegin \DIFadd{(original research, preprint, and so forth), }\DIFaddend author affiliation type (academic/government/non-governmental), country/setting studied, whether at least one author affiliation was situated in the country studied, disease studied, \DIFdelbegin \DIFdel{the }\DIFdelend study objectives (retrospective/prospective impact assessment, timing of the modelling practice with respect to the outbreak (retrospective/prospective/real-time), interventions studied, and whether vaccination was the most impactful intervention when compared as a single intervention (yes/no/inconclusive). A full list of the extracted data items are provided (Section 2 in \nameref{S1_File}).  
+
+From \DIFdelbegin \DIFdel{the model in each paper}\DIFdelend \DIFaddbegin \DIFadd{each model described in the methods section}\DIFaddend , we extracted data on the representation of individuals (compartmental vs individual-based), whether spatial structure was represented (yes/no), model structure (deterministic vs stochastic), model \DIFdelbegin \DIFdel{parameterization}\DIFdelend \DIFaddbegin \DIFadd{parametrization}\DIFaddend , and validation. We also extracted a predefined list of outcomes (\DIFdelbegin \DIFdel{cases averted, }\DIFdelend final epidemic size, \DIFdelbegin \DIFdel{etc}\DIFdelend \DIFaddbegin \DIFadd{attack rate, cases averted, ad a host of others}\DIFaddend ) measured with the models. If \DIFdelbegin \DIFdel{an outcome was reported that was }\DIFdelend \DIFaddbegin \DIFadd{the outcome measured was }\DIFaddend not on the pre-defined list, we collected it separately as free text for further analysis. We \DIFdelbegin \DIFdel{also extracted }\DIFdelend \DIFaddbegin \DIFadd{collected }\DIFaddend data on whether the studies included sensitivity analysis or not. This was to understand how uncertainties in the model inputs were dealt with.  We collected data on whether the studies used \DIFdelbegin \DIFdel{real world }\DIFdelend \DIFaddbegin \DIFadd{observed }\DIFaddend data, that is, excluding simulated data, and whether the data was openly \DIFdelbegin \DIFdel{available for download. We also extracted information on }\DIFdelend \DIFaddbegin \DIFadd{accessible. Lastly, we noted }\DIFaddend whether the code used for the analysis \DIFdelbegin \DIFdel{and visualization were made }\DIFdelend \DIFaddbegin \DIFadd{was }\DIFaddend openly available. \DIFaddbegin \DIFadd{In this regard, we classified code that was only available upon request as not available because of the barrier to access that this approach often introduces.
+}\DIFaddend 
+
+
+\subsection*{Data analysis and synthesis}
+To understand how the papers were distributed in terms of author affiliations, we first tallied the unique combinations of author affiliation types. We then grouped the author affiliations into the following two collaboration types and performed all further analyses by stratifying the variable(s) of interest by them:
+
+\begin{enumerate}
+	\item \textit{Purely academic:} papers with only academic author affiliations (academics collaborating with other academics), 
+	\item \textit{Mixed:} papers with a mixture of academic, government and NGO affiliations. This collaboration type also included papers with only government or only NGO affiliations. 
+\end{enumerate}
+
+We first explored the trend in aggregated publications during 1970-2019 by counting the number of publications in each year irrespective of collaboration type. 
+
+To explore how the publications changed in time with respect to the collaboration types, we tallied the number of publications and relative proportion (mixed versus purely academic collaboration) of studies per year. We lumped together the publications from 1970 to 2005 due to the small numbers. 
+
+To study how the papers were distributed in terms of geographic locations, we split the studies into those that studied actual versus hypothetical locations and used the subset of studies about actual locations to rank the topmost studied locations (country and continent) by frequency. 
+
+We also investigated how connected the authors were to the locations studied. Here, we only considered studies on geographic scales up to actual countries and not larger. All studies about locations larger than a country were dropped from this part of the analysis. We tallied, in terms of collaboration types, the number of studies about actual locations (countries) with or without at least one author affiliation in the studied location. If a paper studied more than one location, we treated each location as a separate instance. This increased the denominators accordingly. 
+
+\DIFdelbegin \DIFdel{To summarize the conclusions drawn about the impact of vaccination as a single intervention, we grouped the }\DIFdelend \DIFaddbegin \DIFadd{We summarized the interventions studied by grouping the }\DIFaddend studies into three categories, that is, studies that modelled non-vaccination interventions, those that modelled vaccination in combination with other interventions, and those that modelled vaccination as a single intervention for comparison with other interventions. \DIFdelbegin \DIFdel{The question was only applicable to the last category of interventions, so we counted }\DIFdelend \DIFaddbegin \DIFadd{We also summarised the top two most studied intervention for each disease by counting }\DIFaddend the number of \DIFdelbegin \DIFdel{studies that found vaccination to be the most impactful or not. Where vaccination was not found to be the most impactful, we briefly summarised the reasons and modelling assumptions}\DIFdelend \DIFaddbegin \DIFadd{times each disease was studied per paper}\DIFaddend . 
+
+For the disease studied, model characteristics (structure, dynamics, and spatial heterogeneity), and modelling practices (parametrization, validation, sensitivity analysis, data \DIFdelbegin \DIFdel{and }\DIFdelend \DIFaddbegin \DIFadd{use and available, and }\DIFaddend code use and availability), we counted the number of studies per collaboration type and reported the results as percentages and fractions of the total. In counting the number of papers per disease studied and outcome measured, if a study had more than one outcome measured or disease, we treated each instance as unique and counted them separately. Hence, in such cases, the denominator of the reported fraction increased from the total studies we reported in our search results. 
+
+To summarise the model outcomes, we stratified by the collaboration type and tallied the outcomes used within each group. We reported the top six most used outcomes by both collaboration types and compared the results between the two.
+
+All analyses were perform in R \DIFdelbegin \DIFdel{4.0.5 ~}%DIFDELCMD < \cite{R2021}%%%
+\DIFdel{.  We have provided a database of all the screened papers and their associated extracted data in a csv file, which can be accessed at }%DIFDELCMD < \url{https://osf.io/dmvst/?view_only=b50a8d3ec21b4a07b7977d0f56e79fc3}%%%
+\DIFdel{.
+Additionally, all the analysis tables are provided as a supplement (}\DIFdelend \DIFaddbegin \DIFadd{version 4.3.0 ~}\cite{R2023}\DIFadd{.  The raw analysis of the results presented in the main text have been provided as a supplement (}\DIFaddend \nameref{S2_File}\DIFdelbegin \DIFdel{). 
+}\DIFdelend \DIFaddbegin \DIFadd{). We have also supplied as supplementary files a pdf of tables with the database of the included studies and extracted data (}\nameref{S4_Table}\DIFadd{). The R code and data for this analysis can be found in a public Github repository accessible at }\url{https://github.com/jamesmbaazam/orv_modelling_review_epidemics}\DIFadd{.
+}\DIFaddend 
+
+\section*{Results}
+\subsection*{Study selection}
+We retrieved a total of $12, 986$ bibliographic records from Scopus, PubMed, and Web of Science (Fig \DIFdelbegin \DIFdel{\ref{PRISMA_flowchart}}\DIFdelend \DIFaddbegin \DIFadd{\ref{fig:fig1prismaflowchart}}\DIFaddend ). Using Endnote and Rayyan, we identified and removed $7, 974$ duplicates, resulting in $5, 012$ unique records\DIFdelbegin \DIFdel{for title, abstract, and full text screening}\DIFdelend . We exported the unique records into Rayyan for \DIFdelbegin \DIFdel{the }\DIFdelend screening in two stages. 
+\DIFdelbegin \DIFdel{Stage 1 involved a title and abstract screening }\DIFdelend \DIFaddbegin 
+
+\DIFadd{Stage one involved screening titles and abstracts }\DIFaddend in duplicate by the three reviewers\DIFdelbegin \DIFdel{and resulted }\DIFdelend \DIFaddbegin \DIFadd{. After this stage, }\DIFaddend $4, 211$ \DIFdelbegin \DIFdel{excluded studies . The stage 2 screening, which involved screening }\DIFdelend \DIFaddbegin \DIFadd{studies were excluded. At stage two, we screened }\DIFaddend the full text \DIFdelbegin \DIFdel{, led to $548$ excluded studies}\DIFdelend \DIFaddbegin \DIFadd{of the remaining studies, and this led to $549$ exclusions}\DIFaddend . 
+
+After \DIFdelbegin \DIFdel{the full text screening, $253$ }\DIFdelend \DIFaddbegin \DIFadd{stage two, $252$ }\DIFaddend studies remained for the data extraction stage\DIFdelbegin \DIFdel{of which $228$ on }\DIFdelend \DIFaddbegin \DIFadd{. Of the $252$ studies, $227$ were about }\DIFaddend human vaccine-preventable diseases and $25$ studies \DIFdelbegin \DIFdel{were on FMD}\DIFdelend \DIFaddbegin \DIFadd{about foot-and-mouth disease (FMD)}\DIFaddend . The FMD studies were \DIFdelbegin \DIFdel{only used for comparisons}\DIFdelend \DIFaddbegin \DIFadd{not used in the main analysis but only for comparisons in the dedicated section for FMD}\DIFaddend .
+
+\DIFdelbegin %DIFDELCMD < \begin{figure}[!h]
+%DIFDELCMD < 	\includegraphics[scale=0.85]{figs/fig1_PRISMA_flowchart}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \DIFaddbeginFL \begin{figure}[h!]
+	\includegraphics[scale=0.65]{figs/fig1_PRISMA_flowchart}
+	\DIFaddendFL \caption{\bf The PRISMA flow chart. Numbers described here include studies for both the human vaccine-preventable diseases and foot-and-mouth disease.}
+	\DIFdelbeginFL %DIFDELCMD < \label{PRISMA_flowchart}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \label{fig:fig1prismaflowchart}
+\DIFaddendFL \end{figure}
+
+\subsection*{Publications over time}
+Overall, a few \DIFdelbegin \DIFdel{outbreak response modelling }\DIFdelend \DIFaddbegin \DIFadd{relevant }\DIFaddend papers were published between 1970-2005 \DIFdelbegin \DIFdel{$(3.9\%; 9/228)$}\DIFdelend \DIFaddbegin \DIFadd{$(4.0\%; 9/227)$}\DIFaddend , followed by a marked increase in publications until 2019 \DIFdelbegin \DIFdel{$(96.1\%; 220/228)$ }\DIFdelend \DIFaddbegin \DIFadd{$(96.0\%; 218/227)$ }\DIFaddend (Fig \ref{publications_per_year}). 
+
+\begin{figure}[!h]	
+ \DIFdelbeginFL %DIFDELCMD < \includegraphics[scale=0.65]{figs/fig2_publications_per_year.png}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[scale=0.70]{figs/fig2_publications_per_year.png}
+	\DIFaddendFL \caption{\bf Number of publications per year (1970-2019).}
+	\label{publications_per_year}
+\end{figure}
+
+We first categorised the papers according to the unique combinations of author affiliation types (Table \ref{studies_per_author_affiliations_type}). 
+
+Overall, papers with \DIFdelbegin \DIFdel{only }\DIFdelend \DIFaddbegin \DIFadd{all }\DIFaddend authors from academic institution affiliations were the most common (\DIFdelbegin \DIFdel{56.1\%; 128}\DIFdelend \DIFaddbegin \DIFadd{56.8\%; 129}\DIFaddend /\DIFdelbegin \DIFdel{228}\DIFdelend \DIFaddbegin \DIFadd{227}\DIFaddend ). Papers with author affiliations from academic and governmental \DIFdelbegin \DIFdel{organization affiliations }\DIFdelend \DIFaddbegin \DIFadd{organizations }\DIFaddend were the second most common (\DIFdelbegin \DIFdel{25.0\%; 57}\DIFdelend \DIFaddbegin \DIFadd{24.2\%; 55}\DIFaddend /\DIFdelbegin \DIFdel{228}\DIFdelend \DIFaddbegin \DIFadd{227}\DIFaddend ), and followed by those \DIFdelbegin \DIFdel{with }\DIFdelend \DIFaddbegin \DIFadd{from }\DIFaddend academic and NGO affiliations (7.5\%; 17/\DIFdelbegin \DIFdel{228}\DIFdelend \DIFaddbegin \DIFadd{227}\DIFaddend ). The least common were those \DIFdelbegin \DIFdel{with }\DIFdelend \DIFaddbegin \DIFadd{from }\DIFaddend governmental and NGO affiliations (0.9\%; 2/\DIFdelbegin \DIFdel{228}\DIFdelend \DIFaddbegin \DIFadd{227}\DIFaddend ).
+
+As explained earlier \DIFdelbegin \DIFdel{, we ultimately }\DIFdelend \DIFaddbegin \DIFadd{in the methods section, for the analyses moving forward, we }\DIFaddend grouped the author affiliation combinations into two collaboration types\DIFaddbegin \DIFadd{: purely academic and mixed}\DIFaddend . There were more purely academic collaborations (\DIFdelbegin \DIFdel{56.1\%; 128}\DIFdelend \DIFaddbegin \DIFadd{56.8\%; 129}\DIFaddend /\DIFdelbegin \DIFdel{228}\DIFdelend \DIFaddbegin \DIFadd{227}\DIFaddend ) than mixed collaborations (\DIFdelbegin \DIFdel{43.9\%; 100}\DIFdelend \DIFaddbegin \DIFadd{43.2\%; 98}\DIFaddend /\DIFdelbegin \DIFdel{228}\DIFdelend \DIFaddbegin \DIFadd{227}\DIFaddend ). 
+
+\begin{table}[!h]
+\centering
+\caption{\bf Number of studies per unique combination of author affiliations (human diseases). Here, we also show the \DIFdelbeginFL \DIFdelFL{grouping }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{categorization }\DIFaddendFL of \DIFaddbeginFL \DIFaddFL{the }\DIFaddendFL author affiliation combinations into purely academic and mixed collaborations. \DIFdelbeginFL \DIFdelFL{Purely academic collaborations refer to those }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Papers }\DIFaddendFL authored by \DIFdelbeginFL \DIFdelFL{only }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{purely academic collaborations have all }\DIFaddendFL authors \DIFdelbeginFL \DIFdelFL{with }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{being affiliated to }\DIFaddendFL academic \DIFdelbeginFL \DIFdelFL{institution affiliations }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{institutions }\DIFaddendFL whereas \DIFdelbeginFL \DIFdelFL{mixed collaborations include }\DIFdelendFL those authored by \DIFaddbeginFL \DIFaddFL{mixed collaborations have authors being affiliated to }\DIFaddendFL a \DIFdelbeginFL \DIFdelFL{mixture }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{combination }\DIFaddendFL of \DIFdelbeginFL \DIFdelFL{authors with }\DIFdelendFL academic \DIFdelbeginFL \DIFdelFL{institution affiliations}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{institutions}\DIFaddendFL , government institutions, and NGOs or only one of the last two.}
+\setlength\arrayrulewidth{1pt} 
+\begin{tabular}{|l l c|}
+\hline
+\textbf{Collaboration type} & \textbf{Author affiliation combination} & \textbf{Number of publications} \\ \hline
+Purely academic & academic only  & \DIFdelbeginFL \DIFdelFL{128 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{129 }\DIFaddendFL \\ \hline
+Mixed & academic + governmental   & \DIFdelbeginFL \DIFdelFL{57 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{55 }\DIFaddendFL \\ \hline
+Mixed & academic + NGO                 & 17  \\ \hline
+Mixed & academic + governmental + NGO    & 14 \\ \hline
+Mixed & governmental only                & 5 \\ \hline
+Mixed & NGO only                       & 5  \\ \hline
+Mixed & governmental + NGO               & 2 \\ \hline  \rowcolor{gray!20}
+\textbf{Total} &  & \textbf{\DIFdelbeginFL \DIFdelFL{228}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{227}\DIFaddendFL } \\  \hline 
+\end{tabular}
+\label{studies_per_author_affiliations_type}
+\end{table}
+
+To investigate the changes in collaboration types over time, we calculated the number and proportion of studies per collaboration type per year (Fig \ref{studies_per_collab_type}). In the past seven years (2013-2019), there was an absolute increase in the number of papers by both collaboration types. However, in the same period, there was no increase in the relative proportion of publications per year of mixed collaborations (\nameref{S1_Fig}).
+
+\begin{figure}[!h]
+\includegraphics[scale=0.65]{figs/fig3_total_collabs_per_year_plot.png}
+	\caption{\bf Total studies by collaboration type. The period from 1970-2005 has been lumped up due to the lack of publications. Academic collaborations refer \DIFdelbeginFL \DIFdelFL{to those authored by only authors }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{papers }\DIFaddendFL with \DIFaddbeginFL \DIFaddFL{all authors affiliated to }\DIFaddendFL academic \DIFdelbeginFL \DIFdelFL{institution affiliations }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{institutions }\DIFaddendFL whereas mixed collaborations include \DIFdelbeginFL \DIFdelFL{those }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{papers }\DIFaddendFL authored by a mixture of authors \DIFaddbeginFL \DIFaddFL{who are affiliated }\DIFaddendFL with academic \DIFdelbeginFL \DIFdelFL{institution affiliations}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{institutions}\DIFaddendFL , government institutions, and\DIFaddbeginFL \DIFaddFL{/or }\DIFaddendFL NGOs. Mixed collaborations are represented by the turquoise bars and purely academic collaborations by the brown bars.}
+	\label{studies_per_collab_type}
+\end{figure}
+
+\subsection*{Locations studied}
+Overall, most of the papers were about actual \DIFdelbegin \DIFdel{locations $(78.6\%; 195/248)$. Among these}\DIFdelend \DIFaddbegin \DIFadd{geographic locations $(78.9\%; 195/247)$ as compared to hypothetical locations $(21.1\%; 52/247)$. Among the former}\DIFaddend , some studied a geographic location spanning more than one country but not classifiable as a continent $(9.7\%; 19/195)$. \DIFdelbegin \DIFdel{Among those 19 }\DIFdelend \DIFaddbegin \DIFadd{Moreover, among those $19$ }\DIFaddend studies, West Africa was \DIFdelbegin \DIFdel{studied the most }\DIFdelend \DIFaddbegin \DIFadd{the most studied }\DIFaddend $(47.4\%; 9/19)$, followed by the whole globe $(36.8\%; 7/19)$, Southeast Asia \DIFdelbegin \DIFdel{$(10.5\%; 2/19)$}\DIFdelend \DIFaddbegin \DIFadd{$(10.6\%; 2/19)$}\DIFaddend , and the Northern Hemisphere $(5.3\%; 1/19)$. 
+
+When aggregated into continents, the Americas were studied the most $(36.4\%; 68/187)$, followed by Asia $(25.1\%;47/187)$, Africa $(24.6\%; 46/187)$, Europe $(13.4\%; 25/187)$, and Oceania $(0.5\%; 1/187)$.
+
+When disaggregated into countries, the United States was the most studied \DIFdelbegin \DIFdel{$(21.1\%; 37/176)$}\DIFdelend \DIFaddbegin \DIFadd{$(21.6\%; 38/176)$}\DIFaddend , followed by China $(10.8\%; 19/176)$, Canada $(6.2\%; 11/176)$, and Sierra Leone $(5.7\%; 10/176)$.
+
+\subsection*{Connection of authors to the location studied}
+We investigated the connection of the authors to the location studied and found that, overall, there were more studies with at least one author connected to the studied location $(75.2\%; 118/157)$ than not $(24.8\%; 39/157)$. 
+
+When stratified by collaboration types, mixed collaborations were more likely to have studies with at least one author in the location studied \DIFdelbegin \DIFdel{$(83.1\%; 63/77)$ }\DIFdelend \DIFaddbegin \DIFadd{$(84.0\%; 63/75)$ }\DIFaddend compared with the purely academic collaborations \DIFdelbegin \DIFdel{$(67.5\%; 54/80)$}\DIFdelend \DIFaddbegin \DIFadd{$(67.1\%; 55/82)$}\DIFaddend . 
+
+\subsection*{Diseases studied}
+Overall, the number of studies per disease was disproportionately distributed (Table \ref{studies_per_disease_and_collaboration_type}). Influenza was the most studied \DIFdelbegin \DIFdel{$(57.2\%; 135/236)$}\DIFdelend \DIFaddbegin \DIFadd{$(57.4\%; 135/235)$}\DIFaddend , followed by Ebola \DIFdelbegin \DIFdel{$(14.4\%; 34/236)$}\DIFdelend \DIFaddbegin \DIFadd{$(14.5\%; 34/235)$}\DIFaddend , Dengue $(5.1\%; 12/236)$, and a tie between Cholera \DIFdelbegin \DIFdel{$(4.7\%; 11/236)$}\DIFdelend \DIFaddbegin \DIFadd{$(4.7\%; 11/235)$}\DIFaddend , and Measles \DIFdelbegin \DIFdel{$(4.7\%; 11/236)$}\DIFdelend \DIFaddbegin \DIFadd{$(4.7\%; 11/235)$}\DIFaddend . 
+
+When the diseases were broken down in terms of \DIFdelbegin \DIFdel{collaboration type}\DIFdelend \DIFaddbegin \DIFadd{which collaboration types studied them}\DIFaddend , there were clear differences in their distribution. Influenza, Dengue, and Measles were more studied by mixed collaborations whereas Ebola and Cholera were more studied by purely academic collaborations. 
+
+\begin{table}[!h]
+	\setlength\arrayrulewidth{1pt} 
+	\centering
+	\caption{\bf Number of studies per disease and collaboration type. Percentages are calculated from the row totals. The number of studies making up the percentages are shown in brackets. In counting the number of papers per disease studied, if a study was about more than one disease, we treated each instance as unique and counted them separately, leading to a total greater than the reported number of studies.}
+	\DIFdelbeginFL %DIFDELCMD < \label{chap3-table: Number of studies per disease and collaboration type}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \begin{tabular}{|l c c c|}
+		\hline
+		\textbf{Disease}         & \textbf{Purely academic} & \textbf{Mixed} & \textbf{Total} \\ \hline
+		Influenza                & \DIFdelbeginFL \DIFdelFL{52.6\% (71}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{54.1\% (73}\DIFaddendFL )     & \DIFdelbeginFL \DIFdelFL{47.4\% (64}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{45.9\% (62}\DIFaddendFL ) & 135   \\ \hline
+		Ebola                    & 70.6\% (24)     & 29.4\% (10) & \DIFdelbeginFL \DIFdelFL{35    }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{34    }\DIFaddendFL \\ \hline
+		Dengue                   & 50.0\% (6)      & 50.0\% (6)  & 12    \\ \hline
+		Cholera                  & 81.8\% (9)      & 18.2\% (2)  & 11    \\ \hline
+		Measles                  & 36.4\% (4)      & 63.6\% (7)  & 11    \\ \hline
+		\DIFdelbeginFL \DIFdelFL{Tuberculosis             }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Poliomyelitis            }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{85.7\% (6}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{28.6\% (2}\DIFaddendFL )      & \DIFdelbeginFL \DIFdelFL{14.3\% (1}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{71.4\% (5}\DIFaddendFL )  & 7     \\ \hline
+		\DIFdelbeginFL \DIFdelFL{Poliomyelitis            }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Tuberculosis             }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{28.6\% (2}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{83.3\% (5}\DIFaddendFL )      & \DIFdelbeginFL \DIFdelFL{71.4\% (5}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{16.7\% (1}\DIFaddendFL )  & \DIFdelbeginFL \DIFdelFL{7     }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{6     }\DIFaddendFL \\ \hline
+		Varicella                & 50.0\% (2)      & 50.0\% (2)  & 4     \\ \hline
+		Meningococcal meningitis & 33.3\% (1)      & 66.7\% (2)  & 3     \\ \hline
+		Pertussis                & 50.0\% (1)      & 50.0\% (1)  & 2     \\ \hline
+		Pneumococcal disease     & 50.0\% (1)      & 50.0\% (1)  & 2     \\ \hline
+		Yellow fever             & 50.0\% (1)      & 50.0\% (1)  & 2     \\ \hline
+		Hepatitis A             & 100.0\% (1)     & 0.0\% (0)   & 1     \\ \hline
+		Rubella                  & 100.0\% (1)     & 0.0\% (0)   & 1     \\ \hline
+		Typhoid                  & 100.0\% (1)     & 0.0\% (0)   & 1     \\ \hline
+		Hepatitis B              & 0.0\% (0)       & 100.0\% (1) & 1     \\ \hline
+		Malaria                  & 0.0\% (0)       & 100.0\% (1) & 1     \\ \hline
+		Mumps                    & 0.0\% (0)       & 100.0\% (1) & 1    \\ \hline \rowcolor{gray!20}
+		\textbf{Overall}			&	\textbf{\DIFdelbeginFL \DIFdelFL{55.5}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{56.2}\DIFaddendFL \% (\DIFdelbeginFL \DIFdelFL{131}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{132}\DIFaddendFL )}   			& \textbf{\DIFdelbeginFL \DIFdelFL{44.5}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{43.8}\DIFaddendFL \% (\DIFdelbeginFL \DIFdelFL{105}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{103}\DIFaddendFL )}   & \textbf{100\% (\DIFdelbeginFL \DIFdelFL{236}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{235}\DIFaddendFL )} \\
+		\hline
+	\end{tabular}
+	\label{studies_per_disease_and_collaboration_type}
+\end{table}
+
+\subsection*{Intervention types\DIFdelbegin \DIFdel{and impact of vaccination}\DIFdelend }
+There were more papers about non-vaccination interventions \DIFdelbegin \DIFdel{$(48.2\%; 110/228)$}\DIFdelend \DIFaddbegin \DIFadd{$(47.6\%; 108/227)$}\DIFaddend , followed by those that modelled vaccination \DIFdelbegin \DIFdel{as part of a mix of }\DIFdelend \DIFaddbegin \DIFadd{in combination with other }\DIFaddend interventions or do-nothing counterfactuals \DIFdelbegin \DIFdel{$(41.7\%; 95/228)$}\DIFdelend \DIFaddbegin \DIFadd{$(41.0\%; 93/227)$}\DIFaddend , and those that modelled vaccination as a single intervention for side-by-side comparison with other non-vaccination interventions \DIFdelbegin \DIFdel{$(10.1\%; 23/228)$}\DIFdelend \DIFaddbegin \DIFadd{$(11.5\%; 26/227)$}\DIFaddend . 
+
+\DIFdelbegin \DIFdel{The third group of papers that modelled vaccination as a single intervention allowed us to collate conclusions on the sole impact of vaccination.
+There were approximately the same number of studies in this set of studies belonging to the two collaborations types. 
+}\DIFdelend \DIFaddbegin \DIFadd{We also tabulated the top 2 interventions studied per disease (Table \ref{top2_interventions_per_disease}).
+}\DIFaddend 
+
+\DIFdelbegin \DIFdel{Concerning the conclusions about the sole impact of vaccination as a single intervention, most of the studies found vaccination to be the most impactful single intervention in side-by-side comparison with other non-vaccination interventions $(82.6\%; 19/23)$. Few studies found the vaccination to be less impactful compared to other interventions and for various reasons $(17.4\%; 4/23)$. Influenza was the disease studied in these latter four cases. Isolation, and antivirals were found to be more impactful than vaccination due to reasons including the delay until a strain-specific vaccine is developed to control the disease . 
+}\DIFdelend \DIFaddbegin \begin{table}
+	\setlength\arrayrulewidth{1pt} 
+	\centering
+	\caption{\bf \DIFaddFL{Top 2 most studied interventions per disease. We counted the unique number of times an intervention was studied per disease and reported the top two.}}
+		\begin{tabular}{| l | l |}
+			\hline
+			\textbf{\DIFaddFL{Disease}} & \textbf{\DIFaddFL{Intervention modelled}} \\ \hline
+			\DIFaddFL{Cholera }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Cholera }& \DIFaddFL{hygiene }\\ \hline
+			\DIFaddFL{Dengue }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Dengue }& \DIFaddFL{larvicides }\\ \hline
+			\DIFaddFL{Ebola }& \DIFaddFL{isolation }\\ \hline
+			\DIFaddFL{Ebola }& \DIFaddFL{safe burial }\\ \hline
+			\DIFaddFL{Hepatitis a }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Hepatitis b }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Influenza }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Influenza }& \DIFaddFL{school closure }\\ \hline
+			\DIFaddFL{Malaria }& \DIFaddFL{drugs }\\ \hline
+			\DIFaddFL{Malaria }& \DIFaddFL{treatment }\\ \hline
+			\DIFaddFL{Measles }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Measles }& \DIFaddFL{behavioural change }\\ \hline
+			\DIFaddFL{Meningococcal meningitis }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Meningococcal meningitis }& \DIFaddFL{PPE }\\ \hline
+			\DIFaddFL{Pertussis }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Pertussis }& \DIFaddFL{contact tracing }\\ \hline
+			\DIFaddFL{Pneumococcal disease }& \DIFaddFL{treatment }\\ \hline
+			\DIFaddFL{Poliomyelitis }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Poliomyelitis }& \DIFaddFL{school closure }\\ \hline
+			\DIFaddFL{Rubella }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Tuberculosis }& \DIFaddFL{treatment }\\ \hline
+			\DIFaddFL{Tuberculosis }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Typhoid }& \DIFaddFL{screening }\\ \hline
+			\DIFaddFL{Varicella }& \DIFaddFL{vaccination }\\ \hline
+			\DIFaddFL{Varicella }& \DIFaddFL{isolation }\\ \hline
+			\DIFaddFL{Yellow fever }& \DIFaddFL{vaccination }\\ \hline
+		\end{tabular}
+			\label{top2_interventions_per_disease}
+	\end{table} 
+\DIFaddend 
+
+\subsection*{Model structure, spatial heterogeneity, and model dynamics}
+There were more compartmental models \DIFdelbegin \DIFdel{$(78.5\%; 179/228)$ }\DIFdelend \DIFaddbegin \DIFadd{$(78.9\%; 179/227)$ }\DIFaddend than agent-based models \DIFdelbegin \DIFdel{$(20.2\%; 46/228)$ }\DIFdelend \DIFaddbegin \DIFadd{$(19.8\%; 45/227)$ }\DIFaddend with no clear difference in preference between the two collaboration types. 
+
+Approximately a third of the papers included spatial heterogeneity \DIFdelbegin \DIFdel{$(28.9\%; 66/228)$ }\DIFdelend \DIFaddbegin \DIFadd{$(28.6\%; 65/227)$ }\DIFaddend with no clear difference between the two collaboration types. 
+
+Deterministic models were the most common \DIFdelbegin \DIFdel{$(62.3\%; 142/228)$ }\DIFdelend \DIFaddbegin \DIFadd{$(63.4\%; 144/227)$ }\DIFaddend compared to stochastic \DIFdelbegin \DIFdel{$(31.6\%; 72/228)$ }\DIFdelend \DIFaddbegin \DIFadd{$(30.4\%; 69/227)$ }\DIFaddend and hybrid models \DIFdelbegin \DIFdel{$(6.1\%; 14/228)$}\DIFdelend \DIFaddbegin \DIFadd{$(6.2\%; 14/227)$}\DIFaddend , that is models with both deterministic and stochastic components. \DIFdelbegin \DIFdel{Here, mixed }\DIFdelend \DIFaddbegin \DIFadd{Mixed }\DIFaddend collaborations were more likely to use stochastic models \DIFdelbegin \DIFdel{$(40.0\%; 40/100)$ }\DIFdelend \DIFaddbegin \DIFadd{$(39.8\%; 39/100)$ }\DIFaddend than purely academic collaborations \DIFdelbegin \DIFdel{$(25.0\%; 32/128)$}\DIFdelend \DIFaddbegin \DIFadd{$(23.3\%; 30/128)$}\DIFaddend .
+
+\DIFaddbegin \subsection*{\DIFadd{Outcomes measured}}
+\DIFadd{We counted the unique number of times an outcome was studied by each collaboration type (Table \ref{top 6 outcomes studied by collab types}). Final epidemic size was the top outcome of interest in both groups. The top 6 outcomes were common between both groups except for intervention cost, which was more of interest to purely academic collaborations but not to mixed collaborations. On the other hand, number of hospitalizations was more of interest to mixed collaborations than purely academic collaborations. 
+}
+
+\begin{table}[h!]
+	 \caption{\textbf{\DIFaddFL{Top 6 outcomes studied per collaboration type. Percentages are calculated from the total of studies within each collaboration type. Actual numbers are provided in brackets.}}}
+	 \centering
+	 \begin{tabular}{| l | l | l |}\hline
+	 	\textbf{\DIFaddFL{Collaboration type}} & \textbf{\DIFaddFL{Outcome measured}} & \textbf{\DIFaddFL{number of studies}} \\ \hline
+	 	\DIFaddFL{Purely academic }& \DIFaddFL{final epidemic size }& \DIFaddFL{22.0\%  (55)}\\ \hline
+	 	 & \DIFaddFL{attack rate }& \DIFaddFL{11.6\%  (29)}\\ \hline
+	 	 & \DIFaddFL{timing of peak }& \DIFaddFL{8.0\%  (20)}\\ \hline
+	 	 & \DIFaddFL{cost }& \DIFaddFL{7.2\%  (18)}\\ \hline
+	 	 & \DIFaddFL{outbreak duration and timing }& \DIFaddFL{6.0\%  (15)}\\ \hline
+	 	 & \DIFaddFL{cases averted }& \DIFaddFL{4.8\%  (12)}\\ \hline
+	 	\DIFaddFL{Mixed }& \DIFaddFL{final epidemic size }& \DIFaddFL{14.4\%  (31)}\\ \hline
+	 	 & \DIFaddFL{attack rate }& \DIFaddFL{13.4\%  (29)}\\ \hline
+	 	 & \DIFaddFL{cases averted }& \DIFaddFL{10.2\%  (22)}\\ \hline
+	 	 & \DIFaddFL{timing of peak }& \DIFaddFL{7.,4\%  (16)}\\ \hline
+	 	 & \DIFaddFL{outbreak duration and timing }& \DIFaddFL{6.0\%  (13)}\\ \hline
+	 	 & \DIFaddFL{hospitalizations }& \DIFaddFL{4.2\%   (9)}\\ \hline
+ 	\end{tabular}
+ 	\label{top 6 outcomes studied by collab types}
+ 	\end{table}
+
+\DIFaddend \subsection*{Model parametrization and validation}
+The top three most commonly used parametrization methods\DIFaddbegin \DIFadd{, that is, how model parameter values were obtained, }\DIFaddend included: combining literature sources and expert opinion/assumptions, literature sources and fitting to data, and literature sources only (Table \ref{model_parametrization_results}). 
+
+The most common parametrization method among mixed collaborations was the combination of literature sources and fitting \DIFdelbegin \DIFdel{$(27.3 \%; 35/128)$}\DIFdelend \DIFaddbegin \DIFadd{$(28.6 \%; 28/98)$}\DIFaddend , whereas the combination of literature and expert opinion was the most common among purely academic collaborations \DIFdelbegin \DIFdel{$(28.0\%; 28/100)$}\DIFdelend \DIFaddbegin \DIFadd{$(27.1\%; 35/129)$}\DIFaddend . 
+
+\begin{table}[!h]
+\setlength\arrayrulewidth{1pt} 
+\centering
+\caption{\bf Model parametrization methods. We define \DIFaddbeginFL \DIFaddFL{model }\DIFaddendFL parametrization as the method of determining the parameter values for the model. In the table, ``Literature'' means the model's parameters were obtained from literature sources. ``Expert opinion'' means the values were assumed in consultation with experts of the field. ``Fitted'' means the model’s parameters were obtained through some form of mathematical or statistical fitting to a time series of data. }
+\begin{adjustwidth}{-2.10in}{0in}
+\begin{tabular}{| p{0.17\textwidth}  p{0.14\textwidth}  p{0.14\textwidth}  p{0.12\textwidth}  p{0.13\textwidth}  p{0.13\textwidth}  p{0.12\textwidth}  p{0.1\textwidth}  p{0.07\textwidth} |} \hline 
+\textbf{Collaboration type} & \textbf{Literature and expert opinion} & \textbf{Literature and fitted} & \textbf{Literature} &  \DIFdelbeginFL \textbf{\DIFdelFL{Expert opinion}} %DIFAUXCMD
+%DIFDELCMD < & %%%
+\DIFdelendFL \textbf{Literature, expert opinion, and fitted} & \DIFaddbeginFL \textbf{\DIFaddFL{Expert opinion}} & \DIFaddendFL \textbf{Fitted} & \textbf{Expert opinion and fitted} & \textbf{Total} \\ \hline
+Academic & \DIFdelbeginFL \DIFdelFL{27.3}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{27.1}\DIFaddendFL \% (35) & \DIFdelbeginFL \DIFdelFL{22.7\% (29}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{21.7\% (28}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{18.0}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{17.8}\DIFaddendFL \% (23) & \DIFdelbeginFL \DIFdelFL{13.3\% (17}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{10.1\% (13}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{9.4\% (12}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{14.0\% (18}\DIFaddendFL )  & 7.0\% (9) & 2.3\% (3) & \DIFdelbeginFL \DIFdelFL{128 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{129 }\DIFaddendFL \\ \hline
+Mixed & \DIFdelbeginFL \DIFdelFL{25.0\% (25}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{24.5\% (24}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{28.0}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{28.6}\DIFaddendFL \% (28) & \DIFdelbeginFL \DIFdelFL{15.0\% (15}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{14.3\% (14}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{7.0\% (7}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{19.4\% (19}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{19.0\% (19}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{7.1\% (7}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{5.0}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{5.1}\DIFaddendFL \% (5) & 1.0\% (1) & \DIFdelbeginFL \DIFdelFL{100 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{98 }\DIFaddendFL \\ \hline \rowcolor{gray!20}
+Overall & 26.3\% (\DIFdelbeginFL \DIFdelFL{60}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{59}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{25.0\% (57}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{24.7\% (56}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{16.7\% (38}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{16.3\% (37}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{10.5\% (24}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{14.1\% (32}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{13.6\% (31}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{11.0\% (25}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{6.1}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{6.2}\DIFaddendFL \% (14) & 1.8\% (4) & \DIFdelbeginFL \DIFdelFL{228 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{227 }\DIFaddendFL \\ \hline 
+\end{tabular}
+\end{adjustwidth}
+\label{model_parametrization_results}
+\end{table}
+
+\DIFdelbegin \DIFdel{Most studies did not perform any form of validation $(63.2\%; 144/228)$. }\DIFdelend \DIFaddbegin \DIFadd{We defined model validation as the method by which the model's performance was measured. Four categories of model validation were established for the purpose of this review. In Table \ref{model_validation_results}, we present the results. If the model was not validated with observed data or another model's output, we classified its validation as ``none''.  ``Data'' means the model's output was compared to independently observed data. ``Another model’s output'' means the model's output was compared to an independent model's output. Some studies also used data and another model's output. We classified these as ``data and another model".
+}
+
+\DIFadd{Most studies were classified as none $(63.2\%; 144/227)$. }\DIFaddend Approximately a third used data to validate their models \DIFdelbegin \DIFdel{$(34.6\%; 79/228)$ }\DIFdelend \DIFaddbegin \DIFadd{$(34.6\%; 79/227)$ }\DIFaddend (Table \ref{model_validation_results}). 
+\DIFdelbegin \DIFdel{Mixed }\DIFdelend \DIFaddbegin 
+
+\DIFadd{In terms of differences between the collaboration types, mixed }\DIFaddend collaborations were more likely to validate their model with data or the output of an independent model. 
+
+\begin{table}[!h]
+	\centering
+	\setlength\arrayrulewidth{1pt} 
+	\caption{\bf Model validation methods.\DIFdelbeginFL \DIFdelFL{We define model validation as the method by which the model's performance was measured. ``None'' means no validation was performed, or the model’s output was compared to another output from the same model. ``Data'' means the model was compared to independently observed data. ``Another model’s output'' means the model's output was compared to an independent model's output.}\DIFdelendFL }
+	\begin{adjustwidth}{-0.00in}{0in}
+		\begin{tabular}{| p{0.15\textwidth}  p{0.13\textwidth} p{0.13\textwidth} p{0.13\textwidth} p{0.13\textwidth} p{0.12\textwidth}|}
+			\hline
+			\textbf{Collaboration type} & \textbf{None} & \textbf{Data} & \textbf{Another model's output} & \textbf{Data and another model} & \textbf{Total} \\ \hline
+			Academic & \DIFdelbeginFL \DIFdelFL{70.3\% (90}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{71.3\% (92}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{28.9\% (37}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{27.9\% (36}\DIFaddendFL ) & 0.8\% (1) & 0.0\% (0) & \DIFdelbeginFL \DIFdelFL{128 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{129 }\DIFaddendFL \\ \hline
+			Mixed & \DIFdelbeginFL \DIFdelFL{54.0\% (54}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{53.1\% (52}\DIFaddendFL ) & \DIFdelbeginFL \DIFdelFL{42.0}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{42.9}\DIFaddendFL \% (42) & \DIFdelbeginFL \DIFdelFL{3.0}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{3.1}\DIFaddendFL \% (3) & 1.0\% (1) & \DIFdelbeginFL \DIFdelFL{100 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{98 }\DIFaddendFL \\ \hline \rowcolor{gray!20}
+			Overall & \DIFdelbeginFL \DIFdelFL{63.2}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{63.4}\DIFaddendFL \% (144) & \DIFdelbeginFL \DIFdelFL{34.6}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{34.4}\DIFaddendFL \% (79) & 1.8\% (4) & 0.4\% (1) & \DIFdelbeginFL \DIFdelFL{228}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{227}\DIFaddendFL \\ \hline
+		\end{tabular}
+	\end{adjustwidth}
+	\label{model_validation_results}
+\end{table}
+
+
+\subsection*{Data and model simulation code}
+More than half of the papers used datasets collected independent of the study for either the model parametrization or validation process \DIFdelbegin \DIFdel{$(56.1\%; 128/228)$}\DIFdelend \DIFaddbegin \DIFadd{$(55.5\%; 126/227)$}\DIFaddend . These papers were split \DIFdelbegin \DIFdel{approximately }\DIFdelend equally between the two collaboration types. 
+
+The use of accessible data was, however, different between the two groups. Purely academic collaborations were more likely to use data that could be accessed in the public domain \DIFdelbegin \DIFdel{$(81.0\%; 51/63)$ }\DIFdelend \DIFaddbegin \DIFadd{$(82.5\%; 52/63)$ }\DIFaddend compared to mixed collaborations \DIFdelbegin \DIFdel{$(56.9\%; 37/65)$}\DIFdelend \DIFaddbegin \DIFadd{$(58.7\%; 37/63)$}\DIFaddend .  
+
+Few papers provided access to the model simulation code \DIFdelbegin \DIFdel{$(1.7\%; 4/228)$}\DIFdelend \DIFaddbegin \DIFadd{$(1.7\%; 4/227)$}\DIFaddend . Here, if a paper indicated that the authors could be contacted for the code, it was deemed as inaccessible due to the many hurdles with getting the code in time. \DIFdelbegin \DIFdel{Some }\DIFdelend \DIFaddbegin \DIFadd{Additionally, some }\DIFaddend papers reported the computer application/software/program/package used (R, Python, C++, Matlab, and so forth) but we did not collect that information. 
+
+\subsection*{Patterns in the foot and mouth disease (FMD) literature}
+\DIFdelbegin \DIFdel{There were }\DIFdelend \DIFaddbegin \DIFadd{We included }\DIFaddend $25$ \DIFdelbegin \DIFdel{studies about }\DIFdelend foot and mouth disease \DIFdelbegin \DIFdel{outbreaks}\DIFdelend \DIFaddbegin \DIFadd{modelling studies for comparison with the human disease literature}\DIFaddend . Due to the small number of studies, the absolute differences between the two collaboration types were generally not large enough to be considered (\nameref{S2_File}), hence, we report on the aggregated patterns. 
+
+\DIFdelbegin \DIFdel{In terms of collaboration types, slightly }\DIFdelend \DIFaddbegin \DIFadd{Slightly }\DIFaddend more than half of the $25$ studies were authored by mixed collaborations $(56.0\%; 14/25)$\DIFdelbegin \DIFdel{than purely academic collaborations $(44.0\%; 11/25)$. Almost }\DIFdelend \DIFaddbegin \DIFadd{. In terms of how connected the authors were to the locations studied, almost }\DIFaddend all the papers had at least one author \DIFaddbegin \DIFadd{affiliated to an institution }\DIFaddend in the location studied $(92.0\%; 23/25)$. 
+
+Overall, vaccination was modelled as a single intervention for comparison in more than half of the studies $(56.0\%; 14/25)$, followed by vaccination in combination with other interventions $(28.0\%; 7/25)$, and no vaccination $(16.0\%; 4/25)$.  
+\DIFdelbegin \DIFdel{Few of the first set of studies found vaccination to be the most impactful as a single intervention $(14.3\%; 2/14)$.  
+}\DIFdelend 
+
+In general, the FMD models had more agent-based $(76.0\%; 19/25)$ and spatially explicit structure $(72.0\%; 18/25)$, largely used stochastic dynamics $(56.0\%; 14/25)$, and performed more sensitivity analyses $(56.0\%; 14/25)$. 
+
+\DIFaddbegin \DIFadd{Outbreak duration and timing, final epidemic size, and intervention costs were the top three outcomes of interest overall. 
+}
+
+\DIFaddend In terms of model parametrization, the most common method was the combined use of literature sources and expert opinion $(28.0\%; 7/25)$, followed by fitting to data only $(20.0\%; 5/25)$, and the combined use of literature sources, expert opinion, and fitting to data $(16.0\%; 4/25)$. \DIFdelbegin \DIFdel{Here, mixed collaborations were more likely than purely academic collaborations to combine literature sources and expert opinion $(42.9\% 6/14)$. Furthermore, }\DIFdelend \DIFaddbegin \DIFadd{In terms of model validation, }\DIFaddend most of the FMD models were not \DIFdelbegin \DIFdel{validated }\DIFdelend \DIFaddbegin \DIFadd{compared to observed data or the output of independent models }\DIFaddend $(72.0\%; 18/25)$. 
+
+\section*{Discussion}
+For the period $1970-2019$, \DIFdelbegin \DIFdel{co-authorship }\DIFdelend \DIFaddbegin \DIFadd{the outbreak response intervention impact modelling literature for human vaccine-preventable diseases was dominated }\DIFaddend by purely academic collaborations\DIFaddbegin \DIFadd{. This collaboration type, which we defined as papers with all authors affiliated to academic institutions, }\DIFaddend formed over $56\%$ of the \DIFdelbegin \DIFdel{outbreak response impact modelling studies of human vaccine-preventable diseases. Both collaboration types }\DIFdelend \DIFaddbegin \DIFadd{literature. Both purely academic and mixed collaborations }\DIFaddend increased in absolute numbers \DIFdelbegin \DIFdel{over the past seven years }\DIFdelend \DIFaddbegin \DIFadd{in the last seven years of the review period (2013-2019)}\DIFaddend . Regarding modelling practices between the two collaboration types, mixed collaborations were more likely to: (i) include authors \DIFdelbegin \DIFdel{affiliated through their institutions to }\DIFdelend \DIFaddbegin \DIFadd{who were affiliated to an institutions in }\DIFaddend the location studied, (ii) use more complex modelling practices including stochastic model dynamics, parametrization methods involving a combination of literature sources, expert opinion/assumptions, and fitting to data, and validate their models with data collected independent of the study. Even though this review was about human vaccine-preventable diseases, only \DIFdelbegin \DIFdel{51.8}\DIFdelend \DIFaddbegin \DIFadd{52.5}\DIFaddend \% of the studies modelled vaccination in some form. \DIFdelbegin \DIFdel{Moreover, only 10.1\% of the total studies modelled vaccination for comparison with other non-vaccination strategies in the same analysis. }\DIFdelend Influenza was disproportionately the most studied disease, followed by Ebola, and Dengue. \DIFaddbegin \DIFadd{Final epidemic size and attack rate were a commonly preferred modelling outcome of interest. Lastly, even though all the studies conducted simulation studies, code availability was rare as only $1.8\%$ of the studies $(4/227)$ made them readily accessible.
+}\DIFaddend 
+
+There were several differences in models and \DIFdelbegin \DIFdel{practices }\DIFdelend \DIFaddbegin \DIFadd{modelling practices/approaches }\DIFaddend between the human disease literature and foot and mouth disease (FMD). Mixed collaborations dominated the FMD literature \DIFdelbegin \DIFdel{, with almost all papers having }\DIFdelend \DIFaddbegin \DIFadd{and almost all the papers had }\DIFaddend an author in the location studied. Furthermore, most of the FMD models and modelling practices were more complex involving the use of spatial, stochastic, agent-based models. However, the FMD models were less likely to be validated with real world data.
+
+\DIFdelbegin \DIFdel{Collaborations, especially between authors from academic institutions, governmental, and non-governmental organizations responsible for outbreak response, could lead to knowledge transfer and improved decision-making }%DIFDELCMD < \cite{Muscatello2017}%%%
+\DIFdel{. Moreover, such diversity in modelling collaborations could expand the skill sets needed to solve the complex real world outbreak response needs. However, it is well known that there is a weak link between academic research and decision-making in general, and research findings are often not easily translated into decisions }%DIFDELCMD < \cite{Choi2005,Deelstra2003,Muscatello2017}%%%
+\DIFdel{. This gap in knowledge translation exists especially between outbreak response researchers and public health decision-makers }%DIFDELCMD < \cite{Rivers2019,Muscatello2017}%%%
+\DIFdel{. There are examples of the commissioning of modelling by organisations such as the US Centers for Disease Control and Prevention (CDC)and the World Health Organization (WHO) to inform decision-making during past outbreaks of Influenza, Ebola, Zika, and Dengue }%DIFDELCMD < \cite{Muscatello2017}%%%
+\DIFdel{. However, many decision-makers remain cautious about the uptake of modelling due, in part, to issues about transparency in assumptions, credibility and ease of use of modelling software, and adaptability of the results to other settings and existing policies }%DIFDELCMD < \cite{Muscatello2017}%%%
+\DIFdelend \DIFaddbegin \DIFadd{We quantified the presence of mixed collaborations in outbreak response modelling between $1970$ and $2019$ (Fig \ref{studies_per_collab_type})}\DIFaddend . \DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{To bridge this knowledge translation gap between modellers and decision-makers, modelling collaborations that deepen the interaction between model developers and decision-making have been proposed }%DIFDELCMD < \cite{Choi2005,Rivers2019}%%%
+\DIFdel{. This could be achieved through the sharing of expertise so that the academics formulate, parametrize, and validate the models taking into account the expert opinions of the decision-makers so that the findings are more tailored towards implementation. }\DIFdelend \DIFaddbegin \DIFadd{Our results show an absolute increase in the number of papers published by mixed collaborations during the period. }\DIFaddend Mixed or interdisciplinary collaborations have been reported to be strongly associated with research impact and translation to decision-making \cite{Deelstra2003}. \DIFdelbegin \DIFdel{Hence, outbreak response}\DIFdelend \DIFaddbegin \DIFadd{We, however, did not measure the impact of mixed collaborations in outbreak response decision-making and therefore recommend that future studies consider pursuing this. Outbreak response}\DIFaddend , which is broadly an operational field, \DIFdelbegin \DIFdel{would }\DIFdelend \DIFaddbegin \DIFadd{should }\DIFaddend ideally have modelling groups/collaborations that \DIFdelbegin \DIFdel{are comprised of academics and decision-makers to bridge this gap. 
+In this review, we observed an absolute increase in the number of papers published by mixed collaborations (Fig \ref{studies_per_collab_type}). This }\DIFdelend \DIFaddbegin \DIFadd{impact decision-making. 
+}
+
+\DIFadd{The increase in mixed collaborations }\DIFaddend could suggest an increase in the uptake or recognition of modelling \DIFaddbegin \DIFadd{by decision-makers in governmental and non-governmental organizations }\DIFaddend as an outbreak response decision-making tool. \DIFdelbegin \DIFdel{Future research to investigate and explain this increase could advance our understanding of the contribution of modelling to outbreak response }\DIFdelend \DIFaddbegin \DIFadd{There are examples of the commissioning of modelling by organisations such as the US Centers for Disease Control and Prevention (CDC) and the World Health Organization (WHO) to support }\DIFaddend decision-making \DIFaddbegin \DIFadd{during past outbreaks of Influenza, Ebola, Zika, and Dengue }\cite{Muscatello2017}\DIFadd{. However, research that measures the direct impact and contributions of such collaborations to decision-making remains lacking in the literature and calls for future research }\cite{Muscatello2017}\DIFaddend . 
+
+The inclusion of local experts in outbreak response modelling teams helps with more tailored problem-solving and decision-making and better reception of the decisions made \cite{Abramowitz2015}. In that regard, mathematical modelling collaborations involving local experts or, in this review, locally affiliated co-authors are an important first step towards achieving this. We found that most of the human disease studies had authors with an institutional affiliation in the location studied. We observed the same pattern for FMD albeit at a much higher percentage. \DIFdelbegin \DIFdel{However, when }\DIFdelend \DIFaddbegin \DIFadd{When }\DIFaddend the human disease data \DIFdelbegin \DIFdel{were }\DIFdelend \DIFaddbegin \DIFadd{was }\DIFaddend disaggregated, the results showed that mixed collaborations had a much higher percentage\DIFdelbegin \DIFdel{of studies with at least one author in the studied location compared to purely academic collaborations. 
+Coupling this with the absolute increase in publications by mixed collaborations in the past seven years could suggest an increase in the uptake of modelling as a public health decision-making tool. However, we did not measure this causality. Research that measures the direct impact of mathematical modelling in public health decision-making remains lacking in the literature }%DIFDELCMD < \cite{Muscatello2017}%%%
+\DIFdel{. Future studies designed to investigate this uptake of models and whether it has had an impact on outbreak response would contribute meaningfully to the field of outbreak response modelling. 
+}%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{Three classes of interventions with respect to vaccination were modelled: non-vaccination (mostly antiviral use and non-pharmaceutical interventions), vaccination mixed with other complementary non-vaccination interventions, and vaccination as a single intervention for side-by-side comparison with other non-vaccination alternatives. The last class of interventions were the only eligible set for our analysis of the conclusions about whether vaccination is always the most impactful intervention when modelling is used as the assessment tool. Even though all the reviewed studies were about human vaccine-preventable diseases, only 10.1\% of the studies modelled vaccination as a single intervention for side-by-side comparison with non-vaccination interventions. This lack of studies assessing the sole impact of vaccination reflects the reality that vaccination is often  implemented alongside other interventions and never alone, making it difficult to assess its sole impact. Nevertheless, mathematical modelling is an ethically viable way to assess the sole impact of vaccination, and hence, an essential tool for decision-making}\DIFdelend . 
+
+\DIFdelbegin \DIFdel{Among the studies that modelled vaccination as a single intervention for comparison with other single non-vaccination interventions, vaccination was found to be the most impactful intervention in 82\% of the studies. Four studies out of the 23 that modelled influenza found case isolation }%DIFDELCMD < \cite{Yasuda2009,Gao2016,Chen2020a} %%%
+\DIFdel{and antiviral prophylaxis and/or therapeutics }%DIFDELCMD < \cite{Gumel2008} %%%
+\DIFdel{to be more impactful than vaccination assuming those interventions could be implemented immediately, given significantly efficient isolation and large antiviral stockpiles before the outbreak/pandemic. Among these four studies, some common assumptions that influenced how vaccination was implemented included: the late arrival of effective vaccines }%DIFDELCMD < \cite{Yasuda2009}%%%
+\DIFdel{, low versus high vaccination rates }%DIFDELCMD < \cite{Gao2016}%%%
+\DIFdel{, the use of partially effective pre-existing vaccines against the current strain reactively }%DIFDELCMD < \cite{Gumel2009} %%%
+\DIFdel{or pre-emptively }%DIFDELCMD < \cite{Chen2018}%%%
+\DIFdel{. In all four studies, it was, however, recommended that, vaccination be used in combination with the alternative interventions. Even though antivirals were found to be more impactful in some cases, its prolonged use was discouraged to prevent the development of antiviral resistance }%DIFDELCMD < \cite{Gumel2009}%%%
+\DIFdel{. On the other hand, there was a high percentage of studies in the FMD literature about the use of vaccination as a single intervention and vaccination was rarely found to be the most impactful intervention. 
+}%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend We found some commonalities and differences in the choice of model structure and dynamics between the two collaboration types in the human disease literature. Mixed collaborations were more likely to use \DIFdelbegin \DIFdel{``complex'' models and practices. }\DIFdelend \DIFaddbegin \DIFadd{agent-based model structures and model validation methods like comparing model outputs to observed data. These are often difficult to implement in practice and tend to lead to complex outcomes. }\DIFaddend We are not making any value judgements with regards to complexity but are only highlighting these differences that might require further investigation. Moreover, it is common to model an outbreak using alternative model choices and assumptions depending on the question being answered \cite{Basu2013}. However, the results must always be interpreted with cognisance of the limitations/assumptions of the model.  The use of more complex models and practices by mixed collaborations is likely due to the fact that often, real world public health policy-related decision-making is operational, requiring finer details in models and approaches to answer the questions posed in a practical way. Our definition of mixed collaborations meant that it may have involved decision-makers. It is, therefore, likely that their need for practical solutions could have influenced higher levels of model \DIFdelbegin \DIFdel{details or }\DIFdelend complexity. 
+
+The FMD models were generally more complex than the human disease models. This is not surprising because the nature of FMD spread often requires the inclusion of farm structure, farm connectivity, and demographics to capture the disease's dynamics accurately \DIFaddbegin \DIFadd{and to capture the complex nature of the responses to outbreaks in terms of movement control and depopulations of farms }\DIFaddend \cite{Kinsley2018}. \DIFaddbegin \DIFadd{These levels of detail and complexity are often required in human disease outbreak models, but we observed a more frequent use among the FMD studies. }\DIFaddend Future studies designed to explain the differences in modelling practices of human outbreak response modelling groups might help to explain what we have observed in this review.
+
+A little over half of the human disease papers used observed data for parametrization or validation. Additionally, only 4 studies shared their code in an easy to access form. \DIFdelbegin \DIFdel{On the other hand, the FMD models were generally not validated with observed data. }\DIFdelend Owing to this, it might be difficult to reproduce some of the results in these outbreak response modelling studies. We recognise that data sharing in public health raises a lot of debate regarding privacy and intellectual property, and often, authors are hindered by institutional data sharing policies \cite{Kim2016}. We, however, recommend that data and code be shared where possible to promote open science practices that help advance the field.  \DIFaddbegin \DIFadd{The FMD models were generally not validated with observed data. This is most likely due to the lack of data on FMD outbreaks as most areas in the world are free of FMD outbreaks. The lack of data seems to have constrained FMD outbreak model validation and might serve as an opportunity to use data-free model validation techniques. However, these techniques were not captured in this review.
+}\DIFaddend 
+
+This review had several limitations. First, outbreak response models and analyses are not always published in peer-reviewed journals, but this systematic review only \DIFdelbegin \DIFdel{focussed }\DIFdelend \DIFaddbegin \DIFadd{focused }\DIFaddend on peer-reviewed articles. It is, therefore, possible that some relevant studies were missed by our search strategy. Second, we used the author list and affiliations to classify studies as either purely academic or mixed. However, this could cause some mixed collaborations to be misclassified as purely academic, especially in cases where non-academics contributed to papers classified as purely academic but were not included on the author list. It is, however, standard practice to include individuals who contributed substantially to a piece of scientific writing, hence, if that was not done for a paper, it could imply that the level of interaction was not high enough to warrant the credit of authorship. Third, in the absence of an explicit measure of contribution of mathematical modelling to outbreak response decision-making, we used mixed collaborations as a proxy. Thus, we may be under-estimating the number of mixed collaborations in the literature. \DIFdelbegin \DIFdel{Forth}\DIFdelend \DIFaddbegin \DIFadd{Fourth}\DIFaddend , we only surveyed the literature on a specific study design – mechanistic models. We excluded statistical models and other computational models, which are not mechanistic. Hence, the results of this systematic review should only be interpreted in the context of the mechanistic modelling landscape. Furthermore, it is also possible that some purely academic collaborations contribute to decision-making whereas some mixed collaborations are purely an academic exercise. Also, we  conducted our database searches in January 2020 and therefore do not reflect the literature, or any changes in practice, associated with the COVID-19 pandemic. \DIFaddbegin \DIFadd{This study, however, provides a baseline for comparing practices before and after the COVID-19 pandemic. }\DIFaddend Lastly, by only including papers published in English, we most certainly missed papers published in other languages.  
+
+Numerous factors could explain the patterns we have observed in this review, and we would recommend future studies that will use appropriate study designs, for example, interviews of modelling groups and public health decision-makers, to explain why certain model choices and modelling practices were made by the collaboration types. Future studies should investigate when modelling results directly impacted decision-making and what determined that to identify best practices that will strengthen the link between modelling and decision-making in the future. We expect that collaboration between academia, decision-makers, and local experts will enhance decision-making by accounting for aspects of policy and decision-making that might be overlooked in studies conducted mainly as a theoretical exercise. 
+
+\subsection*{Other information}
+A protocol following the PRISMA guidelines for systematic review protocols and outlining the procedures for this systematic review was registered on PROSPERO with registration number CRD42020160803 and published through a peer-reviewed process~\cite{Azam2020}. 
+
+\section*{Supporting information}
+
+\paragraph*{S1 File}
+\label{S1_File}
+{\bf Search strings and results, data items extracted, and questionnaire for data extraction.} 
+
+\paragraph*{S1 Fig}
+\label{S1_Fig}
+{\bf Collaboration patterns in time (proportions per year).}
+
+\paragraph*{S2 File}
+\label{S2_File}
+{\bf Analysis of extracted data.} 
+
+\paragraph*{S3 Table}
+\label{S3_Table}
+{\bf PRISMA checklist\DIFaddbegin \DIFadd{.}} 
+
+\paragraph*{\DIFadd{S4 Table}}
+\label{S4_Table}
+{\bf \DIFadd{Database of included studies and extracted data per paper}\DIFaddend .} 
+
+%\section*{Acknowledgments}
+
+% Use the PLoS provided BiBTeX style
+\bibliography{references.bib}
+\bibliographystyle{vancouver}
+\nolinenumbers
+\end{document}
+
