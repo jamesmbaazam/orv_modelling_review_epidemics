@@ -92,8 +92,14 @@ names_dict <- c(year = "publication_year",
                 interventions = "intervention_modelled"
                 )
 
- final_citation_table <-  final_citation_table %>% 
-  rename(names_dict)
+# Remove underscores
+final_citation_table <- final_citation_table %>% 
+  rename(names_dict) |> 
+  mutate(
+    across(!where(is.logical) | !where(is.numeric), 
+      ~str_replace_all(., "_", " ")
+      )
+    )
 ```
 
 ```{r helper_functions}
