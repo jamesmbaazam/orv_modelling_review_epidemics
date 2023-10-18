@@ -6,6 +6,7 @@ output:
   pdf_document:
     toc: yes
     fig_crop: no
+    keep_tex: yes
 ---
 
 ```{r setup, include=FALSE}

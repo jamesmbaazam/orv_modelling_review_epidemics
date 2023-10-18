@@ -3,6 +3,7 @@ title: "Supplementary material"
 output:
   pdf_document:
     fig_crop: no
+    keep_tex: yes
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, 
