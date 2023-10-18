@@ -142,8 +142,10 @@ knitr::kable(cols_1_to_6,
                                   "repeat_header"),
                             font_size = 9
                 ) %>% 
-  kableExtra::column_spec(column = c(2), width = "4cm") %>% 
-  kableExtra::landscape() 
+  kableExtra::column_spec(column = c(2), width = "4cm") %>%
+   kableExtra::column_spec(column = c(4), width = "3.5cm") %>% 
+    kableExtra::column_spec(column = c(6), width = "1.5cm") %>% 
+  kableExtra::landscape()
 ```
 
 ## Table 2
@@ -170,7 +172,8 @@ knitr::kable(cols_7_to_10,
                                   "repeat_header"),
                             font_size = 9
                 ) %>% 
-  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::column_spec(column = c(2, 4), width = "3.3cm") %>% 
+kableExtra::column_spec(column = c(5), width = "2cm") %>% 
   kableExtra::landscape() 
 ```
 ## Table 3
@@ -196,7 +199,7 @@ knitr::kable(cols_11_to_14,
                                   "repeat_header"),
                             font_size = 9
                 ) %>% 
-  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::column_spec(column = c(2, 4), width = "3cm") %>% 
   kableExtra::landscape() 
 ```
 ## Table 4
@@ -220,7 +223,8 @@ knitr::kable(cols_15_to_16,
                                   "repeat_header"),
                             font_size = 9
                 ) %>% 
-  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::column_spec(column = c(2), width = "3cm") %>%
+   kableExtra::column_spec(column = c(4), width = "8cm") %>%
   kableExtra::landscape() 
 ```
 ## Table 5
@@ -273,7 +277,8 @@ knitr::kable(cols_19_to_20,
                                   "repeat_header"),
                             font_size = 9
                 ) %>% 
-  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::column_spec(column = c(2), width = "4cm") %>%
+  kableExtra::column_spec(column = c(3), width = "6cm") %>%
   kableExtra::landscape() 
 ```
 
@@ -299,7 +304,7 @@ knitr::kable(cols_21_to_22,
                                   "repeat_header"),
                             font_size = 9
                 ) %>% 
-  kableExtra::column_spec(column = c(2, 4), width = "4cm") %>% 
+  kableExtra::column_spec(column = c(2), width = "9cm") %>% 
   kableExtra::landscape() 
 ```
 ## Table 8
